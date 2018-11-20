@@ -1,7 +1,7 @@
 describe("game", () => {
-  it("should display the world", () => {
+  it("should display the game grid", () => {
     cy.startGame()
-      .getByTestId("game-world")
+      .getByTestId("game-grid")
       .should("be.visible");
   });
 });

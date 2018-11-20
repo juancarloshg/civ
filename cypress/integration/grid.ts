@@ -1,13 +1,13 @@
-describe("world", () => {
-  it("should be 20x20", () => {
+describe("grid", () => {
+  it("should have a 20x20 grid of visible squares", () => {
     cy.startGame()
-      .getAllByTestId("world-row")
+      .getAllByTestId("grid-row")
       .should(rows => {
         expect(rows).to.have.length(20);
 
         rows.forEach(row =>
           expect(
-            row.querySelectorAll("[data-testid=world-square]")
+            row.querySelectorAll("[data-testid=grid-square]")
           ).to.have.length(20)
         );
       });

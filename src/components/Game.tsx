@@ -1,8 +1,8 @@
 import * as React from "react";
-import { World } from "./world/World";
+import { Grid } from "./grid/Grid";
 
 export const Game: React.SFC = () => (
   <div data-testid="game-container">
-    <World />
+    <Grid />
   </div>
 );

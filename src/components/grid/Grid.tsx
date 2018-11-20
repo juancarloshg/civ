@@ -9,7 +9,7 @@ interface SquareProps {
 }
 
 const Square: React.SFC<SquareProps> = ({ row, col }) => (
-  <span key={`row${row}col${col}`} data-testid="world-square" />
+  <span key={`row${row}col${col}`} data-testid="grid-square" />
 );
 
 interface SquaresRowProps {
@@ -18,15 +18,15 @@ interface SquaresRowProps {
 }
 
 const SquaresRow: React.SFC<SquaresRowProps> = ({ length, row }) => (
-  <span data-testid="world-row">
+  <span data-testid="grid-row">
     {repeat(length, col => (
       <Square row={row} col={col} />
     ))}
   </span>
 );
 
-export const World: React.SFC = () => (
-  <div data-testid="game-world">
+export const Grid: React.SFC = () => (
+  <div data-testid="game-grid">
     {repeat(size.height, row => (
       <SquaresRow length={size.width} row={row} />
     ))}
