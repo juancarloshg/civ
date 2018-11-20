@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "../node_modules",
-    "types": ["cypress"]
+    "types": ["cypress", "cypress-testing-library"]
   },
   "include": ["**/*.*"]
 }

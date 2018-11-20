@@ -1,9 +1,9 @@
 describe("menu", () => {
   it("should allow starting a new game", () => {
     cy.visit("/")
-      .get("[data-testid=menu-start-game]")
+      .getByTestId("menu-start-game")
       .click()
-      .get("[data-testid=game-container]")
+      .getByTestId("game-container")
       .should("be.visible");
   });
 });
