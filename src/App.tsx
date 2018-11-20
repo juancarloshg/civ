@@ -1,8 +1,4 @@
 import * as React from "react";
-import { Menu } from "./components/Menu";
+import { Router } from "./Router";
 
-export const App: React.SFC = () => (
-  <>
-    <Menu />
-  </>
-);
+export const App: React.SFC = () => <Router />;
