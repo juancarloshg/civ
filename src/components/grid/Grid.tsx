@@ -2,15 +2,7 @@ import * as React from "react";
 
 import { repeat } from "../../utils";
 import { size } from "./constants";
-
-interface SquareProps {
-  row: number;
-  col: number;
-}
-
-const Square: React.SFC<SquareProps> = ({ row, col }) => (
-  <span key={`row${row}col${col}`} data-testid="grid-square" />
-);
+import { Square } from "./Square";
 
 interface SquaresRowProps {
   length: number;
