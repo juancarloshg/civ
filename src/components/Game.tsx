@@ -1,5 +1,5 @@
 import * as React from "react";
-import { World } from "./game/World";
+import { World } from "./world/World";
 
 export const Game: React.SFC = () => (
   <div data-testid="game-container">
