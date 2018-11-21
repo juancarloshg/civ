@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { repeat } from "../../utils";
 import { gridSize } from "./constants";
-import { Square } from "./Square";
+import { Tile } from "./Tile";
 
 interface SquaresRowProps {
   length: number;
@@ -14,10 +14,10 @@ const StyledSquaresRow = styled.span`
   display: flex;
 `;
 
-const SquaresRow: React.FunctionComponent<SquaresRowProps> = ({ length, row }) => (
+const TilesRow: React.FunctionComponent<SquaresRowProps> = ({ length, row }) => (
   <StyledSquaresRow data-testid="grid-row">
     {repeat(length, col => (
-      <Square row={row} col={col} />
+      <Tile row={row} col={col} terrain={'grass'} terrainModifiers={['plain']} units={[]}/>
     ))}
   </StyledSquaresRow>
 );
@@ -25,7 +25,7 @@ const SquaresRow: React.FunctionComponent<SquaresRowProps> = ({ length, row }) =
 export const Grid: React.FunctionComponent = () => (
   <div data-testid="game-grid">
     {repeat(gridSize.height, row => (
-      <SquaresRow length={gridSize.width} row={row} />
+      <TilesRow length={gridSize.width} row={row} />
     ))}
   </div>
 );
