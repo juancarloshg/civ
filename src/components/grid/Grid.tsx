@@ -1,7 +1,8 @@
 import * as React from "react";
+import styled from "styled-components";
 
 import { repeat } from "../../utils";
-import { size } from "./constants";
+import { gridSize } from "./constants";
 import { Square } from "./Square";
 
 interface SquaresRowProps {
@@ -9,18 +10,22 @@ interface SquaresRowProps {
   row: number;
 }
 
+const StyledSquaresRow = styled.span`
+  display: flex;
+`;
+
 const SquaresRow: React.SFC<SquaresRowProps> = ({ length, row }) => (
-  <span data-testid="grid-row">
+  <StyledSquaresRow data-testid="grid-row">
     {repeat(length, col => (
       <Square row={row} col={col} />
     ))}
-  </span>
+  </StyledSquaresRow>
 );
 
 export const Grid: React.SFC = () => (
   <div data-testid="game-grid">
-    {repeat(size.height, row => (
-      <SquaresRow length={size.width} row={row} />
+    {repeat(gridSize.height, row => (
+      <SquaresRow length={gridSize.width} row={row} />
     ))}
   </div>
 );
