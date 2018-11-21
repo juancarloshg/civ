@@ -1,7 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 
-import { repeat } from "../../utils";
+import { repeat } from "../../utils/utils";
 import { gridSize } from "./constants";
 import { Tile } from "./Tile";
 
@@ -14,10 +14,19 @@ const StyledSquaresRow = styled.span`
   display: flex;
 `;
 
-const TilesRow: React.FunctionComponent<SquaresRowProps> = ({ length, row }) => (
+const TilesRow: React.FunctionComponent<SquaresRowProps> = ({
+  length,
+  row
+}) => (
   <StyledSquaresRow data-testid="grid-row">
     {repeat(length, col => (
-      <Tile row={row} col={col} terrain={'grass'} terrainModifiers={['plain']} units={[]}/>
+      <Tile
+        row={row}
+        col={col}
+        terrain={"grass"}
+        terrainModifiers={["plain"]}
+        units={[]}
+      />
     ))}
   </StyledSquaresRow>
 );
