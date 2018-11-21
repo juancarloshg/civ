@@ -16,6 +16,6 @@ interface SquareProps {
   col: number;
 }
 
-export const Square: React.SFC<SquareProps> = ({ row, col }) => (
+export const Square: React.FunctionComponent<SquareProps> = ({ row, col }) => (
   <StyledSquare key={`row${row}col${col}`} data-testid="grid-square" />
 );

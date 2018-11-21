@@ -14,7 +14,7 @@ const StyledSquaresRow = styled.span`
   display: flex;
 `;
 
-const SquaresRow: React.SFC<SquaresRowProps> = ({ length, row }) => (
+const SquaresRow: React.FunctionComponent<SquaresRowProps> = ({ length, row }) => (
   <StyledSquaresRow data-testid="grid-row">
     {repeat(length, col => (
       <Square row={row} col={col} />
@@ -22,7 +22,7 @@ const SquaresRow: React.SFC<SquaresRowProps> = ({ length, row }) => (
   </StyledSquaresRow>
 );
 
-export const Grid: React.SFC = () => (
+export const Grid: React.FunctionComponent = () => (
   <div data-testid="game-grid">
     {repeat(gridSize.height, row => (
       <SquaresRow length={gridSize.width} row={row} />
