@@ -5,8 +5,6 @@ import {repeat} from "../../utils/utils";
 import {Tile, TileProps} from "./Tile";
 import {TerrainType} from "../terrains/base/TerrainType";
 import {TerrainModifierType} from "../terrains/modifiers/TerrainModifierType";
-import {GameConfiguration} from "../configuration/GameConfiguration";
-import {gridSize} from "./constants";
 
 interface SquaresRowProps {
     length: number;
@@ -17,9 +15,8 @@ const StyledSquaresRow = styled.span`
   display: flex;
 `;
 
-const conf = new GameConfiguration()
-conf.gridSize = {rows: 20, columns: 20}
-const gameMap = generateMap(conf)
+const size = 50 // TODO get from configuration
+const gameMap = generateMap()
 
 const TilesRow: React.FunctionComponent<SquaresRowProps> = ({
                                                                 length,
@@ -40,17 +37,17 @@ const TilesRow: React.FunctionComponent<SquaresRowProps> = ({
 
 export const Grid: React.FunctionComponent = () => (
     <div data-testid="game-grid">
-        {repeat(gridSize.height, row => (
-            <TilesRow length={gridSize.width} row={row}/>
+        {repeat(size, row => (
+            <TilesRow length={size} row={row}/>
         ))}
     </div>
 );
 
-function generateMap(config: GameConfiguration): TileProps[][] {
+function generateMap(): TileProps[][] {
     const map: TileProps[][] = []
-    for (let row = 0; row < config.gridSize.rows; row++) {
+    for (let row = 0; row < size; row++) {
         map[row] = []
-        for (let col = 0; col < config.gridSize.columns; col++) {
+        for (let col = 0; col < size; col++) {
             map[row][col] = {
                 row: row,
                 col: col,

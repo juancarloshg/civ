@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {createStructuredSelector} from "reselect";
 
-import { actions } from "./menu.actions";
-import { ApplicationState } from "src/rootReducer";
+import {actions} from "./menu.actions";
+import {ApplicationState} from "src/rootReducer";
 
 interface StateProps {
   helloWorldMessage: string;
@@ -24,7 +24,10 @@ const MenuBase: React.FunctionComponent<MenuProps> = ({
 }) => (
   <>
     <Link to="/game" data-testid="menu-start-game">
-      Start
+      Start<br/>
+    </Link>
+    <Link to="/configure" data-testid="menu-configure-game">
+      Configure<br/>
     </Link>
     <button onClick={() => helloWorld("Hello!")}>Hello world</button>
     <p>
