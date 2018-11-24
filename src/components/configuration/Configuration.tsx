@@ -45,11 +45,11 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
             min={0}
             max={5}
             step={1}
-            onChange={(event, value) => {configureGameSize(value); console.log('kk')}}
+            onChange={(event, value) => configureGameSize(value)}
         /><br/>
         Sea Level
         <Slider
-            value={size}
+            value={seaLevel}
             min={0}
             max={5}
             step={1}
@@ -57,7 +57,7 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
         /><br/>
         Tectonic Activity
         <Slider
-            value={size}
+            value={tectonicActivity}
             min={0}
             max={5}
             step={1}
@@ -65,7 +65,7 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
         /><br/>
         Resources Level
         <Slider
-            value={size}
+            value={resourcesLevel}
             min={0}
             max={5}
             step={1}
@@ -73,7 +73,7 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
         /><br/>
         Humidity
         <Slider
-            value={size}
+            value={humidity}
             min={0}
             max={5}
             step={1}
