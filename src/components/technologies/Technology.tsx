@@ -1,4 +1,4 @@
-import {TechnologyType} from "./TechnologyType";
+import { TechnologyType } from './TechnologyType'
 
 export abstract class Technology {
     public abstract requiredTechs: TechnologyType[]

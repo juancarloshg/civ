@@ -1,9 +1,9 @@
-import {UnitType} from "./UnitType";
-import {UnitGroup} from "./UnitGroup";
-import {TileProps} from "../grid/tile/Tile";
-import {TerrainType} from "../terrains/base/TerrainType";
-import {UnitEnvironment} from "./UnitEnvironment";
-import {TerrainModifierType} from "../terrains/modifiers/TerrainModifierType";
+import { UnitType } from './UnitType'
+import { UnitGroup } from './UnitGroup'
+import { TileProps } from '../grid/tile/Tile'
+import { TerrainType } from '../terrains/base/TerrainType'
+import { UnitEnvironment } from './UnitEnvironment'
+import { TerrainModifierType } from '../terrains/modifiers/TerrainModifierType'
 
 export abstract class Unit {
     public abstract type: UnitType
@@ -21,16 +21,18 @@ export abstract class Unit {
         let mvCost = 1
         if (this.environment === UnitEnvironment.LAND) {
             mvCost = this.terrainMovement[tile.terrain]
-            tile.terrainModifiers.forEach(modifier => {mvCost += this.modifierMovement[modifier]})
+            tile.terrainModifiers.forEach(modifier => {
+                mvCost += this.modifierMovement[modifier]
+            })
             // TODO calculate impenetrable terrains, allow at least 1 movement
         }
 
         if (mvCost <= this.turnMovement) {
             tile.units.push(this)
-            this.turnMovement -= mvCost;
+            this.turnMovement -= mvCost
             return true
         } else {
-            return false;
+            return false
         }
     }
 
@@ -56,6 +58,6 @@ export abstract class Unit {
         [TerrainModifierType.RIVER, 1],
         [TerrainModifierType.VOLCANO, 3],
         [TerrainModifierType.SHORE, 0],
-        [TerrainModifierType.COAST, 0],
+        [TerrainModifierType.COAST, 0]
     ])
 }
