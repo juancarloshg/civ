@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 import { repeat } from '../../utils/utils'
-import { TileMatrix, Tile as TileType, isValidGrid } from './grid.helpers'
+import { TileMatrix, Tile as ITile, isValidGrid } from './grid.helpers'
 import { Tile } from './tile/Tile'
 import { getSize } from '../configuration/configuration.selector'
 import { createStructuredSelector } from 'reselect'
@@ -18,7 +18,7 @@ const StyledSquaresRow = styled.span`
 interface SquaresRowProps {
     length: number
     row: number
-    tiles: TileType[]
+    tiles: ITile[]
 }
 
 const TilesRow: React.FunctionComponent<SquaresRowProps> = ({ length, row, tiles }) => (
