@@ -10,7 +10,7 @@ const initialState: MenuState = {
     message: ''
 }
 
-export const reducer = (state: MenuState = initialState, action: Actions) => {
+export const reducer = (state: MenuState = initialState, action: Actions): MenuState => {
     switch (action.type) {
         case ActionTypes.HELLO_WORLD:
             return {

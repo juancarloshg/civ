@@ -1,6 +1,7 @@
-import { all } from 'redux-saga/effects'
+import { all, fork } from 'redux-saga/effects'
 import { sagas as menuSagas } from './components/menu/menu.sagas'
+import { sagas as gridSagas } from './components/grid/grid.sagas'
 
 export function* rootSaga() {
-    yield all([menuSagas])
+    yield all([fork(gridSagas), fork(menuSagas)])
 }
