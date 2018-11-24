@@ -6,53 +6,35 @@ import Slider from '@material-ui/lab/Slider'
 import { actions } from './configuration.actions'
 import { ApplicationState } from 'src/rootReducer'
 import { Link } from 'react-router-dom'
+import { ConfigurationState } from './configuration.reducer'
 
 interface StateProps {
-    size: number
-    seaLevel: number
-    tectonicActivity: number
-    humidity: number
-    resourcesLevel: number
+    configuration: ConfigurationState
 }
 
 interface DispatchProps {
-    configureGameSize(value: number): void
-    configureGameSeaLevel(value: number): void
-    configureGameTectonicActivity(value: number): void
-    configureGameResourcesLevel(value: number): void
-    configureGameHumidity(value: number): void
+    configureGame(configuration: Partial<ConfigurationState>): void
 }
 
 type ConfigurationProps = StateProps & DispatchProps
 
-const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
-    size,
-    seaLevel,
-    tectonicActivity,
-    humidity,
-    resourcesLevel,
-    configureGameSize,
-    configureGameSeaLevel,
-    configureGameTectonicActivity,
-    configureGameResourcesLevel,
-    configureGameHumidity
-}) => (
+const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({ configuration, configureGame }) => (
     <div data-testid="game-configuration-container">
         <b>Configuration</b> <br />
         Size
-        <Slider value={size} min={0} max={500} step={1} onChange={(_, value) => configureGameSize(value)} />
+        <Slider value={configuration.size} min={0} max={500} step={1} onChange={(_, value) => configureGame({ size: value })} />
         <br />
         Sea Level
-        <Slider value={seaLevel} min={0} max={5} step={1} onChange={(_, value) => configureGameSeaLevel(value)} />
+        <Slider value={configuration.seaLevel} min={0} max={5} step={1} onChange={(_, value) => configureGame({ seaLevel: value })} />
         <br />
         Tectonic Activity
-        <Slider value={tectonicActivity} min={0} max={5} step={1} onChange={(_, value) => configureGameTectonicActivity(value)} />
+        <Slider value={configuration.tectonicActivity} min={0} max={5} step={1} onChange={(_, value) => configureGame({ tectonicActivity: value })} />
         <br />
         Resources Level
-        <Slider value={resourcesLevel} min={0} max={5} step={1} onChange={(_, value) => configureGameResourcesLevel(value)} />
+        <Slider value={configuration.resourcesLevel} min={0} max={5} step={1} onChange={(_, value) => configureGame({ resourcesLevel: value })} />
         <br />
         Humidity
-        <Slider value={humidity} min={0} max={5} step={1} onChange={(_, value) => configureGameHumidity(value)} />
+        <Slider value={configuration.humidity} min={0} max={5} step={1} onChange={(_, value) => configureGame({ humidity: value })} />
         <br />
         <Link to="/game" data-testid="menu-start-game">
             Start
@@ -62,19 +44,11 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
 )
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    size: (state: ApplicationState) => state.configuration.size,
-    seaLevel: (state: ApplicationState) => state.configuration.seaLevel,
-    tectonicActivity: (state: ApplicationState) => state.configuration.tectonicActivity,
-    resourcesLevel: (state: ApplicationState) => state.configuration.resourcesLevel,
-    humidity: (state: ApplicationState) => state.configuration.humidity
+    configuration: (state: ApplicationState) => state.configuration
 })
 
 const mapDispatch = {
-    configureGameSize: actions.configureGameSize,
-    configureGameSeaLevel: actions.configureGameSeaLevel,
-    configureGameTectonicActivity: actions.configureGameTectonicActivity,
-    configureGameResourcesLevel: actions.configureGameResourcesLevel,
-    configureGameHumidity: actions.configureGameHumidity
+    configureGame: actions.configureGame
 }
 
 export const Configuration = connect<StateProps, DispatchProps>(

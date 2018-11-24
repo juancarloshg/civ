@@ -18,30 +18,10 @@ const initialState: ConfigurationState = {
 
 export const reducer = (state: ConfigurationState = initialState, action: Actions) => {
     switch (action.type) {
-        case ActionTypes.CONFIGURE_GAME_SIZE:
+        case ActionTypes.CONFIGURE_GAME:
             return {
                 ...state,
-                size: action.payload.value
-            }
-        case ActionTypes.CONFIGURE_GAME_SEA_LEVEL:
-            return {
-                ...state,
-                seaLevel: action.payload.value
-            }
-        case ActionTypes.CONFIGURE_GAME_TECTONIC_ACTIVITY:
-            return {
-                ...state,
-                tectonicActivity: action.payload.value
-            }
-        case ActionTypes.CONFIGURE_GAME_HUMIDITY:
-            return {
-                ...state,
-                humidity: action.payload.value
-            }
-        case ActionTypes.CONFIGURE_GAME_RESOURCES_LEVEL:
-            return {
-                ...state,
-                resourcesLevel: action.payload.value
+                ...action.payload
             }
 
         default:
