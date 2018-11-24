@@ -5,6 +5,7 @@ import Slider from '@material-ui/lab/Slider';
 
 import {actions} from "./configuration.actions";
 import {ApplicationState} from "src/rootReducer";
+import {Link} from "react-router-dom";
 
 interface StateProps {
     size: number;
@@ -43,7 +44,7 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
         <Slider
             value={size}
             min={0}
-            max={5}
+            max={500}
             step={1}
             onChange={(event, value) => configureGameSize(value)}
         /><br/>
@@ -79,6 +80,10 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({
             step={1}
             onChange={(event, value) => configureGameHumidity(value)}
         /><br/>
+
+        <Link to="/game" data-testid="menu-start-game">
+            Start<br/>
+        </Link>
     </div>
 );
 

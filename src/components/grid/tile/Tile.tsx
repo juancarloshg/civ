@@ -1,10 +1,10 @@
 import * as React from "react";
 import styled, {css} from "styled-components";
 
-import {squareSize} from "./constants";
-import {TerrainType} from "../terrains/base/TerrainType";
-import {TerrainModifierType} from "../terrains/modifiers/TerrainModifierType";
-import {Unit} from "../units/Unit";
+import {squareSize} from "../constants";
+import {TerrainType} from "../../terrains/base/TerrainType";
+import {TerrainModifierType} from "../../terrains/modifiers/TerrainModifierType";
+import {Unit} from "../../units/Unit";
 
 const StyledTile = styled.span`
   height: ${squareSize.height};

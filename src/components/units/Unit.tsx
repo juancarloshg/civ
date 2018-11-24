@@ -1,6 +1,6 @@
 import {UnitType} from "./UnitType";
 import {UnitGroup} from "./UnitGroup";
-import {TileProps} from "../grid/Tile";
+import {TileProps} from "../grid/tile/Tile";
 import {TerrainType} from "../terrains/base/TerrainType";
 import {UnitEnvironment} from "./UnitEnvironment";
 import {TerrainModifierType} from "../terrains/modifiers/TerrainModifierType";

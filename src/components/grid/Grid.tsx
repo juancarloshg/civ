@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { repeat } from "../../utils/utils";
-import { Tile, TileProps } from "./Tile";
+import { Tile, TileProps } from "./tile/Tile";
 import { TerrainType } from "../terrains/base/TerrainType";
 import { TerrainModifierType } from "../terrains/modifiers/TerrainModifierType";
 

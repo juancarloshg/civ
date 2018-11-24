@@ -25,7 +25,7 @@ const MenuBase: React.FunctionComponent<MenuProps> = ({
   <>
     <Link to="/game" data-testid="menu-start-game">
       Start<br/>
-    </Link>
+  </Link>
     <Link to="/configure" data-testid="menu-configure-game">
       Configure<br/>
     </Link>
