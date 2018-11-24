@@ -1,6 +1,6 @@
 import { createAction, ActionsUnion } from 'src/utils/actionHelpers'
-import { TerrainType } from '../../terrains/base/TerrainType'
-import { TerrainModifierType } from '../../terrains/modifiers/TerrainModifierType'
+import { TerrainType } from 'src/components/terrains/base/terrains'
+import { TerrainModifierType } from 'src/components/terrains/modifiers/terrainModifiers'
 
 export enum ActionTypes {
     INIT_TILE = 'Init tile'

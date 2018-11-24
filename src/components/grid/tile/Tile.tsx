@@ -2,22 +2,24 @@ import * as React from 'react'
 import styled, { css } from 'styled-components'
 
 import { squareSize } from '../constants'
-import { TerrainType } from '../../terrains/base/TerrainType'
-import { TerrainModifierType } from '../../terrains/modifiers/TerrainModifierType'
 import { Unit } from '../../units/Unit'
+import { TerrainType } from 'src/components/terrains/base/terrains'
+import { TerrainModifierType } from 'src/components/terrains/modifiers/terrainModifiers'
 
 const getColor = (terrain: TerrainType) => {
     switch (terrain) {
-        case TerrainType.SEA:
+        case 'sea':
             return 'Aqua'
-        case TerrainType.SNOW:
+        case 'snow':
             return 'White'
-        case TerrainType.DESERT:
+        case 'desert':
             return 'Yellow'
-        case TerrainType.DIRT:
+        case 'dirt':
             return 'Olive'
-        case TerrainType.GRASS:
+        case 'grass':
             return 'Green'
+        default:
+            return ''
     }
 }
 

@@ -1,9 +1,9 @@
 import { UnitType } from './UnitType'
 import { UnitGroup } from './UnitGroup'
 import { TileProps } from '../grid/tile/Tile'
-import { TerrainType } from '../terrains/base/TerrainType'
+import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
+import { TerrainType } from '../terrains/base/terrains'
 import { UnitEnvironment } from './UnitEnvironment'
-import { TerrainModifierType } from '../terrains/modifiers/TerrainModifierType'
 
 export abstract class Unit {
     public abstract type: UnitType
@@ -40,24 +40,18 @@ export abstract class Unit {
         this.turnMovement = this.movement
     }
 
-    private terrainMovement = new Map([
-        [TerrainType.GRASS, 1],
-        [TerrainType.DIRT, 1],
-        [TerrainType.DESERT, 2],
-        [TerrainType.SNOW, 2],
-        [TerrainType.SEA, 3]
-    ])
+    private terrainMovement = new Map<TerrainType, number>([['grass', 1], ['dirt', 1], ['desert', 2], ['snow', 2], ['sea', 3]])
 
-    private modifierMovement = new Map([
-        [TerrainModifierType.PLAIN, 0],
-        [TerrainModifierType.RAINFOREST, 3],
-        [TerrainModifierType.FOREST, 2],
-        [TerrainModifierType.ICE, 0],
-        [TerrainModifierType.MOUNTAIN, 3],
-        [TerrainModifierType.HILL, 1],
-        [TerrainModifierType.RIVER, 1],
-        [TerrainModifierType.VOLCANO, 3],
-        [TerrainModifierType.SHORE, 0],
-        [TerrainModifierType.COAST, 0]
+    private modifierMovement = new Map<TerrainModifierType, number>([
+        ['plain', 0],
+        ['rainforest', 3],
+        ['forest', 2],
+        ['ice', 0],
+        ['mountain', 3],
+        ['hill', 1],
+        ['river', 1],
+        ['volcano', 3],
+        ['shore', 0],
+        ['coast', 0]
     ])
 }
