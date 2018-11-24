@@ -12,6 +12,7 @@
         "member-ordering": false,
         "object-literal-sort-keys": false,
         "no-any": true,
-        "array-type": false
+        "array-type": false,
+        "member-access": false
     }
 }

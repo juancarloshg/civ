@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects'
-import { sagas as gameSagas } from './components/menu.sagas'
+import { sagas as menuSagas } from './components/menu/menu.sagas'
 
 export function* rootSaga() {
-    yield all([gameSagas])
+    yield all([menuSagas])
 }
