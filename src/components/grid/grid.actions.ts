@@ -1,13 +1,14 @@
 import { createAction, ActionsUnion } from 'src/utils/actionHelpers'
+import { TileMatrix } from './grid.helpers'
 
 export enum ActionTypes {
-    INIT_GRID_STATE = 'Init grid state',
-    INIT_GRID_STATE_SUCCESS = 'Init grid state success'
+    INIT_GRID = '[grid] init grid',
+    INIT_GRID_SUCCESS = '[grid] init grid success'
 }
 
 export const actions = {
-    initGridState: () => createAction(ActionTypes.INIT_GRID_STATE),
-    initGridStateSuccess: () => createAction(ActionTypes.INIT_GRID_STATE_SUCCESS)
+    initGrid: () => createAction(ActionTypes.INIT_GRID),
+    initGridSuccess: (tiles: TileMatrix) => createAction(ActionTypes.INIT_GRID_SUCCESS, tiles)
 }
 
 export type Actions = ActionsUnion<typeof actions>

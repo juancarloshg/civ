@@ -1,20 +1,20 @@
 import { Yield } from '../../yield/Yield'
 
 interface TerrainModifier {
-    yield: Yield
+    yield: Partial<Yield>
 }
 
 export type TerrainModifierType = 'plain' | 'river' | 'hill' | 'mountain' | 'ice' | 'shore' | 'coast' | 'volcano' | 'forest' | 'rainforest'
 
 export const terrainModifiers: { [key in TerrainModifierType]: TerrainModifier } = {
-    plain: { yield: new Yield(0, 1, 0, 0, 0) },
-    river: { yield: new Yield(1, 2, 1, 1, 0) },
-    hill: { yield: new Yield(1, 0, 0, 0, 0) },
-    mountain: { yield: new Yield(2, 0, 0, -1, 0) },
-    ice: { yield: new Yield(0, 0, 0, 0, 0) },
-    shore: { yield: new Yield(0, 0, 1, 0, 0) },
-    coast: { yield: new Yield(0, 0, 1, 0, 0) },
-    volcano: { yield: new Yield(3, 3, 0, -5, 1) },
-    forest: { yield: new Yield(2, 1, 0, 1, 0) },
-    rainforest: { yield: new Yield(2, 1, 0, -2, 2) }
+    plain: { yield: { food: 1 } },
+    river: { yield: { production: 1, food: 2, gold: 1, health: 1 } },
+    hill: { yield: { production: 1 } },
+    mountain: { yield: { production: 1, health: -1 } },
+    ice: { yield: {} },
+    shore: { yield: { gold: 1 } },
+    coast: { yield: { gold: 1 } },
+    volcano: { yield: { production: 3, food: 3, health: -5, science: 1 } },
+    forest: { yield: { production: 2, food: 1, health: 1 } },
+    rainforest: { yield: { production: 2, food: 1, health: -2, science: 2 } }
 }

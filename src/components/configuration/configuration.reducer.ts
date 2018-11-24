@@ -9,7 +9,7 @@ export interface ConfigurationState {
 }
 
 const initialState: ConfigurationState = {
-    size: 200,
+    size: 50,
     seaLevel: 3,
     tectonicActivity: 3,
     humidity: 3,

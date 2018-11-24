@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { Menu } from './components/Menu'
+import { Menu } from './components/menu/Menu'
 import { Game } from './components/Game'
 import { Configuration } from './components/configuration/Configuration'
 

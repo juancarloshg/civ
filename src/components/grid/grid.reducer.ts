@@ -1,20 +1,14 @@
 import { Actions, ActionTypes } from './grid.actions'
-import { TileState } from './tile/tile.reducer'
+import { TileMatrix } from './grid.helpers'
 
-export interface GridState {
-    grid: TileState[][]
-}
+export type GridState = TileMatrix
 
-export const reducer = (state: GridState, action: Actions) => {
+const initialState: TileMatrix = []
+
+export const reducer = (state: GridState = initialState, action: Actions): GridState => {
     switch (action.type) {
-        case ActionTypes.INIT_GRID_STATE:
-            return {
-                ...state
-            }
-        case ActionTypes.INIT_GRID_STATE_SUCCESS:
-            return {
-                ...state
-            }
+        case ActionTypes.INIT_GRID_SUCCESS:
+            return [...action.payload]
         default:
             return state
     }

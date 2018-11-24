@@ -7,6 +7,7 @@ import { actions } from './configuration.actions'
 import { ApplicationState } from 'src/rootReducer'
 import { Link } from 'react-router-dom'
 import { ConfigurationState } from './configuration.reducer'
+import { getConfiguration } from './configuration.selector'
 
 interface StateProps {
     configuration: ConfigurationState
@@ -44,7 +45,7 @@ const ConfigurationBase: React.FunctionComponent<ConfigurationProps> = ({ config
 )
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    configuration: (state: ApplicationState) => state.configuration
+    configuration: getConfiguration
 })
 
 const mapDispatch = {

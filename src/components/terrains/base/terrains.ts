@@ -7,7 +7,7 @@ interface Terrain {
     allowedModifiers: TerrainModifierType[]
     allowedResources: ResourceType[]
     allowedImprovements: ImprovementType[]
-    yield: Yield
+    yield: Partial<Yield>
 }
 
 export type TerrainType = 'dirt' | 'grass' | 'sea' | 'desert' | 'snow'
@@ -17,30 +17,30 @@ export const terrains: { [key in TerrainType]: Terrain } = {
         allowedModifiers: [],
         allowedImprovements: ['farm', 'mine'],
         allowedResources: ['oil', 'iron', 'cow', 'sheep'],
-        yield: new Yield(1, 1, 0, 0, 0)
+        yield: { production: 1, food: 1 }
     },
     grass: {
         allowedModifiers: [],
         allowedImprovements: ['mine', 'farm'],
         allowedResources: ['oil', 'iron', 'cow', 'sheep'],
-        yield: new Yield(0, 2, 0, 0, 0)
+        yield: { food: 2 }
     },
     sea: {
         allowedModifiers: [],
         allowedImprovements: ['fishingShip'],
         allowedResources: ['fish'],
-        yield: new Yield(0, 2, 1, 0, 0)
+        yield: { food: 2, gold: 1 }
     },
     desert: {
         allowedModifiers: [],
         allowedImprovements: [],
         allowedResources: ['oil'],
-        yield: new Yield(0, 0, 0, -1, 0)
+        yield: { health: -1 }
     },
     snow: {
         allowedModifiers: [],
         allowedImprovements: [],
         allowedResources: ['oil'],
-        yield: new Yield(0, 0, 0, -1, 0)
+        yield: { health: -1 }
     }
 }

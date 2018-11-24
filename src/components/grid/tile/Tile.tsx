@@ -1,10 +1,9 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { squareSize } from '../constants'
-import { Unit } from '../../units/units'
 import { TerrainType } from 'src/components/terrains/base/terrains'
-import { TerrainModifierType } from 'src/components/terrains/modifiers/terrainModifiers'
+import { Tile as ITile } from '../grid.helpers'
 
 const getColor = (terrain: TerrainType) => {
     switch (terrain) {
@@ -29,16 +28,9 @@ const StyledTile = styled.span<TileProps>`
     display: inline-block;
     border: 1px solid black;
     box-sizing: border-box;
-    ${props =>
-        css`
-            background: ${getColor(props.terrain)};
-        `}
+    background: ${props => getColor(props.terrain)};
 `
 
-export interface TileProps {
-    terrain: TerrainType
-    terrainModifiers: TerrainModifierType[]
-    units: Unit[]
-}
+type TileProps = ITile
 
 export const Tile: React.FunctionComponent<TileProps> = props => <StyledTile data-testid="grid-square" {...props} />
