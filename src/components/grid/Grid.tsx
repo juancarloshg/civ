@@ -42,11 +42,15 @@ function generateMap(): TileProps[][] {
             map[row][col] = {
                 row,
                 col,
-                terrain: TerrainType[Object.keys(TerrainType)[Math.floor((Math.random() * Object.keys(TerrainType).length) / 2)]] as TerrainType,
+                terrain: getRandomTerrain(),
                 terrainModifiers: [],
                 units: []
             }
         }
     }
     return map
+}
+
+function getRandomTerrain() {
+    return TerrainType[Object.keys(TerrainType)[Math.floor((Math.random() * Object.keys(TerrainType).length) / 2)]];
 }
