@@ -1,5 +1,5 @@
 import { Actions, ActionTypes } from './tile.actions'
-import { Unit } from '../../units/Unit'
+import { Unit } from '../../units/units'
 import { TerrainType } from 'src/components/terrains/base/terrains'
 import { TerrainModifierType } from 'src/components/terrains/modifiers/terrainModifiers'
 

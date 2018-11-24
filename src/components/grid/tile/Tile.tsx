@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled, { css } from 'styled-components'
 
 import { squareSize } from '../constants'
-import { Unit } from '../../units/Unit'
+import { Unit } from '../../units/units'
 import { TerrainType } from 'src/components/terrains/base/terrains'
 import { TerrainModifierType } from 'src/components/terrains/modifiers/terrainModifiers'
 
