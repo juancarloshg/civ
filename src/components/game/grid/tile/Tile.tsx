@@ -2,8 +2,8 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 import { squareSize } from '../constants'
-import { TerrainType } from 'src/components/terrains/base/terrains'
-import { Tile as ITile } from '../grid.helpers'
+import { TerrainType } from 'src/components/game/terrains/base/terrains'
+import { Tile as ITile } from '../../game.helpers'
 
 const getColor = (terrain: TerrainType) => {
     switch (terrain) {
