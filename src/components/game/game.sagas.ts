@@ -1,8 +1,8 @@
 import { takeLatest, put, select, call } from 'redux-saga/effects'
 
 import { actions, ActionTypes } from './game.actions'
-import { TileMatrix, generateMap } from './game.helpers'
-import { getSize } from '../configuration/configuration.selector'
+import { TileMatrix, generateMap, getViewTiles } from './game.helpers'
+import { getSize, getViewSize } from '../configuration/configuration.selector'
 import { UnitType } from './units/units'
 
 function* initGame() {
@@ -13,8 +13,11 @@ function* initGame() {
 function* initGrid() {
     const size: number = yield select(getSize)
     const tiles: TileMatrix = yield generateMap(size)
-
     yield put(actions.initGrid(tiles))
+
+    const viewSize = yield select(getViewSize)
+    const viewTiles = yield getViewTiles(tiles, viewSize)
+    yield put(actions.initViewGrid(viewTiles))
 }
 
 function* initPlayer() {

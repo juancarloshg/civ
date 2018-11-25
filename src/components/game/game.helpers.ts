@@ -29,4 +29,6 @@ function getRandomTerrainType(): TerrainType {
     return Object.keys(terrains)[Math.floor(Math.random() * Object.keys(terrains).length)] as TerrainType
 }
 
-export const isValidGrid = (grid: TileMatrix, size: number): boolean => grid && grid.length === size && grid.every(row => row.length === size)
+export function getViewTiles(tiles: TileMatrix, viewSize: number, row: number = 0, col: number = 0) {
+    return tiles.slice(row, viewSize).map(tilesRow => tilesRow.slice(col, viewSize))
+}
