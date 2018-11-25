@@ -2,17 +2,27 @@ import { Actions, ActionTypes } from './game.actions'
 import { TileMatrix } from './game.helpers'
 import { Player } from './game.types'
 
+export interface ViewGrid {
+    grid: TileMatrix
+    row: number
+    col: number
+}
+
 export interface GameState {
     isGridReady: boolean
     grid: TileMatrix
-    viewGrid: TileMatrix
+    viewGrid: ViewGrid
     player: Player
 }
 
 const initialState: GameState = {
     isGridReady: false,
     grid: [],
-    viewGrid: [],
+    viewGrid: {
+        grid: [],
+        row: 0,
+        col: 0
+    },
     player: {
         units: []
     }
@@ -26,10 +36,10 @@ export const reducer = (state: GameState = initialState, action: Actions): GameS
                 isGridReady: true,
                 grid: [...action.payload]
             }
-        case ActionTypes.INIT_VIEW_GRID:
+        case ActionTypes.SET_VIEW_GRID:
             return {
                 ...state,
-                viewGrid: [...action.payload]
+                viewGrid: { ...action.payload }
             }
         case ActionTypes.INIT_PLAYER:
             return {

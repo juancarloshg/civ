@@ -30,5 +30,5 @@ function getRandomTerrainType(): TerrainType {
 }
 
 export function getViewTiles(tiles: TileMatrix, viewSize: number, row: number = 0, col: number = 0) {
-    return tiles.slice(row, viewSize).map(tilesRow => tilesRow.slice(col, viewSize))
+    return tiles.slice(row, viewSize + row).map(tilesRow => tilesRow.slice(col, viewSize + col))
 }

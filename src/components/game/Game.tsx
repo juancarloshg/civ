@@ -7,6 +7,7 @@ import { Grid } from './grid/Grid'
 
 import { getIsGridReady } from './game.selectors'
 import { actions } from './game.actions'
+import { KeyListener } from '../keys/KeyListener'
 
 interface StateProps {
     isGridReady: boolean
@@ -25,7 +26,11 @@ export class GameBase extends React.Component<GameProps> {
     render() {
         const { isGridReady } = this.props
 
-        return <div data-testid="game-container">{isGridReady && <Grid />}</div>
+        return (
+            <div data-testid="game-container">
+                <KeyListener>{isGridReady && <Grid />}</KeyListener>
+            </div>
+        )
     }
 }
 

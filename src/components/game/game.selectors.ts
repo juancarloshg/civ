@@ -1,7 +1,7 @@
-import { createSelector } from 'reselect'
+import { createSelector, Selector } from 'reselect'
 
 import { ApplicationState } from 'src/rootReducer'
-import { GameState } from './game.reducer'
+import { GameState, ViewGrid } from './game.reducer'
 
 const getRoot = (state: ApplicationState): GameState => state.game
 
@@ -15,7 +15,7 @@ export const getGrid = createSelector(
     (gameState: GameState) => gameState.grid
 )
 
-export const getViewGrid = createSelector(
+export const getViewGrid: Selector<ApplicationState, ViewGrid> = createSelector(
     getRoot,
     (gameState: GameState) => gameState.viewGrid
 )
