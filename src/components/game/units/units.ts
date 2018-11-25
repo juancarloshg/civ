@@ -5,14 +5,14 @@ export interface Unit {
     group: UnitGroup
     environment: UnitEnvironment
     hp: number
-    meleeAtk: number
-    meleeDef: number
-    rangedAtk: number
-    rangedDef: number
+    meleeAtk?: number
+    meleeDef?: number
+    rangedAtk?: number
+    rangedDef?: number
     movement: number
 }
 
-export type UnitType = 'archer' | 'warrior'
+export type UnitType = 'archer' | 'warrior' | 'settler'
 
 export const units: { [key in UnitType]: Unit } = {
     archer: {
@@ -22,8 +22,7 @@ export const units: { [key in UnitType]: Unit } = {
         meleeAtk: 1,
         meleeDef: 1,
         movement: 1,
-        rangedAtk: 4,
-        rangedDef: 0
+        rangedAtk: 4
     },
     warrior: {
         group: 'melee',
@@ -32,7 +31,12 @@ export const units: { [key in UnitType]: Unit } = {
         meleeAtk: 5,
         meleeDef: 2,
         movement: 1,
-        rangedAtk: 0,
         rangedDef: 1
+    },
+    settler: {
+        group: 'pacifist',
+        environment: 'land',
+        hp: 1,
+        movement: 1
     }
 }

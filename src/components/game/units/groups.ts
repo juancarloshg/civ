@@ -1,1 +1,1 @@
-export type UnitGroup = 'melee' | 'ranged' | 'mounted' | 'siege' | 'aircraft' | 'vehicle' | 'hover'
+export type UnitGroup = 'melee' | 'ranged' | 'mounted' | 'siege' | 'aircraft' | 'vehicle' | 'hover' | 'pacifist'

@@ -28,7 +28,7 @@ export class GameBase extends React.Component<GameProps> {
     render() {
         const { size, grid } = this.props
 
-        return <div data-testid="game-container">{!isValidGrid(grid, size) && <Grid size={size} grid={grid} />}</div>
+        return <div data-testid="game-container">{isValidGrid(grid, size) && <Grid size={size} grid={grid} />}</div>
     }
 }
 
