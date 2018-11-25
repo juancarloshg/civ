@@ -3,16 +3,14 @@ import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
 import { ApplicationState } from 'src/rootReducer'
-import { getSize } from '../configuration/configuration.selector'
 import { Grid } from './grid/Grid'
 
-import { TileMatrix, isValidGrid } from './game.helpers'
-import { getGrid } from './game.selectors'
+import { getIsGridReady } from './game.selectors'
 import { actions } from './game.actions'
+import { KeyListener } from '../keys/KeyListener'
 
 interface StateProps {
-    size: number
-    grid: TileMatrix
+    isGridReady: boolean
 }
 
 interface DispatchProps {
@@ -26,15 +24,18 @@ export class GameBase extends React.Component<GameProps> {
         this.props.initGame()
     }
     render() {
-        const { size, grid } = this.props
+        const { isGridReady } = this.props
 
-        return <div data-testid="game-container">{isValidGrid(grid, size) && <Grid size={size} grid={grid} />}</div>
+        return (
+            <div data-testid="game-container">
+                <KeyListener>{isGridReady && <Grid />}</KeyListener>
+            </div>
+        )
     }
 }
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    size: getSize,
-    grid: getGrid
+    isGridReady: getIsGridReady
 })
 
 const mapDispatch: DispatchProps = {

@@ -2,6 +2,7 @@ import { Actions, ActionTypes } from './configuration.actions'
 
 export interface ConfigurationState {
     size: number
+    viewSize: number
     seaLevel: number
     tectonicActivity: number
     humidity: number
@@ -10,6 +11,7 @@ export interface ConfigurationState {
 
 const initialState: ConfigurationState = {
     size: 50,
+    viewSize: 15,
     seaLevel: 3,
     tectonicActivity: 3,
     humidity: 3,
