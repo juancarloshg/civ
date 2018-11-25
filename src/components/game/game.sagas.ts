@@ -53,16 +53,16 @@ function* moveMap(key: string) {
 }
 
 function* setViewGrid(tiles: TileMatrix, row: number, col: number) {
-    // TODO: validate on the other limits
-    if (row < 0 || col < 0) {
+    const viewSize: number = yield select(getViewSize)
+
+    if (row < 0 || col < 0 || row + viewSize === tiles.length || col + viewSize === tiles[0].length) {
         return
     }
-    const viewSize: number = yield select(getViewSize)
     const viewTiles: TileMatrix = yield getViewTiles(tiles, viewSize, row, col)
     yield put(actions.setViewGrid({ row, col, grid: viewTiles }))
 }
 
 export function* sagas() {
     yield takeLatest(ActionTypes.INIT_GAME, initGame)
-    yield throttle(300, KeyActionTypes.KEYDOWN, handleKeydown)
+    yield throttle(0, KeyActionTypes.KEYDOWN, handleKeydown)
 }
