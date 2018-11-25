@@ -1,5 +1,6 @@
+import { Yield } from 'src/components/game/yield/Yield'
+
 import { TerrainModifierType } from '../modifiers/terrainModifiers'
-import { Yield } from 'src/components/yield/Yield'
 import { ResourceType } from '../resources/resources'
 import { ImprovementType } from '../improvements/Improvement'
 
