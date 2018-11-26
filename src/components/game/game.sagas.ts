@@ -55,7 +55,7 @@ function* moveMap(key: string) {
 function* updateViewGrid(tiles: TileMatrix, row: number, col: number) {
     const viewSize: number = yield select(getViewSize)
 
-    if (row < 0 || col < 0 || row + viewSize === tiles.length || col + viewSize === tiles[0].length) {
+    if (row < 0 || col < 0 || row + viewSize > tiles.length || col + viewSize > tiles[0].length) {
         return
     }
 

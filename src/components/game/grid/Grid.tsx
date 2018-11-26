@@ -1,19 +1,16 @@
 import * as React from 'react'
-import styled from 'styled-components'
-
-import { repeat } from 'src/utils/utils'
-import { Tile as ITile } from '../game.helpers'
-import { Tile } from './tile/Tile'
-import { createStructuredSelector } from 'reselect'
-import { ApplicationState } from 'src/rootReducer'
-import { getViewGrid } from '../game.selectors'
 import { connect } from 'react-redux'
-import { getViewSize } from 'src/components/configuration/configuration.selector'
-import { ViewGrid } from '../game.reducer'
+import { createStructuredSelector } from 'reselect'
 
-const StyledTileRow = styled.span`
-    display: flex;
-`
+import { ApplicationState } from 'src/rootReducer'
+import { repeat } from 'src/utils/utils'
+import { FlexDiv } from 'src/components/styled/FlexDiv'
+import { getViewSize } from 'src/components/configuration/configuration.selector'
+
+import { Tile as ITile } from '../game.helpers'
+import { getViewGrid } from '../game.selectors'
+import { ViewGrid } from '../game.reducer'
+import { Tile } from './tile/Tile'
 
 interface TileRowProps {
     length: number
@@ -21,12 +18,12 @@ interface TileRowProps {
 }
 
 const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
-    <StyledTileRow data-testid="grid-row">
+    <FlexDiv data-testid="grid-row">
         {repeat(length, (col: number) => {
             const tile = tiles[col]
             return <Tile key={`row${tile.row}col${tile.col}`} tile={tile} />
         })}
-    </StyledTileRow>
+    </FlexDiv>
 )
 
 interface StateProps {

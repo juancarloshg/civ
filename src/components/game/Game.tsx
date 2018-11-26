@@ -3,11 +3,14 @@ import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
 import { ApplicationState } from 'src/rootReducer'
-import { Grid } from './grid/Grid'
 
+import { FlexDiv } from '../styled/FlexDiv'
+import { KeyListener } from '../keys/KeyListener'
+
+import { Grid } from './grid/Grid'
 import { getIsGridReady } from './game.selectors'
 import { actions } from './game.actions'
-import { KeyListener } from '../keys/KeyListener'
+import { PlayerControls } from './player/PlayerControls'
 
 interface StateProps {
     isGridReady: boolean
@@ -27,9 +30,14 @@ export class GameBase extends React.Component<GameProps> {
         const { isGridReady } = this.props
 
         return (
-            <div data-testid="game-container">
-                <KeyListener>{isGridReady && <Grid />}</KeyListener>
-            </div>
+            <FlexDiv data-testid="game-container">
+                {isGridReady && (
+                    <KeyListener>
+                        <Grid />
+                        <PlayerControls />
+                    </KeyListener>
+                )}
+            </FlexDiv>
         )
     }
 }
