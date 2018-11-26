@@ -1,5 +1,5 @@
-import { UnitType } from './units/units'
+import { Unit } from './units/units'
 
 export interface Player {
-    units: UnitType[]
+    units: Unit[]
 }

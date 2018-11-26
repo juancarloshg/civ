@@ -30,7 +30,7 @@ const initialState: GameState = {
 
 export const reducer = (state: GameState = initialState, action: Actions): GameState => {
     switch (action.type) {
-        case ActionTypes.INIT_GRID:
+        case ActionTypes.SET_GRID:
             return {
                 ...state,
                 isGridReady: true,
