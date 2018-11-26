@@ -17,15 +17,15 @@ const StyledTileRow = styled.span`
 
 interface TileRowProps {
     length: number
-    row: number
     tiles: ITile[]
 }
 
-const TileRow: React.FunctionComponent<TileRowProps> = ({ length, row, tiles }) => (
+const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
     <StyledTileRow data-testid="grid-row">
-        {repeat(length, (col: number) => (
-            <Tile key={`row${row}col${col}`} terrain={tiles[col].terrain} terrainModifiers={['plain']} units={[]} />
-        ))}
+        {repeat(length, (col: number) => {
+            const tile = tiles[col]
+            return <Tile key={`row${tile.row}col${tile.col}`} tile={tile} />
+        })}
     </StyledTileRow>
 )
 
@@ -38,9 +38,10 @@ type GridProps = StateProps
 
 const GridBase: React.FunctionComponent<GridProps> = ({ size, viewGrid }) => (
     <div data-testid="game-grid">
-        {repeat(size, (row: number) => (
-            <TileRow key={`row${row}`} length={size} row={row} tiles={viewGrid.grid[row]} />
-        ))}
+        {repeat(size, (row: number) => {
+            const realRow = viewGrid.grid[row][0].row
+            return <TileRow key={`row${realRow}`} length={size} tiles={viewGrid.grid[row]} />
+        })}
     </div>
 )
 

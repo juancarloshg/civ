@@ -6,6 +6,8 @@ export interface Tile {
     terrain: TerrainType
     terrainModifiers: TerrainModifierType[]
     units: Unit[]
+    row: number
+    col: number
 }
 
 export type TileMatrix = Tile[][]
@@ -18,7 +20,9 @@ export function generateMap(size: number): TileMatrix {
             map[row][col] = {
                 terrain: getRandomTerrainType(),
                 terrainModifiers: [],
-                units: []
+                units: [],
+                row,
+                col
             }
         }
     }
