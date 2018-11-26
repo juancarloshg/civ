@@ -34,7 +34,7 @@ export const units: { [key in UnitType]: Unit } = {
         rangedDef: 1
     },
     settler: {
-        group: 'pacifist',
+        group: 'civilian',
         environment: 'land',
         hp: 1,
         movement: 1
