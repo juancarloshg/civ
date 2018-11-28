@@ -1,6 +1,6 @@
+import { uniqueId } from 'lodash'
 import { GridPosition } from '../grid/grid.types'
 import { Unit, UnitType, units, UnitState, UnitBase } from './units'
-import { uniqueId } from 'lodash'
 
 interface CreateUnitProps {
     type: UnitType
