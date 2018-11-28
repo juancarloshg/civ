@@ -13,6 +13,7 @@
         "object-literal-sort-keys": false,
         "no-any": true,
         "array-type": false,
-        "member-access": false
+        "member-access": false,
+        "curly": false
     }
 }

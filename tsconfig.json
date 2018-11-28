@@ -4,7 +4,7 @@
         "outDir": "build/dist",
         "module": "esnext",
         "target": "es5",
-        "lib": ["es7", "dom"],
+        "lib": ["es7", "dom", "es2017.object"],
         "plugins": [
             {
                 "name": "typescript-styled-plugin"

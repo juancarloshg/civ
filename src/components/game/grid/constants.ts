@@ -1,1 +1,1 @@
-export const squareSize = { width: '50px', height: '50px' }
+export const squareSize = { width: '60px', height: '60px' }
