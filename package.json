@@ -5,6 +5,8 @@
     "dependencies": {
         "@material-ui/core": "^3.5.1",
         "@material-ui/lab": "^3.0.0-alpha.23",
+        "lodash.uniqueid": "^4.0.1",
+        "ramda": "^0.26.1",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
         "react-redux": "^5.1.1",
@@ -38,7 +40,9 @@
     "devDependencies": {
         "@cypress/webpack-preprocessor": "^4.0.2",
         "@types/jest": "^23.3.9",
+        "@types/lodash.uniqueid": "^4.0.4",
         "@types/node": "^10.12.9",
+        "@types/ramda": "types/npm-ramda#dist",
         "@types/react": "^16.7.6",
         "@types/react-dom": "^16.0.9",
         "@types/react-redux": "^6.0.10",

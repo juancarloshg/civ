@@ -1,5 +1,6 @@
 import { GridPosition } from '../grid/grid.types'
 import { Unit, UnitType, units, UnitState, UnitBase } from './units'
+import { uniqueId } from 'lodash'
 
 interface CreateUnitProps {
     type: UnitType
@@ -9,6 +10,7 @@ interface CreateUnitProps {
 export const createUnit = ({ type, position }: CreateUnitProps): Unit => {
     const unitBase: UnitBase = units[type]
     const unitState: UnitState = {
+        id: uniqueId('unit'),
         currentHp: unitBase.hp,
         movementsLeft: unitBase.movement,
         position

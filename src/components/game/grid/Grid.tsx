@@ -21,7 +21,7 @@ const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
     <FlexDiv data-testid="grid-row">
         {repeat(length, (col: number) => {
             const tile = tiles[col]
-            return <Tile key={`row${tile.row}col${tile.col}`} tile={tile} />
+            return <Tile key={tile.id} tile={tile} />
         })}
     </FlexDiv>
 )

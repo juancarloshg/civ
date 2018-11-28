@@ -15,6 +15,7 @@ export interface UnitBase {
 }
 
 export interface UnitState {
+    id: string
     currentHp: number
     movementsLeft: number
     position: GridPosition

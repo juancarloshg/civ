@@ -3,6 +3,7 @@ import { TerrainModifierType } from './terrains/modifiers/terrainModifiers'
 import { Unit } from './units/units'
 
 export interface Tile {
+    id: string
     terrain: TerrainType
     terrainModifiers: TerrainModifierType[]
     units: Unit[]
@@ -18,6 +19,7 @@ export function generateMap(size: number): TileMatrix {
         map[row] = []
         for (let col = 0; col < size; col++) {
             map[row][col] = {
+                id: `row${row}col${col}`,
                 terrain: getRandomTerrainType(),
                 terrainModifiers: [],
                 units: [],
