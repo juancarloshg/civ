@@ -1,3 +1,10 @@
+import { uniqueId } from 'lodash'
+
+import { Archer } from 'src/components/icons/Archer'
+import { Warrior } from 'src/components/icons/Warrior'
+import { Settler } from 'src/components/icons/Settler'
+import { IconProps } from 'src/components/icons/icons.types'
+
 import { GridPosition } from '../grid/grid.types'
 import { Unit, UnitType, units, UnitState, UnitBase } from './units'
 
@@ -9,6 +16,7 @@ interface CreateUnitProps {
 export const createUnit = ({ type, position }: CreateUnitProps): Unit => {
     const unitBase: UnitBase = units[type]
     const unitState: UnitState = {
+        id: uniqueId('unit'),
         currentHp: unitBase.hp,
         movementsLeft: unitBase.movement,
         position
@@ -21,3 +29,9 @@ export const createUnit = ({ type, position }: CreateUnitProps): Unit => {
 }
 
 export const createUnits = (unitTypes: UnitType[], position: GridPosition): Unit[] => unitTypes.map(type => createUnit({ type, position }))
+
+export const unitIcons: { [key in UnitType]: React.FunctionComponent<IconProps> } = {
+    archer: Archer,
+    warrior: Warrior,
+    settler: Settler
+}

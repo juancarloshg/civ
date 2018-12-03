@@ -1,39 +1,13 @@
 import * as React from 'react'
-import styled from 'styled-components'
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 
-import { TerrainType } from 'src/components/game/terrains/base/terrains'
+import { ApplicationState } from 'src/rootReducer'
 import { Tile as ITile } from '../../game.helpers'
 import { actions as playerActions } from '../../player/player.actions'
-import { squareSize } from '../constants'
-
-const getColor = (terrain: TerrainType) => {
-    switch (terrain) {
-        case 'sea':
-            return 'Aqua'
-        case 'snow':
-            return 'White'
-        case 'desert':
-            return 'Yellow'
-        case 'dirt':
-            return 'Olive'
-        case 'grass':
-            return 'Green'
-        default:
-            return ''
-    }
-}
-
-type StyledTileProps = Pick<Props, 'tile'>
-
-const StyledTile = styled.span<StyledTileProps>`
-    height: ${squareSize.height};
-    width: ${squareSize.width};
-    display: inline-block;
-    border: 1px solid black;
-    box-sizing: border-box;
-    background: ${props => getColor(props.tile.terrain)};
-`
+import { getIsSelectedTile } from '../../player/player.selectors'
+import { StyledTile } from './StyledTile'
+import { Unit } from './Unit'
 
 interface OwnProps {
     tile: ITile
@@ -43,17 +17,27 @@ interface DispatchProps {
     selectTile(tile: ITile): void
 }
 
-type Props = OwnProps & DispatchProps
+interface StateProps {
+    isSelectedTile: boolean
+}
+
+export type Props = OwnProps & DispatchProps & StateProps
 
 const TileBase: React.FunctionComponent<Props> = ({ selectTile, tile, ...passProps }) => (
-    <StyledTile data-testid="grid-square" tile={tile} onClick={() => selectTile(tile)} {...passProps} />
+    <StyledTile data-testid="grid-square" tile={tile} onClick={() => selectTile(tile)} {...passProps}>
+        {tile.units && tile.units.map(unit => <Unit unit={unit} key={unit.id} />)}
+    </StyledTile>
 )
+
+const mapState = createStructuredSelector<ApplicationState, Props, StateProps>({
+    isSelectedTile: getIsSelectedTile
+})
 
 const mapDispatch: DispatchProps = {
     selectTile: (tile: ITile) => playerActions.selectTile(tile)
 }
 
-export const Tile = connect<{}, DispatchProps, OwnProps>(
-    null,
+export const Tile = connect<StateProps, DispatchProps, OwnProps>(
+    mapState,
     mapDispatch
 )(TileBase)
