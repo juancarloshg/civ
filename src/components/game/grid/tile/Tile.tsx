@@ -8,7 +8,6 @@ import { actions as playerActions } from '../../player/player.actions'
 import { getIsSelectedTile } from '../../player/player.selectors'
 import { StyledTile } from './StyledTile'
 import { Unit } from './Unit'
-import { Unit as IUnit } from '../../units/units'
 
 interface OwnProps {
     tile: ITile
@@ -16,7 +15,6 @@ interface OwnProps {
 
 interface DispatchProps {
     selectTile(tile: ITile): void
-    selectUnit(unit: IUnit): void
 }
 
 interface StateProps {
@@ -25,9 +23,9 @@ interface StateProps {
 
 export type Props = OwnProps & DispatchProps & StateProps
 
-const TileBase: React.FunctionComponent<Props> = ({ selectTile, selectUnit, tile, ...passProps }) => (
+const TileBase: React.FunctionComponent<Props> = ({ selectTile, tile, ...passProps }) => (
     <StyledTile data-testid="grid-square" tile={tile} onClick={() => selectTile(tile)} {...passProps}>
-        {tile.units && tile.units.map(unit => <Unit onClick={() => selectUnit(unit)} unit={unit} key={unit.id} />)}
+        {tile.units && tile.units.map(unit => <Unit unit={unit} key={unit.id} />)}
     </StyledTile>
 )
 
@@ -36,8 +34,7 @@ const mapState = createStructuredSelector<ApplicationState, Props, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectTile: (tile: ITile) => playerActions.selectTile(tile),
-    selectUnit: (unit: IUnit) => playerActions.selectUnit(unit)
+    selectTile: (tile: ITile) => playerActions.selectTile(tile)
 }
 
 export const Tile = connect<StateProps, DispatchProps, OwnProps>(
