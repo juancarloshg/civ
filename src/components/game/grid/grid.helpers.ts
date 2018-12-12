@@ -1,6 +1,6 @@
-import { TerrainType, terrains } from './terrains/base/terrains'
-import { TerrainModifierType } from './terrains/modifiers/terrainModifiers'
-import { Unit } from './units/units'
+import { TerrainType, terrains } from '../terrains/base/terrains'
+import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
+import { Unit } from '../units/units'
 
 export interface Tile {
     id: string

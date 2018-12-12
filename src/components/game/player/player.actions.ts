@@ -1,5 +1,5 @@
 import { createAction, ActionsUnion } from 'src/utils/actionHelpers'
-import { Tile } from '../game.helpers'
+import { Tile } from '../grid/grid.helpers'
 import { Unit } from '../units/units'
 
 export enum ActionTypes {

@@ -8,9 +8,10 @@ import { FlexDiv } from '../styled/FlexDiv'
 import { KeyListener } from '../keys/KeyListener'
 
 import { Grid } from './grid/Grid'
-import { getIsGridReady } from './game.selectors'
-import { actions } from './game.actions'
+import { getIsGridReady } from './grid/grid.selectors'
 import { PlayerControls } from './player/PlayerControls'
+
+import { actions } from './game.actions'
 
 interface StateProps {
     isGridReady: boolean

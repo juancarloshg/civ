@@ -1,6 +1,6 @@
 import { Actions, ActionTypes } from './player.actions'
-import { Tile } from '../game.helpers'
 import { Unit } from '../units/units'
+import { Tile } from '../grid/grid.helpers'
 
 export interface PlayerState {
     selectedTile: Tile | null

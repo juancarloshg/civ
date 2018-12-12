@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from 'src/rootReducer'
-import { Tile as ITile } from '../../game.helpers'
+import { Tile as ITile } from '../../grid/grid.helpers'
 import { actions as playerActions } from '../../player/player.actions'
 import { getIsSelectedTile } from '../../player/player.selectors'
 import { StyledTile } from './StyledTile'

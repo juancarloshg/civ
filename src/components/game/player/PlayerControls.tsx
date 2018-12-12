@@ -3,8 +3,8 @@ import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
 import { ApplicationState } from 'src/rootReducer'
-import { Tile } from '../game.helpers'
 import { Unit } from '../units/units'
+import { Tile } from '../grid/grid.helpers'
 
 import { actions } from './player.actions'
 import { getSelectedTile, getSelectedUnit } from './player.selectors'

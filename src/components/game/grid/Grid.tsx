@@ -7,10 +7,10 @@ import { repeat } from 'src/utils/utils'
 import { FlexDiv } from 'src/components/styled/FlexDiv'
 import { getViewSize } from 'src/components/configuration/configuration.selector'
 
-import { Tile as ITile } from '../game.helpers'
-import { getViewGrid } from '../game.selectors'
-import { ViewGrid } from '../game.reducer'
 import { Tile } from './tile/Tile'
+import { Tile as ITile } from './grid.helpers'
+import { ViewGrid } from './grid.reducer'
+import { getViewGrid } from './grid.selectors'
 
 interface TileRowProps {
     length: number
