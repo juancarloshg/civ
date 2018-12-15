@@ -3,7 +3,7 @@ import { takeLatest, call, throttle } from 'redux-saga/effects'
 import { ActionTypes as KeyActionTypes, actions as keyActions } from '../keys/keys.actions'
 
 import { initGrid } from './grid/grid.sagas'
-import { keydownHandler } from './player/controls'
+import { keyBindings } from './player/controls'
 
 import { ActionTypes } from './game.actions'
 import { initPlayer } from './player/player.sagas'
@@ -15,8 +15,10 @@ function* initGame() {
 
 function* handleKeydown(action: ReturnType<typeof keyActions.keydown>) {
     const key = action.payload.key
-
-    yield call(keydownHandler[key])
+    const handler = keyBindings[key]
+    if (handler) {
+        yield handler()
+    }
 }
 
 export function* sagas() {

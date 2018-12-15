@@ -1,7 +1,7 @@
 import { moveMap } from '../grid/grid.sagas'
 import { attemptUnitMove } from '../units/unit.sagas'
 
-export const keydownHandler: { [key: string]: () => void } = {
+export const keyBindings: { [key: string]: () => void } = {
     // Grid controls
     ArrowUp: () => moveMap('up'),
     ArrowDown: () => moveMap('down'),
