@@ -34,7 +34,7 @@ const mapState = createStructuredSelector<ApplicationState, Props, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectTile: (tile: ITile) => playerActions.selectTile(tile)
+    selectTile: (tile: ITile) => playerActions.selectTile(tile.id)
 }
 
 export const Tile = connect<StateProps, DispatchProps, OwnProps>(

@@ -5,15 +5,15 @@ import { Player } from '../game.types'
 
 export interface PlayerState {
     player: Player
-    selectedTile: Tile | null
+    selectedTileId: Tile['id'] | null
     selectedUnitId: Unit['id'] | null
 }
 
 const initialState: PlayerState = {
-    selectedTile: null,
+    selectedTileId: null,
     selectedUnitId: null,
     player: {
-        units: []
+        unitIds: []
     }
 }
 
@@ -22,7 +22,7 @@ export const reducer = (state: PlayerState = initialState, action: Actions): Pla
         case ActionTypes.SELECT_TILE:
             return {
                 ...state,
-                selectedTile: action.payload
+                selectedTileId: action.payload
             }
         case ActionTypes.SELECT_UNIT:
             return {

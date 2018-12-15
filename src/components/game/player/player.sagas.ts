@@ -8,7 +8,7 @@ import { actions, ActionTypes } from './player.actions'
 
 export function* initPlayer() {
     const startingUnits: Unit[] = createUnits(['warrior', 'settler'], { row: 0, col: 0 })
-    yield put(actions.addPlayer({ units: startingUnits.map(unit => unit.id) }))
+    yield put(actions.addPlayer({ unitIds: startingUnits.map(unit => unit.id) }))
     yield put(unitActions.addUnits(startingUnits))
 }
 
