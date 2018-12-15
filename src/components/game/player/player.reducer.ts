@@ -7,11 +7,13 @@ export interface PlayerState {
     player: Player
     selectedTileId: Tile['id'] | null
     selectedUnitId: Unit['id'] | null
+    turn: number
 }
 
 const initialState: PlayerState = {
     selectedTileId: null,
     selectedUnitId: null,
+    turn: 0,
     player: {
         unitIds: []
     }
@@ -38,6 +40,11 @@ export const reducer = (state: PlayerState = initialState, action: Actions): Pla
                     ...state.player,
                     ...action.payload
                 }
+            }
+        case ActionTypes.NEXT_TURN:
+            return {
+                ...state,
+                turn: state.turn + 1
             }
         default:
             return state
