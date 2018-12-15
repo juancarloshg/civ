@@ -7,21 +7,6 @@ import { Grid } from '../grid/grid.helpers'
 import { getUnits } from './unit.selectors'
 import { actions } from './unit.actions'
 
-// function* displayPlayerUnits(action: ReturnType<typeof actions.initPlayer>) {
-//     const units = action.payload.units
-//     if (!units) return
-
-//     const currentTiles: Grid = yield select(getGrid)
-//     const tiles = currentTiles.map(row => row.slice())
-
-//     units.forEach(unit => {
-//         const tile = tiles[unit.position.row][unit.position.row]
-//         tile.units = [...tile.units, unit]
-//     })
-
-//     yield put(gridActions.setGrid(tiles))
-// }
-
 type MovementDirection = 'up' | 'down' | 'right' | 'left' | 'left-down' | 'left-up' | 'right-down' | 'right-up'
 export function* attemptUnitMove(direction: MovementDirection) {
     const unit: Unit | null = yield select(getSelectedUnit)
