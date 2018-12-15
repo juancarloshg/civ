@@ -22,12 +22,14 @@ export const reducer = (state: PlayerState = initialState, action: Actions): Pla
         case ActionTypes.SELECT_TILE:
             return {
                 ...state,
-                selectedTileId: action.payload
+                selectedTileId: action.payload,
+                selectedUnitId: null
             }
         case ActionTypes.SELECT_UNIT:
             return {
                 ...state,
-                selectedUnitId: action.payload
+                selectedUnitId: action.payload,
+                selectedTileId: null
             }
         case ActionTypes.ADD_PLAYER:
             return {
