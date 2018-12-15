@@ -13,7 +13,7 @@ export enum ActionTypes {
 export const actions = {
     addPlayer: (player: Partial<Player>) => createAction(ActionTypes.ADD_PLAYER, player),
     selectTile: (tile: Tile) => createAction(ActionTypes.SELECT_TILE, tile),
-    selectUnit: (unit: Unit) => createAction(ActionTypes.SELECT_UNIT, unit)
+    selectUnit: (unit: Unit['id']) => createAction(ActionTypes.SELECT_UNIT, unit)
 }
 
 export type Actions = ActionsUnion<typeof actions>

@@ -25,9 +25,15 @@ export const getSelectedTileWithUnits = createSelector(
 )
 
 // TODO get selected unit needs to update when the unit moves - maybe used the id?
-export const getSelectedUnit = createSelector(
+export const getSelectedUnitId = createSelector(
     getRoot,
-    prop('selectedUnit')
+    prop('selectedUnitId')
+)
+
+export const getSelectedUnit = createSelector(
+    getSelectedUnitId,
+    getUnits,
+    (unitId, units) => units.find(unit => unit.id === unitId) || null
 )
 
 const getCurrentTile = (_: ApplicationState, props: { tile: Tile }) => props.tile

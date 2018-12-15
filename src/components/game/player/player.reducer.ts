@@ -6,18 +6,18 @@ import { Player } from '../game.types'
 export interface PlayerState {
     player: Player
     selectedTile: Tile | null
-    selectedUnit: Unit | null
+    selectedUnitId: Unit['id'] | null
 }
 
 const initialState: PlayerState = {
     selectedTile: null,
-    selectedUnit: null,
+    selectedUnitId: null,
     player: {
         units: []
     }
 }
 
-export const reducer = (state: PlayerState = initialState, action: Actions) => {
+export const reducer = (state: PlayerState = initialState, action: Actions): PlayerState => {
     switch (action.type) {
         case ActionTypes.SELECT_TILE:
             return {
@@ -27,7 +27,7 @@ export const reducer = (state: PlayerState = initialState, action: Actions) => {
         case ActionTypes.SELECT_UNIT:
             return {
                 ...state,
-                selectedUnit: action.payload
+                selectedUnitId: action.payload
             }
         case ActionTypes.ADD_PLAYER:
             return {
