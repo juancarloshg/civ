@@ -7,7 +7,7 @@ import { ApplicationState } from 'src/rootReducer'
 import { FlexDiv } from '../styled/FlexDiv'
 import { KeyListener } from '../keys/KeyListener'
 
-import { Grid } from './grid/Grid'
+import { ViewGrid } from './grid/ViewGrid'
 import { getIsGridReady } from './grid/grid.selectors'
 import { PlayerControls } from './player/PlayerControls'
 
@@ -34,7 +34,7 @@ export class GameBase extends React.Component<GameProps> {
             <FlexDiv data-testid="game-container">
                 {isGridReady && (
                     <KeyListener>
-                        <Grid />
+                        <ViewGrid />
                         <PlayerControls />
                     </KeyListener>
                 )}

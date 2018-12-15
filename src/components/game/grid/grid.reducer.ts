@@ -1,23 +1,21 @@
 import { Actions, ActionTypes } from './grid.actions'
-import { TileMatrix } from './grid.helpers'
+import { Grid } from './grid.helpers'
 
-export interface ViewGrid {
-    grid: TileMatrix
+export interface ViewGridOrigin {
     row: number
     col: number
 }
 
 export interface GridState {
     isGridReady: boolean
-    grid: TileMatrix
-    viewGrid: ViewGrid
+    grid: Grid
+    viewGridOrigin: ViewGridOrigin
 }
 
 const initialState: GridState = {
     isGridReady: false,
     grid: [],
-    viewGrid: {
-        grid: [],
+    viewGridOrigin: {
         row: 0,
         col: 0
     }
@@ -31,10 +29,10 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
                 isGridReady: true,
                 grid: [...action.payload]
             }
-        case ActionTypes.SET_VIEW_GRID:
+        case ActionTypes.SET_VIEW_GRID_ORIGIN:
             return {
                 ...state,
-                viewGrid: { ...action.payload }
+                viewGridOrigin: { ...action.payload }
             }
         default:
             return state

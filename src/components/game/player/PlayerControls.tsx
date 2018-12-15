@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 
 import { ApplicationState } from 'src/rootReducer'
 import { Unit } from '../units/units'
-import { Tile } from '../grid/grid.helpers'
+import { TileWithUnits } from '../grid/grid.helpers'
 
 import { actions } from './player.actions'
-import { getSelectedTile, getSelectedUnit } from './player.selectors'
+import { getSelectedUnit, getSelectedTileWithUnits } from './player.selectors'
 
 interface StateProps {
-    tile: Tile | null
+    tile: TileWithUnits | null
     unit: Unit | null
 }
 
@@ -54,7 +54,7 @@ const PlayerControlsBase: React.SFC<Props> = ({ tile, unit, selectUnit }) => (
 )
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    tile: getSelectedTile,
+    tile: getSelectedTileWithUnits,
     unit: getSelectedUnit
 })
 

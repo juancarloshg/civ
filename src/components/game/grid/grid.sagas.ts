@@ -1,15 +1,15 @@
-import { select, put, takeLatest } from 'redux-saga/effects'
+import { select, put } from 'redux-saga/effects'
 
 import { getViewSize, getSize } from 'src/components/configuration/configuration.selector'
 
-import { ActionTypes, actions } from './grid.actions'
-import { TileMatrix, getViewTiles, generateMap } from './grid.helpers'
-import { ViewGrid } from './grid.reducer'
-import { getGrid, getViewGrid } from './grid.selectors'
+import { actions } from './grid.actions'
+import { Grid, generateMap, GridWithUnits } from './grid.helpers'
+import { getGridWithUnits, getViewGridOrigin } from './grid.selectors'
+import { ViewGridOrigin } from './grid.reducer'
 
 export function* moveMap(direction: 'up' | 'down' | 'right' | 'left') {
-    const tiles: TileMatrix = yield select(getGrid)
-    const { row: currentRow, col: currentCol }: ViewGrid = yield select(getViewGrid)
+    const tiles: GridWithUnits = yield select(getGridWithUnits)
+    const { row: currentRow, col: currentCol }: ViewGridOrigin = yield select(getViewGridOrigin)
 
     switch (direction) {
         case 'up':
@@ -23,32 +23,18 @@ export function* moveMap(direction: 'up' | 'down' | 'right' | 'left') {
     }
 }
 
-function* updateViewGrid(tiles: TileMatrix, row: number, col: number) {
+function* updateViewGrid(tiles: GridWithUnits, row: number, col: number) {
     const viewSize: number = yield select(getViewSize)
 
     if (row < 0 || col < 0 || row + viewSize > tiles.length || col + viewSize > tiles[0].length) {
         return
     }
 
-    const viewTiles: TileMatrix = yield getViewTiles(tiles, viewSize, row, col)
-    yield put(actions.setViewGrid({ row, col, grid: viewTiles }))
-}
-
-function* refreshViewGridTiles(action: ReturnType<typeof actions.setGrid>) {
-    const tiles = action.payload
-    const currentViewGrid: ViewGrid = yield select(getViewGrid)
-    const row = currentViewGrid.row
-    const col = currentViewGrid.col
-
-    yield updateViewGrid(tiles, row, col)
+    yield put(actions.setViewGridOrigin({ row, col }))
 }
 
 export function* initGrid() {
     const size: number = yield select(getSize)
-    const tiles: TileMatrix = yield generateMap(size)
+    const tiles: Grid = yield generateMap(size)
     yield put(actions.setGrid(tiles))
-}
-
-export function* sagas() {
-    yield takeLatest(ActionTypes.SET_GRID, refreshViewGridTiles)
 }
