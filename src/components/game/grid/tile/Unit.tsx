@@ -50,7 +50,13 @@ const getStyledIcon = (icon: React.FunctionComponent<IconProps>) => styled(icon)
 const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected }) => {
     const Icon = getStyledIcon(unitIcons[unit.type])
     return (
-        <StyledUnit onClick={() => selectUnit(unit)} isSelected={isSelected}>
+        <StyledUnit
+            onClick={e => {
+                e.stopPropagation()
+                selectUnit(unit)
+            }}
+            isSelected={isSelected}
+        >
             {isSelected && <Icon height={getHeight({ isSelected })} />}
         </StyledUnit>
     )
