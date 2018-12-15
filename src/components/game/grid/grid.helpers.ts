@@ -1,20 +1,24 @@
-import { TerrainType, terrains } from './terrains/base/terrains'
-import { TerrainModifierType } from './terrains/modifiers/terrainModifiers'
-import { Unit } from './units/units'
+import { TerrainType, terrains } from '../terrains/base/terrains'
+import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
+import { Unit } from '../units/units'
 
 export interface Tile {
     id: string
     terrain: TerrainType
     terrainModifiers: TerrainModifierType[]
-    units: Unit[]
     row: number
     col: number
 }
 
-export type TileMatrix = Tile[][]
+export interface TileWithUnits extends Tile {
+    units: Unit[]
+}
 
-export function generateMap(size: number): TileMatrix {
-    const map: TileMatrix = []
+export type Grid = Tile[][]
+export type GridWithUnits = TileWithUnits[][]
+
+export function generateMap(size: number): Grid {
+    const map: Grid = []
     for (let row = 0; row < size; row++) {
         map[row] = []
         for (let col = 0; col < size; col++) {
@@ -22,7 +26,6 @@ export function generateMap(size: number): TileMatrix {
                 id: `row${row}col${col}`,
                 terrain: getRandomTerrainType(),
                 terrainModifiers: [],
-                units: [],
                 row,
                 col
             }
@@ -33,8 +36,4 @@ export function generateMap(size: number): TileMatrix {
 
 function getRandomTerrainType(): TerrainType {
     return Object.keys(terrains)[Math.floor(Math.random() * Object.keys(terrains).length)] as TerrainType
-}
-
-export function getViewTiles(tiles: TileMatrix, viewSize: number, row: number = 0, col: number = 0) {
-    return tiles.slice(row, viewSize + row).map(tilesRow => tilesRow.slice(col, viewSize + col))
 }

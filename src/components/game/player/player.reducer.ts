@@ -1,30 +1,42 @@
 import { Actions, ActionTypes } from './player.actions'
-import { Tile } from '../game.helpers'
 import { Unit } from '../units/units'
+import { Tile } from '../grid/grid.helpers'
+import { Player } from '../game.types'
 
 export interface PlayerState {
-    selectedTile: Tile | null
-    selectedUnit: Unit | null
+    player: Player
+    selectedTileId: Tile['id'] | null
+    selectedUnitId: Unit['id'] | null
 }
 
 const initialState: PlayerState = {
-    selectedTile: null,
-    selectedUnit: null
+    selectedTileId: null,
+    selectedUnitId: null,
+    player: {
+        unitIds: []
+    }
 }
 
-export const reducer = (state: PlayerState = initialState, action: Actions) => {
+export const reducer = (state: PlayerState = initialState, action: Actions): PlayerState => {
     switch (action.type) {
         case ActionTypes.SELECT_TILE:
             return {
                 ...state,
-                selectedTile: action.payload
+                selectedTileId: action.payload
             }
         case ActionTypes.SELECT_UNIT:
             return {
                 ...state,
-                selectedUnit: action.payload
+                selectedUnitId: action.payload
             }
-
+        case ActionTypes.ADD_PLAYER:
+            return {
+                ...state,
+                player: {
+                    ...state.player,
+                    ...action.payload
+                }
+            }
         default:
             return state
     }

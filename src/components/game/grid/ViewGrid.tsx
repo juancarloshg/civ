@@ -7,14 +7,13 @@ import { repeat } from 'src/utils/utils'
 import { FlexDiv } from 'src/components/styled/FlexDiv'
 import { getViewSize } from 'src/components/configuration/configuration.selector'
 
-import { Tile as ITile } from '../game.helpers'
-import { getViewGrid } from '../game.selectors'
-import { ViewGrid } from '../game.reducer'
 import { Tile } from './tile/Tile'
+import { TileWithUnits, GridWithUnits } from './grid.helpers'
+import { getViewGrid } from './grid.selectors'
 
 interface TileRowProps {
     length: number
-    tiles: ITile[]
+    tiles: TileWithUnits[]
 }
 
 const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
@@ -28,16 +27,16 @@ const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
 
 interface StateProps {
     size: number
-    viewGrid: ViewGrid
+    viewGrid: GridWithUnits
 }
 
 type GridProps = StateProps
 
-const GridBase: React.FunctionComponent<GridProps> = ({ size, viewGrid }) => (
+const ViewGridBase: React.FunctionComponent<GridProps> = ({ size, viewGrid }) => (
     <div data-testid="game-grid">
         {repeat(size, (row: number) => {
-            const realRow = viewGrid.grid[row][0].row
-            return <TileRow key={`row${realRow}`} length={size} tiles={viewGrid.grid[row]} />
+            const realRow = viewGrid[row][0].row
+            return <TileRow key={`row${realRow}`} length={size} tiles={viewGrid[row]} />
         })}
     </div>
 )
@@ -47,4 +46,4 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
     viewGrid: getViewGrid
 })
 
-export const Grid = connect<StateProps>(mapState)(GridBase)
+export const ViewGrid = connect<StateProps>(mapState)(ViewGridBase)
