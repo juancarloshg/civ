@@ -9,7 +9,7 @@ import { KeyListener } from '../keys/KeyListener'
 
 import { ViewGrid } from './grid/ViewGrid'
 import { getIsGridReady } from './grid/grid.selectors'
-import { PlayerControls } from './player/PlayerControls'
+import { PlayerInfo } from './player/PlayerInfo'
 
 import { actions } from './game.actions'
 
@@ -35,7 +35,7 @@ export class GameBase extends React.Component<GameProps> {
                 {isGridReady && (
                     <KeyListener>
                         <ViewGrid />
-                        <PlayerControls />
+                        <PlayerInfo />
                     </KeyListener>
                 )}
             </FlexDiv>
