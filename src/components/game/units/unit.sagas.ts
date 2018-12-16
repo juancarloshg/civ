@@ -1,12 +1,16 @@
-import { select, call, put, takeLatest } from 'redux-saga/effects'
+import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
+
 import { getSelectedUnit } from '../player/player.selectors'
-import { Unit } from './units'
 import { GridPosition } from '../grid/grid.types'
 import { getGrid } from '../grid/grid.selectors'
 import { Grid } from '../grid/grid.helpers'
+import { actions as cityActions } from '../city/city.actions'
+import { City } from '../city/city.reducer'
+
 import { getUnits } from './unit.selectors'
-import { actions } from './unit.actions'
 import { ActionTypes as PlayerActionTypes } from '../player/player.actions'
+import { actions, ActionTypes } from './unit.actions'
+import { Unit } from './units'
 
 type MovementDirection = 'up' | 'down' | 'right' | 'left' | 'left-down' | 'left-up' | 'right-down' | 'right-up'
 export function* attemptUnitMove(direction: MovementDirection) {
@@ -74,6 +78,15 @@ function* handleNextTurn() {
     yield put(actions.setUnits(newUnits))
 }
 
+function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof actions.unitAction>) {
+    switch (action) {
+        case 'create city':
+            const city: City = { position: unit.position }
+            yield put(cityActions.addCity(city))
+    }
+}
+
 export function* sagas() {
     yield takeLatest(PlayerActionTypes.NEXT_TURN, handleNextTurn)
+    yield takeEvery(ActionTypes.UNIT_ACTION, handleUnitAction)
 }

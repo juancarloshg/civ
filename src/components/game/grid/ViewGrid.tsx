@@ -8,12 +8,12 @@ import { FlexDiv } from 'src/components/styled/FlexDiv'
 import { getViewSize } from 'src/components/configuration/configuration.selector'
 
 import { Tile } from './tile/Tile'
-import { TileWithUnits, GridWithUnits } from './grid.helpers'
+import { ExtendedTile, ExtendedGrid } from './grid.helpers'
 import { getViewGrid } from './grid.selectors'
 
 interface TileRowProps {
     length: number
-    tiles: TileWithUnits[]
+    tiles: ExtendedTile[]
 }
 
 const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
@@ -27,7 +27,7 @@ const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
 
 interface StateProps {
     size: number
-    viewGrid: GridWithUnits
+    viewGrid: ExtendedGrid
 }
 
 type GridProps = StateProps

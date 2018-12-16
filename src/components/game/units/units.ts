@@ -12,6 +12,7 @@ export interface UnitBase {
     rangedAtk?: number
     rangedDef?: number
     movement: number
+    actions?: UnitActionType[]
 }
 
 export interface UnitState {
@@ -19,6 +20,17 @@ export interface UnitState {
     currentHp: number
     movementsLeft: number
     position: GridPosition
+}
+
+export interface UnitAction {
+    type: UnitActionType
+    description: string
+}
+
+export type UnitActionType = 'create city'
+
+export const unitActionDescriptions: { [key in UnitActionType]: string } = {
+    'create city': 'Build city'
 }
 
 export type Unit = UnitBase & UnitState
@@ -51,6 +63,7 @@ export const units: { [key in UnitType]: UnitBase } = {
         group: 'civilian',
         environment: 'land',
         hp: 1,
-        movement: 1
+        movement: 1,
+        actions: ['create city']
     }
 }

@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { TileWithUnits } from '../grid/grid.helpers'
+
+import { ExtendedTile } from '../grid/grid.helpers'
 import { Unit } from '../units/units'
 
 interface TileInfoProps {
-    tile: TileWithUnits
+    tile: ExtendedTile
     selectUnit(unit: Unit): void
 }
 
@@ -15,6 +16,8 @@ export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit }) => (
         <br />
         <p>Tile details:</p>
         <p>Terrain - {tile.terrain}</p>
+        <br />
+        {tile.city && <p>This tile has a city!</p>}
         <br />
         {tile.units.length > 0 && (
             <>

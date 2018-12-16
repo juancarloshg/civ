@@ -22,13 +22,16 @@ const getColor = (props: StyledTileProps) => {
     }
 }
 
-const getBorderSize = (props: StyledTileProps) => (props.isSelectedTile ? 3 : 1)
+const getBorderSize = (props: StyledTileProps) => (props.tile.city ? (props.isSelectedTile ? 8 : 7) : props.isSelectedTile ? 3 : 1)
+const getBorderStyle = (props: StyledTileProps) => (props.tile.city ? 'double' : 'solid')
 
 export const StyledTile = styled.span<StyledTileProps>`
     height: ${squareSize.height};
     width: ${squareSize.width};
     display: inline-block;
-    border: ${getBorderSize}px solid black;
+    border-width: ${getBorderSize}px;
+    border-style: ${getBorderStyle};
+    border-color: black;
     box-sizing: border-box;
     background: ${getColor};
 `
