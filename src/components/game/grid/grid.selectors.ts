@@ -1,4 +1,4 @@
-import { createSelector, Selector } from 'reselect'
+import { createSelector, Selector, ParametricSelector } from 'reselect'
 
 import { ApplicationState } from 'src/rootReducer'
 import { getViewSize } from 'src/components/configuration/configuration.selector'
@@ -8,7 +8,9 @@ import { getCities } from '../city/city.selector'
 import { City } from '../city/city.reducer'
 
 import { GridState, ViewGridOrigin } from './grid.reducer'
-import { Grid, ExtendedGrid } from './grid.helpers'
+import { Grid, ExtendedGrid, Tile } from './grid.helpers'
+import { GridPosition } from './grid.types'
+import { flatten } from 'ramda'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -49,4 +51,10 @@ export const getViewGrid = createSelector(
         grid
             .slice(viewGridOrigin.row, viewSize + viewGridOrigin.row)
             .map(tilesRow => tilesRow.slice(viewGridOrigin.col, viewSize + viewGridOrigin.col))
+)
+
+export const getTileByPosition: ParametricSelector<ApplicationState, GridPosition, Tile | null> = createSelector(
+    getGrid,
+    (_: ApplicationState, position: GridPosition) => position,
+    (grid, { row, col }) => flatten(grid).find(tile => tile.row === row && tile.col === col) || null
 )

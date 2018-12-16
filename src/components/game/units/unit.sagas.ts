@@ -2,9 +2,10 @@ import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import { getSelectedUnit } from '../player/player.selectors'
 import { GridPosition } from '../grid/grid.types'
-import { getGrid } from '../grid/grid.selectors'
-import { Grid } from '../grid/grid.helpers'
+import { getGrid, getTileByPosition } from '../grid/grid.selectors'
+import { Grid, Tile } from '../grid/grid.helpers'
 import { actions as cityActions } from '../city/city.actions'
+import { actions as playerActions } from '../player/player.actions'
 import { City } from '../city/city.reducer'
 
 import { getUnits } from './unit.selectors'
@@ -83,6 +84,9 @@ function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof acti
         case 'create city':
             const city: City = { position: unit.position }
             yield put(cityActions.addCity(city))
+            const tile: Tile | null = yield select(getTileByPosition, unit.position)
+            yield put(playerActions.selectTile(tile!.id))
+            yield put(actions.removeUnit(unit))
     }
 }
 
