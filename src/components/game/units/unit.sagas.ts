@@ -13,7 +13,7 @@ import { ActionTypes as PlayerActionTypes } from '../player/player.actions'
 import { actions, ActionTypes } from './unit.actions'
 import { Unit } from './units'
 
-type MovementDirection = 'up' | 'down' | 'right' | 'left' | 'left-down' | 'left-up' | 'right-down' | 'right-up'
+type MovementDirection = 'north' | 'south' | 'east' | 'west' | 'southwest' | 'northwest' | 'southeast' | 'northeast'
 export function* attemptUnitMove(direction: MovementDirection) {
     const unit: Unit | null = yield select(getSelectedUnit)
     if (!unit) return
@@ -50,21 +50,21 @@ function hasMovement(unit: Unit) {
 
 function getNextPosition(position: GridPosition, direction: MovementDirection): GridPosition {
     switch (direction) {
-        case 'up':
+        case 'north':
             return { row: position.row - 1, col: position.col }
-        case 'down':
+        case 'south':
             return { row: position.row + 1, col: position.col }
-        case 'left-down':
+        case 'southwest':
             return { row: position.row + 1, col: position.col - 1 }
-        case 'right-down':
+        case 'southeast':
             return { row: position.row + 1, col: position.col + 1 }
-        case 'right-up':
+        case 'northeast':
             return { row: position.row - 1, col: position.col + 1 }
-        case 'left-up':
+        case 'northwest':
             return { row: position.row - 1, col: position.col - 1 }
-        case 'left':
+        case 'west':
             return { row: position.row, col: position.col - 1 }
-        case 'right':
+        case 'east':
             return { row: position.row, col: position.col + 1 }
     }
 }

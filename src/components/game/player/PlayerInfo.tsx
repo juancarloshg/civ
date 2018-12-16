@@ -10,6 +10,7 @@ import { actions } from './player.actions'
 import { getSelectedUnit, getSelectedExtendedTile, getTurn } from './player.selectors'
 import { TileInfo } from './TileInfo'
 import { UnitInfo } from './UnitInfo'
+import { NextTurn } from './NextTurn'
 
 interface StateProps {
     tile: ExtendedTile | null
@@ -19,19 +20,19 @@ interface StateProps {
 
 interface DispatchProps {
     selectUnit(unit: Unit): void
-    nextTurn(): void
 }
 
 type Props = StateProps & DispatchProps
 
-const PlayerInfoBase: React.SFC<Props> = ({ tile, unit, selectUnit, turn, nextTurn }) => (
+const PlayerInfoBase: React.SFC<Props> = ({ tile, unit, selectUnit, turn }) => (
     <div>
         <h3>Player 1</h3>
         {tile && <TileInfo tile={tile} selectUnit={selectUnit} />}
         {unit && <UnitInfo unit={unit} />}
-        Turn {turn}
+        <p>Turn {turn}</p>
         <br />
-        <button onClick={() => nextTurn()}>Next Turn</button>
+        <br />
+        <NextTurn />
     </div>
 )
 
@@ -42,8 +43,7 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectUnit: (unit: Unit) => actions.selectUnit(unit.id),
-    nextTurn: () => actions.nextTurn()
+    selectUnit: (unit: Unit) => actions.selectUnit(unit.id)
 }
 
 export const PlayerInfo = connect<StateProps, DispatchProps>(

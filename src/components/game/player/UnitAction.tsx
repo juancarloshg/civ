@@ -16,7 +16,9 @@ interface DispatchProps {
 type UnitActionProps = OwnProps & DispatchProps
 
 const UnitActionBase: React.SFC<UnitActionProps> = ({ unit, action, playerAction }) => (
-    <button onClick={() => playerAction(unit, action)}>{unitActionDescriptions[action]}</button>
+    <button disabled={!unit.movementsLeft} onClick={() => playerAction(unit, action)}>
+        {unitActionDescriptions[action]}
+    </button>
 )
 
 const mapDispatch: DispatchProps = {
