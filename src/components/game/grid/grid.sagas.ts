@@ -7,18 +7,18 @@ import { Grid, generateMap, ExtendedGrid } from './grid.helpers'
 import { getExtendedGrid, getViewGridOrigin } from './grid.selectors'
 import { ViewGridOrigin } from './grid.reducer'
 
-export function* moveMap(direction: 'up' | 'down' | 'right' | 'left') {
+export function* moveMap(direction: 'north' | 'south' | 'east' | 'west') {
     const tiles: ExtendedGrid = yield select(getExtendedGrid)
     const { row: currentRow, col: currentCol }: ViewGridOrigin = yield select(getViewGridOrigin)
 
     switch (direction) {
-        case 'up':
+        case 'north':
             return yield updateViewGrid(tiles, currentRow - 1, currentCol)
-        case 'down':
+        case 'south':
             return yield updateViewGrid(tiles, currentRow + 1, currentCol)
-        case 'right':
+        case 'east':
             return yield updateViewGrid(tiles, currentRow, currentCol + 1)
-        case 'left':
+        case 'west':
             return yield updateViewGrid(tiles, currentRow, currentCol - 1)
     }
 }

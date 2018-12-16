@@ -5,20 +5,20 @@ import { nextTurn } from './player.sagas'
 
 export const keyBindings: { [key: string]: () => void } = {
     // Grid controls
-    ArrowUp: () => moveMap('up'),
-    ArrowDown: () => moveMap('down'),
-    ArrowRight: () => moveMap('right'),
-    ArrowLeft: () => moveMap('left'),
+    ArrowUp: () => moveMap('north'),
+    ArrowDown: () => moveMap('south'),
+    ArrowRight: () => moveMap('east'),
+    ArrowLeft: () => moveMap('west'),
 
     // Unit controls
-    1: () => attemptUnitMove('left-down'),
-    2: () => attemptUnitMove('down'),
-    3: () => attemptUnitMove('right-down'),
-    4: () => attemptUnitMove('left'),
-    6: () => attemptUnitMove('right'),
-    7: () => attemptUnitMove('left-up'),
-    8: () => attemptUnitMove('up'),
-    9: () => attemptUnitMove('right-up'),
+    1: () => attemptUnitMove('southwest'),
+    2: () => attemptUnitMove('south'),
+    3: () => attemptUnitMove('southeast'),
+    4: () => attemptUnitMove('west'),
+    6: () => attemptUnitMove('east'),
+    7: () => attemptUnitMove('northwest'),
+    8: () => attemptUnitMove('north'),
+    9: () => attemptUnitMove('northeast'),
 
     // Other controls
     Enter: () => nextTurn()
