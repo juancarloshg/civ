@@ -12,6 +12,10 @@ export function* initPlayer() {
     yield put(unitActions.addUnits(startingUnits))
 }
 
+export function* nextTurn() {
+    yield put(actions.nextTurn())
+}
+
 export function* sagas() {
     yield takeEvery(ActionTypes.INIT_PLAYER, initPlayer)
 }

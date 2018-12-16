@@ -1,6 +1,8 @@
 import { moveMap } from '../grid/grid.sagas'
 import { attemptUnitMove } from '../units/unit.sagas'
 
+import { nextTurn } from './player.sagas'
+
 export const keyBindings: { [key: string]: () => void } = {
     // Grid controls
     ArrowUp: () => moveMap('up'),
@@ -16,5 +18,8 @@ export const keyBindings: { [key: string]: () => void } = {
     6: () => attemptUnitMove('right'),
     7: () => attemptUnitMove('left-up'),
     8: () => attemptUnitMove('up'),
-    9: () => attemptUnitMove('right-up')
+    9: () => attemptUnitMove('right-up'),
+
+    // Other controls
+    Enter: () => nextTurn()
 }

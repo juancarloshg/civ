@@ -3,18 +3,18 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from 'src/rootReducer'
-import { Tile as ITile, TileWithUnits } from '../../grid/grid.helpers'
+import { ExtendedTile } from '../../grid/grid.helpers'
 import { actions as playerActions } from '../../player/player.actions'
 import { getIsSelectedTile } from '../../player/player.selectors'
 import { StyledTile } from './StyledTile'
 import { Unit } from './Unit'
 
 interface OwnProps {
-    tile: TileWithUnits
+    tile: ExtendedTile
 }
 
 interface DispatchProps {
-    selectTile(tile: ITile): void
+    selectTile(tile: ExtendedTile): void
 }
 
 interface StateProps {
@@ -34,7 +34,7 @@ const mapState = createStructuredSelector<ApplicationState, Props, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectTile: (tile: ITile) => playerActions.selectTile(tile.id)
+    selectTile: (tile: ExtendedTile) => playerActions.selectTile(tile.id)
 }
 
 export const Tile = connect<StateProps, DispatchProps, OwnProps>(

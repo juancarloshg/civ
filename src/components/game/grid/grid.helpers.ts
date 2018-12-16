@@ -1,6 +1,7 @@
 import { TerrainType, terrains } from '../terrains/base/terrains'
 import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
 import { Unit } from '../units/units'
+import { City } from '../city/city.reducer'
 
 export interface Tile {
     id: string
@@ -10,12 +11,13 @@ export interface Tile {
     col: number
 }
 
-export interface TileWithUnits extends Tile {
+export interface ExtendedTile extends Tile {
     units: Unit[]
+    city: City | null
 }
 
 export type Grid = Tile[][]
-export type GridWithUnits = TileWithUnits[][]
+export type ExtendedGrid = ExtendedTile[][]
 
 export function generateMap(size: number): Grid {
     const map: Grid = []

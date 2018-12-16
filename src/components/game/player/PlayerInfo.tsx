@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 
 import { ApplicationState } from 'src/rootReducer'
 import { Unit } from '../units/units'
-import { TileWithUnits } from '../grid/grid.helpers'
+import { ExtendedTile } from '../grid/grid.helpers'
 
 import { actions } from './player.actions'
-import { getSelectedUnit, getSelectedTileWithUnits, getTurn } from './player.selectors'
+import { getSelectedUnit, getSelectedExtendedTile, getTurn } from './player.selectors'
 import { TileInfo } from './TileInfo'
 import { UnitInfo } from './UnitInfo'
 
 interface StateProps {
-    tile: TileWithUnits | null
+    tile: ExtendedTile | null
     unit: Unit | null
     turn: number
 }
@@ -36,7 +36,7 @@ const PlayerInfoBase: React.SFC<Props> = ({ tile, unit, selectUnit, turn, nextTu
 )
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    tile: getSelectedTileWithUnits,
+    tile: getSelectedExtendedTile,
     unit: getSelectedUnit,
     turn: getTurn
 })

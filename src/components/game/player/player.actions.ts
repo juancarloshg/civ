@@ -13,8 +13,8 @@ export enum ActionTypes {
 
 export const actions = {
     addPlayer: (player: Partial<Player>) => createAction(ActionTypes.ADD_PLAYER, player),
-    selectTile: (tile: Tile['id']) => createAction(ActionTypes.SELECT_TILE, tile),
-    selectUnit: (unit: Unit['id']) => createAction(ActionTypes.SELECT_UNIT, unit),
+    selectTile: (tileId: Tile['id']) => createAction(ActionTypes.SELECT_TILE, tileId),
+    selectUnit: (unitId: Unit['id']) => createAction(ActionTypes.SELECT_UNIT, unitId),
     nextTurn: () => createAction(ActionTypes.NEXT_TURN)
 }
 

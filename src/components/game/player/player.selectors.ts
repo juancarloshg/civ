@@ -2,11 +2,13 @@ import { createSelector } from 'reselect'
 import { prop, equals, flatten } from 'ramda'
 
 import { ApplicationState } from 'src/rootReducer'
+
 import { Unit } from '../units/units'
-import { Tile, TileWithUnits } from '../grid/grid.helpers'
-import { PlayerState } from './player.reducer'
+import { Tile } from '../grid/grid.helpers'
 import { getUnits } from '../units/unit.selectors'
-import { getGrid } from '../grid/grid.selectors'
+import { getGrid, getExtendedGrid } from '../grid/grid.selectors'
+
+import { PlayerState } from './player.reducer'
 
 const getRoot = (state: ApplicationState): PlayerState => state.player
 
@@ -21,14 +23,10 @@ export const getSelectedTile = createSelector(
     (tileId, grid) => flatten(grid).find(tile => tile.id === tileId) || null
 )
 
-export const getSelectedTileWithUnits = createSelector(
-    getSelectedTile,
-    getUnits,
-    (tile, units): TileWithUnits | null =>
-        tile && {
-            ...tile,
-            units: units.filter(({ position: { row, col } }) => row === tile.row && col === tile.col)
-        }
+export const getSelectedExtendedTile = createSelector(
+    getSelectedTileId,
+    getExtendedGrid,
+    (tileId, grid) => flatten(grid).find(tile => tile.id === tileId) || null
 )
 
 export const getSelectedUnitId = createSelector(
