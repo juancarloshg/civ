@@ -60,3 +60,8 @@ export const getIsSelectedUnit = createSelector(
     getCurrentUnit,
     equals
 )
+
+export const getAnyMovesLeft = createSelector(
+    getUnits,
+    units => units.some(unit => unit.movementsLeft !== 0)
+)
