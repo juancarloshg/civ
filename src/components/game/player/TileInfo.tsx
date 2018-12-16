@@ -24,7 +24,7 @@ export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit }) => (
                 <p>Units:</p>
                 {tile.units.map((u, i) => (
                     <p key={i}>
-                        {u.type} - {u.currentHp}/{u.hp} - <span onClick={() => selectUnit(u)}>USE</span>
+                        {u.type} - {u.currentHp}/{u.hp} - <button onClick={() => selectUnit(u)}>USE</button>
                     </p>
                 ))}
                 <br />
