@@ -42,6 +42,11 @@ export const getSelectedUnit = createSelector(
     (unitId, units) => units.find(unit => unit.id === unitId) || null
 )
 
+export const getTurn = createSelector(
+    getRoot,
+    prop('turn')
+)
+
 const getCurrentTileId = (_: ApplicationState, props: { tile: Tile }) => props.tile.id
 
 export const getIsSelectedTile = createSelector(
