@@ -1,9 +1,9 @@
 import { uniqueId } from 'lodash'
 
-import { Archer } from 'src/components/icons/Archer'
-import { Warrior } from 'src/components/icons/Warrior'
-import { Settler } from 'src/components/icons/Settler'
-import { IconProps } from 'src/components/icons/icons.types'
+import { Archer } from '../../icons/Archer'
+import { Warrior } from '../../icons/Warrior'
+import { Settler } from '../../icons/Settler'
+import { IconProps } from '../../icons/icons.types'
 
 import { GridPosition } from '../grid/grid.types'
 import { Unit, UnitType, units, UnitState, UnitBase } from './units'

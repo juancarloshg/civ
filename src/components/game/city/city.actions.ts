@@ -1,4 +1,4 @@
-import { createAction, ActionsUnion } from 'src/utils/actionHelpers'
+import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
 import { City } from './city.reducer'
 
 export enum ActionTypes {

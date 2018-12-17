@@ -2,7 +2,8 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { ApplicationState } from 'src/rootReducer'
+
+import { ApplicationState } from '../../../rootReducer'
 import { actions } from './player.actions'
 import { getAnyMovesLeft } from './player.selectors'
 

@@ -1,4 +1,4 @@
-import { ApplicationState } from 'src/rootReducer'
+import { ApplicationState } from '../../../rootReducer'
 import { CitiesState } from './city.reducer'
 
 const getRoot = (state: ApplicationState): CitiesState => state.cities

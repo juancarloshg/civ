@@ -1,6 +1,6 @@
 import { select, put } from 'redux-saga/effects'
 
-import { getViewSize, getSize } from 'src/components/configuration/configuration.selector'
+import { getViewSize, getSize } from '../../configuration/configuration.selector'
 
 import { actions } from './grid.actions'
 import { Grid, generateMap, ExtendedGrid } from './grid.helpers'
