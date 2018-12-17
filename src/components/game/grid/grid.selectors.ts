@@ -49,8 +49,8 @@ export const getViewGrid = createSelector(
     getExtendedGrid,
     (viewGridOrigin, viewSize, grid): ExtendedGrid =>
         grid
-            .slice(viewGridOrigin.row, viewSize + viewGridOrigin.row)
-            .map(tilesRow => tilesRow.slice(viewGridOrigin.col, viewSize + viewGridOrigin.col))
+            .slice(viewGridOrigin.row, viewSize.height + viewGridOrigin.row)
+            .map(tilesRow => tilesRow.slice(viewGridOrigin.col, viewSize.width + viewGridOrigin.col))
 )
 
 export const getTileByPosition: ParametricSelector<ApplicationState, GridPosition, Tile | null> = createSelector(
