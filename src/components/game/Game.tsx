@@ -8,13 +8,19 @@ import { FlexContainer } from '../styled/FlexContainer'
 import { KeyListener } from '../keys/KeyListener'
 
 import { ViewGrid } from './grid/ViewGrid'
-import { getIsGridReady } from './grid/grid.selectors'
+import { getIsGridReady, getMainViewGrid } from './grid/grid.selectors'
 import { PlayerInfo } from './player/PlayerInfo'
 
 import { actions } from './game.actions'
+import { Tile } from './grid/tile/Tile'
+import { getViewSize } from '../configuration/configuration.selector'
+import { Size } from '../configuration/configuration.reducer'
+import { ExtendedGrid } from './grid/grid.helpers'
 
 interface StateProps {
     isGridReady: boolean
+    size: Size
+    viewGrid: ExtendedGrid
 }
 
 interface DispatchProps {
@@ -28,13 +34,13 @@ export class GameBase extends React.Component<GameProps> {
         this.props.initGame()
     }
     render() {
-        const { isGridReady } = this.props
+        const { isGridReady, size, viewGrid } = this.props
 
         return (
             <FlexContainer cssHeight="100vh" direction="column" data-testid="game-container">
                 {isGridReady && (
                     <KeyListener>
-                        <ViewGrid />
+                        <ViewGrid size={size} viewGrid={viewGrid} tileComponent={Tile} />
                         <PlayerInfo />
                     </KeyListener>
                 )}
@@ -44,7 +50,9 @@ export class GameBase extends React.Component<GameProps> {
 }
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    isGridReady: getIsGridReady
+    isGridReady: getIsGridReady,
+    size: getViewSize,
+    viewGrid: getMainViewGrid
 })
 
 const mapDispatch: DispatchProps = {
