@@ -1,51 +1,42 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
 
-import { ApplicationState } from '../../../rootReducer'
 import { repeat } from '../../../utils/utils'
 import { FlexContainer } from '../../styled/FlexContainer'
-import { getViewSize } from '../../configuration/configuration.selector'
 import { Size } from '../../configuration/configuration.reducer'
 
-import { Tile } from './tile/Tile'
-import { ExtendedTile, ExtendedGrid } from './grid.helpers'
-import { getViewGrid } from './grid.selectors'
+import { ExtendedTile, ExtendedGrid, Tile, Grid } from './grid.helpers'
 import { squareSize } from './constants'
+
+type ITileComponent = React.ComponentType<{ tile: ExtendedTile | Tile }>
 
 interface TileRowProps {
     length: number
-    tiles: ExtendedTile[]
+    tiles: Tile[] | ExtendedTile[]
+    tileComponent: ITileComponent
 }
 
-const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles }) => (
+const TileRow: React.FunctionComponent<TileRowProps> = ({ length, tiles, tileComponent: TileComponent }) => (
     <FlexContainer basis={squareSize.height} grow={1} data-testid="grid-row">
         {repeat(length, (col: number) => {
             const tile = tiles[col]
-            return <Tile key={tile.id} tile={tile} />
+            return <TileComponent key={tile.id} tile={tile} />
         })}
     </FlexContainer>
 )
 
-interface StateProps {
+interface OwnProps {
+    tileComponent: ITileComponent
     size: Size
-    viewGrid: ExtendedGrid
+    viewGrid: ExtendedGrid | Grid
 }
 
-type GridProps = StateProps
+type GridProps = OwnProps
 
-const ViewGridBase: React.FunctionComponent<GridProps> = ({ size, viewGrid }) => (
+export const ViewGrid: React.FunctionComponent<GridProps> = ({ size, viewGrid, tileComponent }) => (
     <FlexContainer direction="column" data-testid="game-grid">
         {repeat(size.height, (row: number) => {
             const realRow = viewGrid[row][0].row
-            return <TileRow key={`row${realRow}`} length={size.width} tiles={viewGrid[row]} />
+            return <TileRow key={`row${realRow}`} tileComponent={tileComponent} length={size.width} tiles={viewGrid[row]} />
         })}
     </FlexContainer>
 )
-
-const mapState = createStructuredSelector<ApplicationState, StateProps>({
-    size: getViewSize,
-    viewGrid: getViewGrid
-})
-
-export const ViewGrid = connect<StateProps>(mapState)(ViewGridBase)

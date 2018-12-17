@@ -43,7 +43,7 @@ export const getViewGridOrigin: Selector<ApplicationState, ViewGridOrigin> = cre
     (gameState: GridState) => gameState.viewGridOrigin
 )
 
-export const getViewGrid = createSelector(
+export const getMainViewGrid = createSelector(
     getViewGridOrigin,
     getViewSize,
     getExtendedGrid,

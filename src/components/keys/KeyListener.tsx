@@ -17,6 +17,7 @@ const KeyListenerBase: React.SFC<KeyListenerProps> = ({ keydown, children }) => 
         tabIndex={0}
         onKeyDown={ev => {
             ev.stopPropagation()
+            ev.preventDefault()
             keydown(ev.key)
         }}
     >
