@@ -2,6 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { actions } from './keys.actions'
+import { FlexContainer } from '../styled/FlexContainer'
 
 interface DispatchProps {
     keydown(key: string): void
@@ -9,15 +10,19 @@ interface DispatchProps {
 
 type KeyListenerProps = DispatchProps
 
-class KeyListenerBase extends React.Component<KeyListenerProps> {
-    componentDidMount() {
-        document.addEventListener('keydown', ev => this.props.keydown(ev.key))
-    }
-
-    render() {
-        return this.props.children || null
-    }
-}
+const KeyListenerBase: React.SFC<KeyListenerProps> = ({ keydown, children }) => (
+    <FlexContainer
+        direction="column"
+        grow={1}
+        tabIndex={0}
+        onKeyDown={ev => {
+            ev.stopPropagation()
+            keydown(ev.key)
+        }}
+    >
+        {children}
+    </FlexContainer>
+)
 
 const mapDispatch: DispatchProps = {
     keydown: actions.keydown

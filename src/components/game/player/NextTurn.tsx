@@ -18,7 +18,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps
 
 type StyledNextTurnButtonProps = Pick<Props, 'movesLeft'>
-const getBackgroundColor = ({ movesLeft }: StyledNextTurnButtonProps) => (movesLeft ? 'green' : 'red')
+const getBackgroundColor = ({ movesLeft }: StyledNextTurnButtonProps) => (movesLeft ? '#295923' : '#630101')
 
 const StyledNextTurnButton = styled.button<StyledNextTurnButtonProps>`
     color: white;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { ApplicationState } from '../../rootReducer'
 
-import { FlexDiv } from '../styled/FlexDiv'
+import { FlexContainer } from '../styled/FlexContainer'
 import { KeyListener } from '../keys/KeyListener'
 
 import { ViewGrid } from './grid/ViewGrid'
@@ -31,14 +31,14 @@ export class GameBase extends React.Component<GameProps> {
         const { isGridReady } = this.props
 
         return (
-            <FlexDiv data-testid="game-container">
+            <FlexContainer cssHeight="100vh" direction="column" data-testid="game-container">
                 {isGridReady && (
                     <KeyListener>
                         <ViewGrid />
                         <PlayerInfo />
                     </KeyListener>
                 )}
-            </FlexDiv>
+            </FlexContainer>
         )
     }
 }

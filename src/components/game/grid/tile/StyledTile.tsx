@@ -8,15 +8,15 @@ const getColor = (props: StyledTileProps) => {
     const terrain = props.tile.terrain
     switch (terrain) {
         case 'sea':
-            return 'Aqua'
+            return '#2860ba'
         case 'snow':
-            return 'White'
+            return '#f2f5f9'
         case 'desert':
-            return 'Yellow'
+            return '#edefba'
         case 'dirt':
             return 'Olive'
         case 'grass':
-            return 'Green'
+            return '#06891d'
         default:
             return ''
     }
@@ -26,8 +26,7 @@ const getBorderSize = (props: StyledTileProps) => (props.tile.city ? (props.isSe
 const getBorderStyle = (props: StyledTileProps) => (props.tile.city ? 'double' : 'solid')
 
 export const StyledTile = styled.span<StyledTileProps>`
-    height: ${squareSize.height};
-    width: ${squareSize.width};
+    flex: 1 0 ${squareSize.width};
     display: inline-block;
     border-width: ${getBorderSize}px;
     border-style: ${getBorderStyle};

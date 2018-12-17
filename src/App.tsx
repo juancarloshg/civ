@@ -7,7 +7,6 @@ import logger from 'redux-logger'
 import { Router } from './Router'
 import { rootReducer } from './rootReducer'
 import { rootSaga } from './rootSaga'
-import { Footer } from './components/Footer'
 import { SiteWrapper } from './components/SiteWrapper'
 import { Main } from './components/Main'
 
@@ -24,7 +23,6 @@ export const App: React.FunctionComponent = () => (
             <Main>
                 <Router />
             </Main>
-            <Footer />
         </SiteWrapper>
     </Provider>
 )
