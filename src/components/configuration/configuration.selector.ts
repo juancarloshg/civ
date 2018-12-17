@@ -1,4 +1,4 @@
-import { ApplicationState } from 'src/rootReducer'
+import { ApplicationState } from '../../rootReducer'
 import { ConfigurationState } from './configuration.reducer'
 import { createSelector } from 'reselect'
 

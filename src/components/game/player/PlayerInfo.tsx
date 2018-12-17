@@ -2,7 +2,7 @@ import * as React from 'react'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
-import { ApplicationState } from 'src/rootReducer'
+import { ApplicationState } from '../../../rootReducer'
 import { Unit } from '../units/units'
 import { ExtendedTile } from '../grid/grid.helpers'
 

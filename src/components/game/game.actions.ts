@@ -1,4 +1,4 @@
-import { createAction, ActionsUnion } from 'src/utils/actionHelpers'
+import { createAction, ActionsUnion } from '../../utils/actionHelpers'
 
 export enum ActionTypes {
     INIT_GAME = '[game] init game'

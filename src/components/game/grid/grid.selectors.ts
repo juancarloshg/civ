@@ -1,7 +1,7 @@
 import { createSelector, Selector, ParametricSelector } from 'reselect'
 
-import { ApplicationState } from 'src/rootReducer'
-import { getViewSize } from 'src/components/configuration/configuration.selector'
+import { ApplicationState } from '../../../rootReducer'
+import { getViewSize } from '../../configuration/configuration.selector'
 import { getUnits } from '../units/unit.selectors'
 import { Unit } from '../units/units'
 import { getCities } from '../city/city.selector'

@@ -12,7 +12,8 @@ export function createAction<T extends string, P>(type: T, payload?: P) {
     return payload === undefined ? { type } : { type, payload }
 }
 
-type FunctionType = (...args: unknown[]) => unknown
+// tslint:disable-next-line:no-any
+type FunctionType = (...args: any[]) => any
 interface ActionCreatorsMapObject {
     [actionCreator: string]: FunctionType
 }

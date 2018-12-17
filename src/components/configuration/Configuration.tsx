@@ -2,10 +2,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import Slider from '@material-ui/lab/Slider'
-
-import { actions } from './configuration.actions'
-import { ApplicationState } from 'src/rootReducer'
 import { Link } from 'react-router-dom'
+
+import { ApplicationState } from '../../rootReducer'
+import { actions } from './configuration.actions'
 import { ConfigurationState } from './configuration.reducer'
 import { getConfiguration } from './configuration.selector'
 

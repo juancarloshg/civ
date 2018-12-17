@@ -2,7 +2,7 @@ import * as React from 'react'
 import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 
-import { ApplicationState } from 'src/rootReducer'
+import { ApplicationState } from '../../rootReducer'
 
 import { FlexDiv } from '../styled/FlexDiv'
 import { KeyListener } from '../keys/KeyListener'

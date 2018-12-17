@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { prop, equals, flatten } from 'ramda'
 
-import { ApplicationState } from 'src/rootReducer'
+import { ApplicationState } from '../../../rootReducer'
 
 import { Unit } from '../units/units'
 import { Tile } from '../grid/grid.helpers'

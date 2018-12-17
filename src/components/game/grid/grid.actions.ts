@@ -1,4 +1,4 @@
-import { createAction, ActionsUnion } from 'src/utils/actionHelpers'
+import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
 import { Grid } from './grid.helpers'
 import { ViewGridOrigin } from './grid.reducer'
 
