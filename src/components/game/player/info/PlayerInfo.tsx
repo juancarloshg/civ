@@ -3,20 +3,19 @@ import { createStructuredSelector } from 'reselect'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { ApplicationState } from '../../../rootReducer'
-import { FlexContainer } from '../../styled/FlexContainer'
-import { getSize } from '../../configuration/configuration.selector'
-import { Unit } from '../units/units'
-import { ExtendedTile, Grid } from '../grid/grid.helpers'
-import { BaseStyledTile } from '../grid/tile/StyledTile'
-import { ViewGrid } from '../grid/ViewGrid'
-import { getGrid } from '../grid/grid.selectors'
+import { ApplicationState } from '../../../../rootReducer'
+import { FlexContainer } from '../../../styled/FlexContainer'
+import { getSize } from '../../../configuration/configuration.selector'
+import { Unit } from '../../units/units'
+import { ExtendedTile, Grid } from '../../grid/grid.helpers'
+import { getGrid } from '../../grid/grid.selectors'
 
-import { actions } from './player.actions'
-import { getSelectedUnit, getSelectedExtendedTile, getTurn } from './player.selectors'
+import { actions } from '../player.actions'
+import { getSelectedUnit, getSelectedExtendedTile, getTurn } from '../player.selectors'
 import { TileInfo } from './TileInfo'
 import { UnitInfo } from './UnitInfo'
 import { NextTurn } from './NextTurn'
+import { Minimap } from './Minimap'
 
 const StyledFlexContainer = styled(FlexContainer)`
     border: 5px solid black;
@@ -39,7 +38,7 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps
 
-const PlayerInfoBase: React.SFC<Props> = ({ tile, unit, selectUnit, turn, size, viewGrid }) => (
+const PlayerInfoBase: React.SFC<Props> = ({ tile, unit, selectUnit, turn }) => (
     <StyledFlexContainer grow={1} basis="0">
         <FlexContainer direction="column" grow={1} basis={`${1 / 3}%`}>
             <h3>Player 1</h3>
@@ -53,7 +52,7 @@ const PlayerInfoBase: React.SFC<Props> = ({ tile, unit, selectUnit, turn, size, 
                 <NextTurn />
                 <h3>Turn {turn}</h3>
             </div>
-            <ViewGrid tileComponent={BaseStyledTile} size={{ height: size, width: size }} viewGrid={viewGrid} />
+            <Minimap />
         </FlexContainer>
     </StyledFlexContainer>
 )

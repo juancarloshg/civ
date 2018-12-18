@@ -9,7 +9,7 @@ import { KeyListener } from '../keys/KeyListener'
 
 import { ViewGrid } from './grid/ViewGrid'
 import { getIsGridReady, getMainViewGrid } from './grid/grid.selectors'
-import { PlayerInfo } from './player/PlayerInfo'
+import { PlayerInfo } from './player/info/PlayerInfo'
 
 import { actions } from './game.actions'
 import { Tile } from './grid/tile/Tile'
