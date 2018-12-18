@@ -8,7 +8,7 @@ import { getCities } from '../city/city.selector'
 import { City } from '../city/city.reducer'
 
 import { GridState, ViewGridOrigin } from './grid.reducer'
-import { Grid, ExtendedGrid, Tile } from './grid.helpers'
+import { Grid, ExtendedGrid, Tile, getCircularView } from './grid.helpers'
 import { GridPosition } from './grid.types'
 import { flatten } from 'ramda'
 
@@ -47,10 +47,7 @@ export const getMainViewGrid = createSelector(
     getViewGridOrigin,
     getViewSize,
     getExtendedGrid,
-    (viewGridOrigin, viewSize, grid): ExtendedGrid =>
-        grid
-            .slice(viewGridOrigin.row, viewSize.height + viewGridOrigin.row)
-            .map(tilesRow => tilesRow.slice(viewGridOrigin.col, viewSize.width + viewGridOrigin.col))
+    getCircularView
 )
 
 export const getTileByPosition: ParametricSelector<ApplicationState, GridPosition, Tile | null> = createSelector(
