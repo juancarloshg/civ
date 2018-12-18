@@ -1,5 +1,5 @@
 import { createSelector, Selector, ParametricSelector } from 'reselect'
-import { flatten } from 'ramda'
+import { flatten, pick } from 'ramda'
 
 import { ApplicationState } from '../../../rootReducer'
 import { getViewSize } from '../../configuration/configuration.selector'
@@ -48,6 +48,20 @@ export const getMainViewGrid = createSelector(
     getViewSize,
     getExtendedGrid,
     getCircularView
+)
+
+export const getMainViewGridBorders = createSelector(
+    getMainViewGrid,
+    (grid: ExtendedGrid): GridPosition[] =>
+        grid.reduce<GridPosition[]>(
+            (borders, tiles, rowIndex) =>
+                borders.concat(
+                    rowIndex === 0 || rowIndex === grid.length - 1
+                        ? tiles.map(({ row, col }) => ({ row, col }))
+                        : [tiles[0], tiles[tiles.length - 1]].map(pick(['row', 'col']))
+                ),
+            []
+        )
 )
 
 export const getTileByPosition: ParametricSelector<ApplicationState, GridPosition, Tile | null> = createSelector(
