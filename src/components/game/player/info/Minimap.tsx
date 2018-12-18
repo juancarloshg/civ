@@ -1,33 +1,32 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
 import { createStructuredSelector } from 'reselect'
 
 import { ExtendedGrid } from '../../grid/grid.helpers'
 import { ApplicationState } from '../../../../rootReducer'
-import { getExtendedGrid } from '../../grid/grid.selectors'
+import { getExtendedGrid, getMainViewGridBorders } from '../../grid/grid.selectors'
 import { getSize } from '../../../configuration/configuration.selector'
 import { getColor } from '../../grid/tile/StyledTile'
 import { actions as gridActions } from '../../grid/grid.actions'
 import { GridPosition } from '../../grid/grid.types'
-
-const StyledCanvas = styled.canvas`
-    height: 100%;
-    width: 100%;
-`
 
 const pixelRatio = 10
 
 interface StateProps {
     grid: ExtendedGrid
     size: number
+    viewGridBorders: GridPosition[]
+}
+
+interface OwnProps {
+    className?: string
 }
 
 interface DispatchProps {
     setViewGridOrigin(position: GridPosition): void
 }
 
-type Props = StateProps & DispatchProps
+type Props = StateProps & DispatchProps & OwnProps
 
 export class MinimapBase extends React.Component<Props> {
     canvas: React.RefObject<HTMLCanvasElement>
@@ -47,13 +46,21 @@ export class MinimapBase extends React.Component<Props> {
 
     draw() {
         const context = this.canvas.current!.getContext('2d')!
+        this.drawGrid(context)
+        this.drawViewGridBorders(context)
+    }
 
-        this.props.grid.forEach((tiles, row) =>
-            tiles.forEach((tile, col) => {
-                context.fillStyle = getColor({ tile })
-                context.fillRect(col * pixelRatio, row * pixelRatio, pixelRatio, pixelRatio)
-            })
-        )
+    drawGrid(context: CanvasRenderingContext2D) {
+        this.props.grid.forEach((tiles, row) => tiles.forEach((tile, col) => this.paint(context, row, col, getColor({ tile }))))
+    }
+
+    drawViewGridBorders(context: CanvasRenderingContext2D) {
+        this.props.viewGridBorders.forEach(({ row, col }) => this.paint(context, row, col, 'black'))
+    }
+
+    paint(context: CanvasRenderingContext2D, row: number, col: number, color: string) {
+        context.fillStyle = color
+        context.fillRect(col * pixelRatio, row * pixelRatio, pixelRatio, pixelRatio)
     }
 
     handleClick = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -69,14 +76,15 @@ export class MinimapBase extends React.Component<Props> {
     }
 
     render() {
-        const { size } = this.props
-        return <StyledCanvas onClick={this.handleClick} height={size * pixelRatio} width={size * pixelRatio} ref={this.canvas} />
+        const { size, className } = this.props
+        return <canvas onClick={this.handleClick} className={className} height={size * pixelRatio} width={size * pixelRatio} ref={this.canvas} />
     }
 }
 
 const mapState = createStructuredSelector<ApplicationState, StateProps>({
     grid: getExtendedGrid,
-    size: getSize
+    size: getSize,
+    viewGridBorders: getMainViewGridBorders
 })
 
 const mapDispatch: DispatchProps = {

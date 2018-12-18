@@ -33,7 +33,7 @@ interface OwnProps {
 type GridProps = OwnProps
 
 export const ViewGrid: React.FunctionComponent<GridProps> = ({ size, viewGrid, tileComponent }) => (
-    <FlexContainer direction="column" data-testid="game-grid">
+    <FlexContainer basis="auto" direction="column" data-testid="game-grid">
         {repeat(size.height, (row: number) => {
             const realRow = viewGrid[row][0].row
             return <TileRow key={`row${realRow}`} tileComponent={tileComponent} length={size.width} tiles={viewGrid[row]} />
