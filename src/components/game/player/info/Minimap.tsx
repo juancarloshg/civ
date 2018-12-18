@@ -45,20 +45,20 @@ export class MinimapBase extends React.Component<Props> {
     }
 
     draw() {
-        this.drawGrid()
-        this.drawViewGridBorders()
-    }
-
-    drawGrid() {
-        this.props.grid.forEach((tiles, row) => tiles.forEach((tile, col) => this.paint(row, col, getColor({ tile }))))
-    }
-
-    drawViewGridBorders() {
-        this.props.viewGridBorders.forEach(({ row, col }) => this.paint(row, col, 'black'))
-    }
-
-    paint(row: number, col: number, color: string) {
         const context = this.canvas.current!.getContext('2d')!
+        this.drawGrid(context)
+        this.drawViewGridBorders(context)
+    }
+
+    drawGrid(context: CanvasRenderingContext2D) {
+        this.props.grid.forEach((tiles, row) => tiles.forEach((tile, col) => this.paint(context, row, col, getColor({ tile }))))
+    }
+
+    drawViewGridBorders(context: CanvasRenderingContext2D) {
+        this.props.viewGridBorders.forEach(({ row, col }) => this.paint(context, row, col, 'black'))
+    }
+
+    paint(context: CanvasRenderingContext2D, row: number, col: number, color: string) {
         context.fillStyle = color
         context.fillRect(col * pixelRatio, row * pixelRatio, pixelRatio, pixelRatio)
     }
