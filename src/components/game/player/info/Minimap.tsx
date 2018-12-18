@@ -60,8 +60,8 @@ export class MinimapBase extends React.Component<Props> {
         const canvasRect = this.canvas.current!.getBoundingClientRect()
         const canvasClickCoords = { x: x - canvasRect.left, y: y - canvasRect.top }
         const clickGridPosition = {
-            row: Math.floor((canvasClickCoords.x / canvasRect.width) * this.props.size),
-            col: Math.floor((canvasClickCoords.y / canvasRect.height) * this.props.size)
+            col: Math.floor((canvasClickCoords.x / canvasRect.width) * this.props.size),
+            row: Math.floor((canvasClickCoords.y / canvasRect.height) * this.props.size)
         }
         this.props.setViewGridOrigin(clickGridPosition)
     }

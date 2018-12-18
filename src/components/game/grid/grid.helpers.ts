@@ -3,7 +3,7 @@ import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
 import { Unit } from '../units/units'
 import { City } from '../city/city.reducer'
 import { Size } from '../../configuration/configuration.reducer'
-import { ViewGridOrigin } from './grid.reducer'
+import { GridPosition } from './grid.types'
 
 export interface Tile {
     id: string
@@ -42,7 +42,7 @@ function getRandomTerrainType(): TerrainType {
     return Object.keys(terrains)[Math.floor(Math.random() * Object.keys(terrains).length)] as TerrainType
 }
 
-export const getCircularView = (viewGridOrigin: ViewGridOrigin, viewSize: Size, grid: ExtendedGrid): ExtendedGrid => {
+export const getCircularView = (viewGridOrigin: GridPosition, viewSize: Size, grid: ExtendedGrid): ExtendedGrid => {
     const vPadding = viewSize.height / 2
     const rowStart = viewGridOrigin.row - vPadding
     const rowEnd = viewGridOrigin.row + vPadding
