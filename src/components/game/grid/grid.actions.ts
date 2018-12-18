@@ -1,6 +1,6 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
 import { Grid } from './grid.helpers'
-import { ViewGridOrigin } from './grid.reducer'
+import { GridPosition } from './grid.types'
 
 export enum ActionTypes {
     SET_GRID = '[grid] set grid',
@@ -9,7 +9,7 @@ export enum ActionTypes {
 
 export const actions = {
     setGrid: (tiles: Grid) => createAction(ActionTypes.SET_GRID, tiles),
-    setViewGridOrigin: (viewGrid: ViewGridOrigin) => createAction(ActionTypes.SET_VIEW_GRID_ORIGIN, viewGrid)
+    setViewGridOrigin: (viewGrid: GridPosition) => createAction(ActionTypes.SET_VIEW_GRID_ORIGIN, viewGrid)
 }
 
 export type Actions = ActionsUnion<typeof actions>

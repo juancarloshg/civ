@@ -1,15 +1,11 @@
 import { Actions, ActionTypes } from './grid.actions'
 import { Grid } from './grid.helpers'
-
-export interface ViewGridOrigin {
-    row: number
-    col: number
-}
+import { GridPosition } from './grid.types'
 
 export interface GridState {
     isGridReady: boolean
     grid: Grid
-    viewGridOrigin: ViewGridOrigin
+    viewGridOrigin: GridPosition
 }
 
 const initialState: GridState = {
