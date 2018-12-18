@@ -44,11 +44,11 @@ function getRandomTerrainType(): TerrainType {
 
 export const getCircularView = (viewGridOrigin: GridPosition, viewSize: Size, grid: ExtendedGrid): ExtendedGrid => {
     const vPadding = viewSize.height / 2
-    const rowStart = viewGridOrigin.row - vPadding
-    const rowEnd = viewGridOrigin.row + vPadding
+    const rowStart = viewGridOrigin.row - Math.floor(vPadding)
+    const rowEnd = viewGridOrigin.row + Math.ceil(vPadding)
     const hPadding = viewSize.width / 2
-    const colStart = viewGridOrigin.col - hPadding
-    const colEnd = viewGridOrigin.col + hPadding
+    const colStart = viewGridOrigin.col - Math.floor(hPadding)
+    const colEnd = viewGridOrigin.col + Math.ceil(hPadding)
     return getCircularSlice(grid, rowStart, rowEnd).map(tilesRow => getCircularSlice(tilesRow, colStart, colEnd))
 }
 

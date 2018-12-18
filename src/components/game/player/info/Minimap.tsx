@@ -16,6 +16,8 @@ const StyledCanvas = styled.canvas`
     width: 100%;
 `
 
+const pixelRatio = 10
+
 interface StateProps {
     grid: ExtendedGrid
     size: number
@@ -49,7 +51,7 @@ export class MinimapBase extends React.Component<Props> {
         this.props.grid.forEach((tiles, row) =>
             tiles.forEach((tile, col) => {
                 context.fillStyle = getColor({ tile })
-                context.fillRect(row, col, 1, 1)
+                context.fillRect(col * pixelRatio, row * pixelRatio, pixelRatio, pixelRatio)
             })
         )
     }
@@ -68,7 +70,7 @@ export class MinimapBase extends React.Component<Props> {
 
     render() {
         const { size } = this.props
-        return <StyledCanvas onClick={this.handleClick} height={size} width={size} ref={this.canvas} />
+        return <StyledCanvas onClick={this.handleClick} height={size * pixelRatio} width={size * pixelRatio} ref={this.canvas} />
     }
 }
 
