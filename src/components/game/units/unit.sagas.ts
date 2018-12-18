@@ -12,6 +12,7 @@ import { getUnits } from './unit.selectors'
 import { ActionTypes as PlayerActionTypes } from '../player/player.actions'
 import { actions, ActionTypes } from './unit.actions'
 import { Unit } from './units'
+import { getSize } from '../../configuration/configuration.selector'
 
 type MovementDirection = 'north' | 'south' | 'east' | 'west' | 'southwest' | 'northwest' | 'southeast' | 'northeast'
 export function* attemptUnitMove(direction: MovementDirection) {
@@ -48,7 +49,12 @@ function hasMovement(unit: Unit) {
     return unit.movementsLeft > 0
 }
 
-function getNextPosition(position: GridPosition, direction: MovementDirection): GridPosition {
+function* getNextPosition(position: GridPosition, direction: MovementDirection) {
+    const absPosition = getAbsolutePosition(position, direction)
+    return { row: yield call(getCircularPosition, absPosition.row), col: yield call(getCircularPosition, absPosition.col) }
+}
+
+function getAbsolutePosition(position: GridPosition, direction: MovementDirection): GridPosition {
     switch (direction) {
         case 'north':
             return { row: position.row - 1, col: position.col }
@@ -67,6 +73,17 @@ function getNextPosition(position: GridPosition, direction: MovementDirection): 
         case 'east':
             return { row: position.row, col: position.col + 1 }
     }
+}
+
+function* getCircularPosition(index: number) {
+    const size: number = yield select(getSize)
+    if (index < 0) {
+        return size + index
+    }
+    if (index > size) {
+        return index - size
+    }
+    return index
 }
 
 function* handleNextTurn() {

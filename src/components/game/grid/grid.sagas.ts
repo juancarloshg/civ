@@ -1,7 +1,6 @@
 import { select, put } from 'redux-saga/effects'
 
-import { getViewSize, getSize } from '../../configuration/configuration.selector'
-import { Size } from '../../configuration/configuration.reducer'
+import { getSize } from '../../configuration/configuration.selector'
 
 import { actions } from './grid.actions'
 import { Grid, generateMap, ExtendedGrid } from './grid.helpers'
@@ -26,10 +25,16 @@ export function* moveMap(direction: 'north' | 'south' | 'east' | 'west') {
 function* updateViewGrid(row: number, col: number) {
     const tiles: ExtendedGrid = yield select(getExtendedGrid)
 
-    const viewSize: Size = yield select(getViewSize)
+    if (row < 0) {
+        row = tiles.length + row
+    } else if (row > tiles.length) {
+        row = row - tiles.length
+    }
 
-    if (row < 0 || col < 0 || row + viewSize.height > tiles.length || col + viewSize.width > tiles[0].length) {
-        return
+    if (col < 0) {
+        col = tiles[0].length + col
+    } else if (col > tiles[0].length) {
+        col = col - tiles[0].length
     }
 
     yield put(actions.setViewGridOrigin({ row, col }))

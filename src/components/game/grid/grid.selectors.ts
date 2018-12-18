@@ -8,9 +8,10 @@ import { getCities } from '../city/city.selector'
 import { City } from '../city/city.reducer'
 
 import { GridState, ViewGridOrigin } from './grid.reducer'
-import { Grid, ExtendedGrid, Tile } from './grid.helpers'
+import { Grid, ExtendedGrid, Tile, ExtendedTile } from './grid.helpers'
 import { GridPosition } from './grid.types'
 import { flatten } from 'ramda'
+import { Size } from '../../configuration/configuration.reducer'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -43,14 +44,34 @@ export const getViewGridOrigin: Selector<ApplicationState, ViewGridOrigin> = cre
     (gameState: GridState) => gameState.viewGridOrigin
 )
 
+const getCircularView = (viewGridOrigin: ViewGridOrigin, viewSize: Size, grid: ExtendedTile[][]): ExtendedGrid => {
+    const vPadding = viewSize.height / 2
+    const rowStart = viewGridOrigin.row - vPadding
+    const rowEnd = viewGridOrigin.row + vPadding
+    const hPadding = viewSize.width / 2
+    const colStart = viewGridOrigin.col - hPadding
+    const colEnd = viewGridOrigin.col + hPadding
+    return circularSlice(grid, rowStart, rowEnd).map(tilesRow => circularSlice(tilesRow, colStart, colEnd))
+}
+
+const circularSlice = <T>(array: T[], start: number, end: number): T[] => {
+    const rows = []
+    if (start < 0) {
+        rows.push(...array.slice(array.length + start))
+    }
+    rows.push(...array.slice(Math.max(0, start), Math.min(end, array.length)))
+    if (end > array.length) {
+        rows.push(...array.slice(0, end - array.length))
+    }
+
+    return rows
+}
+
 export const getMainViewGrid = createSelector(
     getViewGridOrigin,
     getViewSize,
     getExtendedGrid,
-    (viewGridOrigin, viewSize, grid): ExtendedGrid =>
-        grid
-            .slice(viewGridOrigin.row, viewSize.height + viewGridOrigin.row)
-            .map(tilesRow => tilesRow.slice(viewGridOrigin.col, viewSize.width + viewGridOrigin.col))
+    getCircularView
 )
 
 export const getTileByPosition: ParametricSelector<ApplicationState, GridPosition, Tile | null> = createSelector(
