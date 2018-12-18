@@ -5,10 +5,10 @@ import { getSize } from '../../configuration/configuration.selector'
 import { actions } from './grid.actions'
 import { Grid, generateMap, ExtendedGrid } from './grid.helpers'
 import { getExtendedGrid, getViewGridOrigin } from './grid.selectors'
-import { ViewGridOrigin } from './grid.reducer'
+import { GridPosition } from './grid.types'
 
 export function* moveMap(direction: 'north' | 'south' | 'east' | 'west') {
-    const { row: currentRow, col: currentCol }: ViewGridOrigin = yield select(getViewGridOrigin)
+    const { row: currentRow, col: currentCol }: GridPosition = yield select(getViewGridOrigin)
 
     switch (direction) {
         case 'north':

@@ -5,7 +5,7 @@ import { Props as TileProps } from './Tile'
 
 type StyledTileProps = Pick<TileProps, 'tile' | 'isSelectedTile'>
 
-const getColor = (props: { tile: ExtendedTile }): string => {
+export const getColor = (props: { tile: ExtendedTile }): string => {
     const terrain = props.tile.terrain
     switch (terrain) {
         case 'sea':
