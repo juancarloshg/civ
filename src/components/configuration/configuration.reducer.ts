@@ -16,7 +16,7 @@ export interface ConfigurationState {
 
 const initialState: ConfigurationState = {
     size: 50,
-    viewSize: { height: 10, width: 15 },
+    viewSize: { height: 11, width: 15 },
     seaLevel: 3,
     tectonicActivity: 3,
     humidity: 3,
