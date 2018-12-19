@@ -1,11 +1,11 @@
-import { uniqueId } from 'lodash'
+import uniqueId from 'lodash.uniqueid'
 
 import { Archer } from '../../icons/Archer'
 import { Warrior } from '../../icons/Warrior'
 import { Settler } from '../../icons/Settler'
 import { IconProps } from '../../icons/icons.types'
 
-import { GridPosition } from '../grid/grid.types'
+import { GridPosition } from '../grid'
 import { Unit, UnitType, units, UnitState, UnitBase } from './units'
 
 interface CreateUnitProps {

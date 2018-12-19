@@ -1,12 +1,12 @@
 import { createAction, ActionsUnion } from '../../utils/actionHelpers'
-import { ConfigurationState } from './configuration.reducer'
+import { Configuration } from './configuration.types'
 
 export enum ActionTypes {
     CONFIGURE_GAME = '[configuration] Configure game'
 }
 
 export const actions = {
-    configureGame: (configuration: Partial<ConfigurationState>) => createAction(ActionTypes.CONFIGURE_GAME, configuration)
+    configureGame: (configuration: Partial<Configuration>) => createAction(ActionTypes.CONFIGURE_GAME, configuration)
 }
 
 export type Actions = ActionsUnion<typeof actions>

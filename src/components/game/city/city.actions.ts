@@ -1,5 +1,5 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { City } from './city.reducer'
+import { City } from './city.types'
 
 export enum ActionTypes {
     ADD_CITY = '[city] add city'

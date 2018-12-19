@@ -1,7 +1,7 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { Tile } from '../grid/grid.helpers'
 import { Unit } from '../units/units'
 import { Player } from '../game.types'
+import { Tile } from '../grid'
 
 export enum ActionTypes {
     INIT_PLAYER = '[player] init player',

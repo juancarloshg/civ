@@ -1,18 +1,15 @@
 import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 
+import { getSize } from '../../configuration/configuration.selector'
 import { getSelectedUnit } from '../player/player.selectors'
-import { GridPosition } from '../grid/grid.types'
-import { getGrid, getTileByPosition } from '../grid/grid.selectors'
-import { Grid, Tile } from '../grid/grid.helpers'
 import { actions as cityActions } from '../city/city.actions'
-import { actions as playerActions } from '../player/player.actions'
-import { City } from '../city/city.reducer'
+import { actions as playerActions, ActionTypes as PlayerActionTypes } from '../player/player.actions'
+import { City } from '../city/city.types'
+import { GridPosition, Grid, Tile, getGrid, getTileByPosition } from '../grid'
 
 import { getUnits } from './unit.selectors'
-import { ActionTypes as PlayerActionTypes } from '../player/player.actions'
 import { actions, ActionTypes } from './unit.actions'
 import { Unit } from './units'
-import { getSize } from '../../configuration/configuration.selector'
 
 type MovementDirection = 'north' | 'south' | 'east' | 'west' | 'southwest' | 'northwest' | 'southeast' | 'northeast'
 export function* attemptUnitMove(direction: MovementDirection) {

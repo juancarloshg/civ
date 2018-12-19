@@ -9,8 +9,7 @@ import { FlexContainer } from '../../../styled/FlexContainer'
 import { FlexItem } from '../../../styled/FlexItem'
 import { getSize } from '../../../configuration/configuration.selector'
 import { Unit } from '../../units/units'
-import { ExtendedTile, Grid } from '../../grid/grid.helpers'
-import { getGrid } from '../../grid/grid.selectors'
+import { getGrid, ExtendedTile, Grid } from '../../grid'
 
 import { actions } from '../player.actions'
 import { getSelectedUnit, getSelectedExtendedTile, getTurn } from '../player.selectors'
@@ -56,6 +55,7 @@ interface State {
 
 class PlayerInfoBase extends React.Component<Props, State> {
     minimapWrapper: React.RefObject<HTMLDivElement>
+    observer: ResizeObserver
     constructor(props: Props) {
         super(props)
         this.minimapWrapper = React.createRef()
@@ -64,17 +64,24 @@ class PlayerInfoBase extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        new ResizeObserver(this.updateMinimapWrapperSize).observe(this.minimapWrapper.current!)
+        this.observer = new ResizeObserver(this.updateMinimapWrapperSize)
+        this.observer.observe(this.minimapWrapper.current!)
+    }
+
+    componentWillUnmount() {
+        this.observer.disconnect()
     }
 
     updateMinimapWrapperSize() {
-        const minimapWrapper = this.minimapWrapper.current!
-        this.setState({
-            miniwrapperSize: {
-                height: minimapWrapper.getBoundingClientRect().height,
-                width: minimapWrapper.getBoundingClientRect().width
-            }
-        })
+        const minimapWrapper = this.minimapWrapper.current
+        if (minimapWrapper) {
+            this.setState({
+                miniwrapperSize: {
+                    height: minimapWrapper.getBoundingClientRect().height,
+                    width: minimapWrapper.getBoundingClientRect().width
+                }
+            })
+        }
     }
 
     render() {

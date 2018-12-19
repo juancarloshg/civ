@@ -1,18 +1,7 @@
 import { Actions, ActionTypes } from './configuration.actions'
+import { Configuration } from './configuration.types'
 
-export interface Size {
-    height: number
-    width: number
-}
-
-export interface ConfigurationState {
-    size: number
-    viewSize: Size
-    seaLevel: number
-    tectonicActivity: number
-    humidity: number
-    resourcesLevel: number
-}
+export type ConfigurationState = Configuration
 
 const initialState: ConfigurationState = {
     size: 50,

@@ -1,4 +1,4 @@
-import { moveMap } from '../grid/grid.sagas'
+import { moveMap } from '../grid'
 import { attemptUnitMove } from '../units/unit.sagas'
 
 import { nextTurn } from './player.sagas'

@@ -2,7 +2,7 @@ import { takeLatest, call, throttle } from 'redux-saga/effects'
 
 import { ActionTypes as KeyActionTypes, actions as keyActions } from '../keys/keys.actions'
 
-import { initGrid } from './grid/grid.sagas'
+import { initGrid } from './grid'
 import { keyBindings } from './player/controls'
 
 import { ActionTypes } from './game.actions'

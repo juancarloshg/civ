@@ -1,6 +1,5 @@
 import { Actions, ActionTypes } from './grid.actions'
-import { Grid } from './grid.helpers'
-import { GridPosition } from './grid.types'
+import { GridPosition, Grid } from './grid.types'
 
 export interface GridState {
     isGridReady: boolean

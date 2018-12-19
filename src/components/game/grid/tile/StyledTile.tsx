@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import { squareSize } from '../constants'
-import { ExtendedTile } from '../grid.helpers'
-import { Props as TileProps } from './Tile'
+import { ExtendedTile } from '../grid.types'
 
-type StyledTileProps = Pick<TileProps, 'tile' | 'isSelectedTile'>
+export interface StyledTileProps {
+    tile: ExtendedTile
+    isSelectedTile: boolean
+}
 
 export const getColor = (props: { tile: ExtendedTile }): string => {
     const terrain = props.tile.terrain

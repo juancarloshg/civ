@@ -1,5 +1,5 @@
 {
-    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+    "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier", "tslint-no-circular-imports"],
     "linterOptions": {
         "exclude": ["config/**/*.js", "node_modules/**/*.ts", "coverage/lcov-report/*.js"]
     },
@@ -14,6 +14,12 @@
         "no-any": true,
         "array-type": false,
         "member-access": false,
-        "curly": false
+        "curly": false,
+        "no-duplicate-imports": true,
+        "no-implicit-dependencies": true,
+        "no-import-side-effect": true,
+        "no-require-imports": true,
+        "no-reference-import": true,
+        "no-circular-imports": true
     }
 }

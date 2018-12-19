@@ -10813,6 +10813,11 @@ tslint-config-prettier@^1.17.0:
   resolved "https://registry.yarnpkg.com/tslint-config-prettier/-/tslint-config-prettier-1.17.0.tgz#946ed6117f98f3659a65848279156d87628c33dc"
   integrity sha512-NKWNkThwqE4Snn4Cm6SZB7lV5RMDDFsBwz6fWUkTxOKGjMx8ycOHnjIbhn7dZd5XmssW3CwqUjlANR6EhP9YQw==
 
+tslint-no-circular-imports@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/tslint-no-circular-imports/-/tslint-no-circular-imports-0.6.1.tgz#a91358395a81c067bf104a641f269655057715cd"
+  integrity sha512-XuRgHZKFu6dv7fm/tuilmvynLHgtCTd63/p3744dYVEpnMExp2Jd9IwTiBOGmy5bUDlpTy117vtBcLd028RsBA==
+
 tslint-react@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/tslint-react/-/tslint-react-3.6.0.tgz#7f462c95c4a0afaae82507f06517ff02942196a1"

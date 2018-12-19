@@ -1,9 +1,5 @@
-import { GridPosition } from '../grid/grid.types'
 import { Actions, ActionTypes } from './city.actions'
-
-export interface City {
-    position: GridPosition
-}
+import { City } from './city.types'
 
 export type CitiesState = City[]
 
