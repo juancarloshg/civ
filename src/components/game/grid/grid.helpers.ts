@@ -1,27 +1,5 @@
-import { TerrainType, terrains } from '../terrains/base/terrains'
-import { Size } from '../../configuration/configuration.reducer'
-import { GridPosition, Grid, ExtendedGrid } from './grid.types'
-
-export function generateMap(size: number): Grid {
-    const map: Grid = []
-    for (let row = 0; row < size; row++) {
-        map[row] = []
-        for (let col = 0; col < size; col++) {
-            map[row][col] = {
-                id: `row${row}col${col}`,
-                terrain: getRandomTerrainType(),
-                terrainModifiers: [],
-                row,
-                col
-            }
-        }
-    }
-    return map
-}
-
-function getRandomTerrainType(): TerrainType {
-    return Object.keys(terrains)[Math.floor(Math.random() * Object.keys(terrains).length)] as TerrainType
-}
+import { Size } from '../../configuration/configuration.types'
+import { GridPosition, ExtendedGrid } from './grid.types'
 
 export const getCircularView = (viewGridOrigin: GridPosition, viewSize: Size, grid: ExtendedGrid): ExtendedGrid => {
     const vPadding = viewSize.height / 2

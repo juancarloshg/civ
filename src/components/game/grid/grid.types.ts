@@ -1,7 +1,7 @@
 import { TerrainType } from '../terrains/base/terrains'
 import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
 import { Unit } from '../units/units'
-import { City } from '../city/city.reducer'
+import { City } from '../city/city.types'
 
 export interface GridPosition {
     row: number

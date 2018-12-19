@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { repeat } from '../../../utils/utils'
 import { FlexContainer } from '../../styled/FlexContainer'
-import { Size } from '../../configuration/configuration.reducer'
+import { Size } from '../../configuration/configuration.types'
 
 import { squareSize } from './constants'
 import { Tile } from './tile/Tile'

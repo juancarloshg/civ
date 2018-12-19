@@ -55,6 +55,7 @@ interface State {
 
 class PlayerInfoBase extends React.Component<Props, State> {
     minimapWrapper: React.RefObject<HTMLDivElement>
+    observer: ResizeObserver
     constructor(props: Props) {
         super(props)
         this.minimapWrapper = React.createRef()
@@ -63,17 +64,24 @@ class PlayerInfoBase extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        new ResizeObserver(this.updateMinimapWrapperSize).observe(this.minimapWrapper.current!)
+        this.observer = new ResizeObserver(this.updateMinimapWrapperSize)
+        this.observer.observe(this.minimapWrapper.current!)
+    }
+
+    componentWillUnmount() {
+        this.observer.disconnect()
     }
 
     updateMinimapWrapperSize() {
-        const minimapWrapper = this.minimapWrapper.current!
-        this.setState({
-            miniwrapperSize: {
-                height: minimapWrapper.getBoundingClientRect().height,
-                width: minimapWrapper.getBoundingClientRect().width
-            }
-        })
+        const minimapWrapper = this.minimapWrapper.current
+        if (minimapWrapper) {
+            this.setState({
+                miniwrapperSize: {
+                    height: minimapWrapper.getBoundingClientRect().height,
+                    width: minimapWrapper.getBoundingClientRect().width
+                }
+            })
+        }
     }
 
     render() {

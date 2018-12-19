@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import Slider from '@material-ui/lab/Slider'
+import { Slider } from '@material-ui/lab'
 import { Link } from 'react-router-dom'
 
 import { ApplicationState } from '../../rootReducer'

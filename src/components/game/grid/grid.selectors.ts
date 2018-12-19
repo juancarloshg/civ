@@ -6,7 +6,7 @@ import { getViewSize } from '../../configuration/configuration.selector'
 import { getUnits } from '../units/unit.selectors'
 import { Unit } from '../units/units'
 import { getCities } from '../city/city.selector'
-import { City } from '../city/city.reducer'
+import { City } from '../city/city.types'
 
 import { GridState } from './grid.reducer'
 import { getCircularView } from './grid.helpers'

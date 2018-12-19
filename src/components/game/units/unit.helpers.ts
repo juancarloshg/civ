@@ -1,4 +1,4 @@
-import { uniqueId } from 'lodash'
+import uniqueId from 'lodash.uniqueid'
 
 import { Archer } from '../../icons/Archer'
 import { Warrior } from '../../icons/Warrior'

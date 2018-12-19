@@ -3,7 +3,7 @@ import { select, put } from 'redux-saga/effects'
 import { getSize } from '../../configuration/configuration.selector'
 
 import { actions } from './grid.actions'
-import { generateMap } from './grid.helpers'
+import { generateMap } from './mapGeneration'
 import { getExtendedGrid, getViewGridOrigin } from './grid.selectors'
 import { GridPosition, ExtendedGrid, Grid } from './grid.types'
 

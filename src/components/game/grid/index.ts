@@ -1,5 +1,4 @@
 export * from './constants'
-export * from './ViewGrid'
 export * from './grid.actions'
 export * from './grid.helpers'
 export * from './grid.reducer'

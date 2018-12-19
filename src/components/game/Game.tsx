@@ -7,11 +7,12 @@ import { ApplicationState } from '../../rootReducer'
 import { FlexContainer } from '../styled/FlexContainer'
 import { KeyListener } from '../keys/KeyListener'
 import { getViewSize } from '../configuration/configuration.selector'
-import { Size } from '../configuration/configuration.reducer'
+import { Size } from '../configuration/configuration.types'
 
-import { ViewGrid, getIsGridReady, getMainViewGrid, ExtendedGrid } from './grid'
+import { getIsGridReady, getMainViewGrid, ExtendedGrid } from './grid'
 import { PlayerInfo } from './player/info/PlayerInfo'
 import { actions } from './game.actions'
+import { ViewGrid } from './grid/ViewGrid'
 
 interface StateProps {
     isGridReady: boolean
