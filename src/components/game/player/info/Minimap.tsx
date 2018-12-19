@@ -2,13 +2,10 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
-import { ExtendedGrid } from '../../grid/grid.helpers'
 import { ApplicationState } from '../../../../rootReducer'
-import { getExtendedGrid, getMainViewGridBorders } from '../../grid/grid.selectors'
+import { getExtendedGrid, getMainViewGridBorders, actions as gridActions, GridPosition, ExtendedGrid } from '../../grid'
 import { getSize } from '../../../configuration/configuration.selector'
-import { getColor } from '../../grid/tile/StyledTile'
-import { actions as gridActions } from '../../grid/grid.actions'
-import { GridPosition } from '../../grid/grid.types'
+import { getColor } from '../../grid/tile'
 
 const pixelRatio = 10
 

@@ -9,8 +9,8 @@ import { getCities } from '../city/city.selector'
 import { City } from '../city/city.reducer'
 
 import { GridState } from './grid.reducer'
-import { Grid, ExtendedGrid, Tile, getCircularView } from './grid.helpers'
-import { GridPosition } from './grid.types'
+import { getCircularView } from './grid.helpers'
+import { GridPosition, ExtendedGrid, Grid, Tile } from './grid.types'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 

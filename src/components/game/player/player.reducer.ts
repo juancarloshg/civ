@@ -1,7 +1,7 @@
 import { Actions, ActionTypes } from './player.actions'
 import { Unit } from '../units/units'
-import { Tile } from '../grid/grid.helpers'
 import { Player } from '../game.types'
+import { Tile } from '../grid'
 
 export interface PlayerState {
     player: Player

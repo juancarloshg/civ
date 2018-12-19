@@ -1,6 +1,5 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { Grid } from './grid.helpers'
-import { GridPosition } from './grid.types'
+import { GridPosition, Grid } from './grid.types'
 
 export enum ActionTypes {
     SET_GRID = '[grid] set grid',

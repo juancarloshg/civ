@@ -1,4 +1,4 @@
-import { GridPosition } from '../grid/grid.types'
+import { GridPosition } from '../grid'
 import { UnitEnvironment } from './environments'
 import { UnitGroup } from './groups'
 

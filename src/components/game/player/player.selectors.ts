@@ -4,9 +4,8 @@ import { prop, equals, flatten } from 'ramda'
 import { ApplicationState } from '../../../rootReducer'
 
 import { Unit } from '../units/units'
-import { Tile } from '../grid/grid.helpers'
 import { getUnits } from '../units/unit.selectors'
-import { getGrid, getExtendedGrid } from '../grid/grid.selectors'
+import { getGrid, getExtendedGrid, Tile } from '../grid'
 
 import { PlayerState } from './player.reducer'
 

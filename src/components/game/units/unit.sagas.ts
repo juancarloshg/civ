@@ -1,9 +1,7 @@
 import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 
 import { getSelectedUnit } from '../player/player.selectors'
-import { GridPosition } from '../grid/grid.types'
-import { getGrid, getTileByPosition } from '../grid/grid.selectors'
-import { Grid, Tile } from '../grid/grid.helpers'
+import { GridPosition, Grid, Tile, getGrid, getTileByPosition } from '../grid'
 import { actions as cityActions } from '../city/city.actions'
 import { actions as playerActions } from '../player/player.actions'
 import { City } from '../city/city.reducer'

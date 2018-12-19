@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from '../../../../rootReducer'
-import { ExtendedTile } from '../../grid/grid.helpers'
 import { actions as playerActions } from '../../player/player.actions'
 import { getIsSelectedTile } from '../../player/player.selectors'
 import { StyledTile } from './StyledTile'
 import { Unit } from './Unit'
+import { ExtendedTile } from '../grid.types'
 
 interface OwnProps {
     tile: ExtendedTile

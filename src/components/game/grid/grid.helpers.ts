@@ -1,25 +1,6 @@
 import { TerrainType, terrains } from '../terrains/base/terrains'
-import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
-import { Unit } from '../units/units'
-import { City } from '../city/city.reducer'
 import { Size } from '../../configuration/configuration.reducer'
-import { GridPosition } from './grid.types'
-
-export interface Tile {
-    id: string
-    terrain: TerrainType
-    terrainModifiers: TerrainModifierType[]
-    row: number
-    col: number
-}
-
-export interface ExtendedTile extends Tile {
-    units: Unit[]
-    city: City | null
-}
-
-export type Grid = Tile[][]
-export type ExtendedGrid = ExtendedTile[][]
+import { GridPosition, Grid, ExtendedGrid } from './grid.types'
 
 export function generateMap(size: number): Grid {
     const map: Grid = []

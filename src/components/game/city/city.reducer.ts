@@ -1,4 +1,4 @@
-import { GridPosition } from '../grid/grid.types'
+import { GridPosition } from '../grid'
 import { Actions, ActionTypes } from './city.actions'
 
 export interface City {

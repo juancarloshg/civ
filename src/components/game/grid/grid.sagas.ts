@@ -3,9 +3,9 @@ import { select, put } from 'redux-saga/effects'
 import { getSize } from '../../configuration/configuration.selector'
 
 import { actions } from './grid.actions'
-import { Grid, generateMap, ExtendedGrid } from './grid.helpers'
+import { generateMap } from './grid.helpers'
 import { getExtendedGrid, getViewGridOrigin } from './grid.selectors'
-import { GridPosition } from './grid.types'
+import { GridPosition, ExtendedGrid, Grid } from './grid.types'
 
 export function* moveMap(direction: 'north' | 'south' | 'east' | 'west') {
     const { row: currentRow, col: currentCol }: GridPosition = yield select(getViewGridOrigin)
