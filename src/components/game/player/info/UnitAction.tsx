@@ -2,11 +2,11 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 
 import { unitActionDescriptions } from '../../units/units'
-import { UnitActionType, Unit } from '../../units/unit.types'
+import { UnitActionType, Unit, ExtendedUnit } from '../../units/unit.types'
 import { actions as unitActions } from '../../units/unit.actions'
 
 interface OwnProps {
-    unit: Unit
+    unit: ExtendedUnit
     action: UnitActionType
 }
 
@@ -23,7 +23,7 @@ const UnitActionBase: React.SFC<UnitActionProps> = ({ unit, action, playerAction
 )
 
 const mapDispatch: DispatchProps = {
-    playerAction: (unit: Unit, action: UnitActionType) => unitActions.unitAction(unit, action)
+    playerAction: (unit: ExtendedUnit, action: UnitActionType) => unitActions.unitAction(unit, action)
 }
 
 export const UnitAction = connect<{}, DispatchProps, OwnProps>(

@@ -8,7 +8,7 @@ import { ApplicationState } from '../../../../rootReducer'
 import { FlexContainer } from '../../../styled/FlexContainer'
 import { FlexItem } from '../../../styled/FlexItem'
 import { getSize } from '../../../configuration/configuration.selector'
-import { Unit } from '../../units/unit.types'
+import { Unit, ExtendedUnit } from '../../units/unit.types'
 import { getGrid, ExtendedTile, Grid } from '../../grid'
 import { actions as gameActions } from '../../game.actions'
 
@@ -37,7 +37,7 @@ export interface Size {
 
 interface StateProps {
     tile: ExtendedTile | null
-    unit: Unit | null
+    unit: ExtendedUnit | null
     turn: number
     viewGrid: Grid
     size: number

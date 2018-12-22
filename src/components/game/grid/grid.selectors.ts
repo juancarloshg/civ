@@ -9,6 +9,7 @@ import { getCities } from '../city/city.selector'
 import { GridState } from './grid.reducer'
 import { getCircularView } from './grid.helpers'
 import { GridPosition, ExtendedGrid, Tile } from './grid.types'
+import { getPlayers } from '../player/player.selectors'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -26,13 +27,15 @@ export const getExtendedGrid: Selector<ApplicationState, ExtendedGrid> = createS
     getGrid,
     getExtendedUnits,
     getCities,
-    (grid, units, cities) => {
+    getPlayers,
+    (grid, units, cities, players) => {
         const newGrid: ExtendedGrid = grid.map(row => row.map(tile => ({ ...tile, units: [], city: null, owner: null })))
 
         units.forEach(unit => newGrid[unit.position.row][unit.position.col].units.push(unit))
         cities.forEach(city => {
             newGrid[city.position.row][city.position.col].city = city
-            city.ownedTiles.forEach(position => (newGrid[position.row][position.col].owner = 'me'))
+            const owner = players.find(player => player.cityIds.includes(city.id)) || null
+            city.ownedTiles.forEach(position => (newGrid[position.row][position.col].owner = owner))
         })
 
         return newGrid

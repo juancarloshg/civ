@@ -1,10 +1,10 @@
 import * as React from 'react'
 
-import { Unit } from '../../units/unit.types'
 import { UnitAction } from './UnitAction'
+import { ExtendedUnit } from '../../units/unit.types'
 
 interface TileInfoProps {
-    unit: Unit
+    unit: ExtendedUnit
 }
 
 export const UnitInfo: React.SFC<TileInfoProps> = ({ unit }) => (

@@ -83,7 +83,7 @@ function* handleNextTurn() {
 function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof actions.unitAction>) {
     switch (action) {
         case 'create city':
-            yield put(cityActions.createCity(unit.position))
+            yield put(cityActions.createCity(unit.position, unit.owner))
             const tile: Tile | null = yield select(getTileByPosition, unit.position)
             yield put(gameActions.selectTile(tile!.id))
             yield call(removePlayerUnit, unit)
