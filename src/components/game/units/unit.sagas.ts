@@ -3,7 +3,7 @@ import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 import { getSelectedUnit } from '../player/player.selectors'
 import { actions as cityActions } from '../city/city.actions'
 import { actions as playerActions, ActionTypes as PlayerActionTypes } from '../player/player.actions'
-import { GridPosition, Grid, Tile, getGrid, getTileByPosition, getCircularIndex } from '../grid'
+import { GridPosition, Grid, Tile, getGrid, getTileByPosition, getCircularPosition } from '../grid'
 
 import { getUnits } from './unit.selectors'
 import { actions, ActionTypes } from './unit.actions'
@@ -45,8 +45,7 @@ function hasMovement(unit: Unit) {
 }
 
 function* getNextPosition(position: GridPosition, direction: MovementDirection) {
-    const absPosition = getAbsolutePosition(position, direction)
-    return { row: yield call(getCircularIndex, absPosition.row), col: yield call(getCircularIndex, absPosition.col) }
+    return yield call(getCircularPosition, getAbsolutePosition(position, direction))
 }
 
 function getAbsolutePosition(position: GridPosition, direction: MovementDirection): GridPosition {
