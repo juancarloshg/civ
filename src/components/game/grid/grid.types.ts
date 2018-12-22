@@ -1,7 +1,7 @@
 import { TerrainType } from '../terrains/base/terrains'
 import { TerrainModifierType } from '../terrains/modifiers/terrainModifiers'
 import { Unit } from '../units/units'
-import { City } from '../city/city.types'
+import { ExtendedCity } from '../city/city.types'
 
 export interface GridPosition {
     row: number
@@ -18,7 +18,7 @@ export interface Tile {
 
 export interface ExtendedTile extends Tile {
     units: Unit[]
-    city: City | null
+    city: ExtendedCity | null
     owner: string | null
 }
 

@@ -1,5 +1,9 @@
 import { Size } from '../../configuration/configuration.types'
-import { GridPosition, ExtendedGrid } from './grid.types'
+import { GridPosition, ExtendedGrid, Tile, Grid } from './grid.types'
+import { Yield, addPartialYields, EMPTY_YIELD } from '../yield/Yield'
+import { terrains } from '../terrains/base/terrains'
+import { terrainModifiers } from '../terrains/modifiers/terrainModifiers'
+import { flatten } from 'ramda'
 
 export const getCircularView = (viewGridOrigin: GridPosition, viewSize: Size, grid: ExtendedGrid): ExtendedGrid => {
     const vPadding = viewSize.height / 2
@@ -22,4 +26,14 @@ const getCircularSlice = <T>(array: T[], start: number, end: number): T[] => {
     }
 
     return rows
+}
+
+export const getTileYield = (tile: Tile): Yield => {
+    let currentYield = EMPTY_YIELD
+    tile.terrainModifiers.forEach(terrainModifier => (currentYield = addPartialYields(currentYield, terrainModifiers[terrainModifier].yield)))
+    return addPartialYields(terrains[tile.terrain].yield, currentYield)
+}
+
+export const getTileByGridAndPosition = (grid: Grid, position: GridPosition): Tile | null => {
+    return flatten(grid).find(tile => tile.row === position.row && tile.col === position.col) || null
 }

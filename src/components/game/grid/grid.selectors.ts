@@ -5,12 +5,13 @@ import { ApplicationState } from '../../../rootReducer'
 import { getViewSize } from '../../configuration/configuration.selector'
 import { getUnits } from '../units/unit.selectors'
 import { Unit } from '../units/units'
-import { getCities } from '../city/city.selector'
-import { City } from '../city/city.types'
+import { ExtendedCity, City } from '../city/city.types'
 
 import { GridState } from './grid.reducer'
 import { getCircularView } from './grid.helpers'
 import { GridPosition, ExtendedGrid, Grid, Tile } from './grid.types'
+import { getCities } from '../city/city.selector'
+import { getCityTilesYield } from '../city/city.helper'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -24,11 +25,19 @@ export const getGrid = createSelector(
     (gameState: GridState) => gameState.grid
 )
 
+export const getExtendedCities: Selector<ApplicationState, ExtendedCity[]> = createSelector(
+    getCities,
+    getGrid,
+    (cities: City[], grid: Grid) => {
+        return cities.map(city => ({ ...city, yield: getCityTilesYield(city, grid) }))
+    }
+)
+
 export const getExtendedGrid: Selector<ApplicationState, ExtendedGrid> = createSelector(
     getGrid,
     getUnits,
-    getCities,
-    (grid: Grid, units: Unit[], cities: City[]) => {
+    getExtendedCities,
+    (grid: Grid, units: Unit[], cities: ExtendedCity[]) => {
         const newGrid: ExtendedGrid = grid.map(row => row.map(tile => ({ ...tile, units: [], city: null, owner: null })))
 
         units.forEach(unit => newGrid[unit.position.row][unit.position.col].units.push(unit))
