@@ -6,7 +6,8 @@ import { Settler } from '../../icons/Settler'
 import { IconProps } from '../../icons/icons.types'
 
 import { GridPosition } from '../grid'
-import { Unit, UnitType, units, UnitState, UnitBase } from './units'
+import { units } from './units'
+import { Unit, UnitType, UnitState, UnitBase } from './unit.types'
 
 interface CreateUnitProps {
     type: UnitType

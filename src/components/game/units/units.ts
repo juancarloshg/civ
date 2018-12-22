@@ -1,41 +1,8 @@
-import { GridPosition } from '../grid'
-import { UnitEnvironment } from './environments'
-import { UnitGroup } from './groups'
-
-export interface UnitBase {
-    type: UnitType
-    group: UnitGroup
-    environment: UnitEnvironment
-    hp: number
-    meleeAtk?: number
-    meleeDef?: number
-    rangedAtk?: number
-    rangedDef?: number
-    movement: number
-    actions?: UnitActionType[]
-}
-
-export interface UnitState {
-    id: string
-    currentHp: number
-    movementsLeft: number
-    position: GridPosition
-}
-
-export interface UnitAction {
-    type: UnitActionType
-    description: string
-}
-
-export type UnitActionType = 'create city'
+import { UnitActionType, UnitType, UnitBase } from './unit.types'
 
 export const unitActionDescriptions: { [key in UnitActionType]: string } = {
     'create city': 'Build city'
 }
-
-export type Unit = UnitBase & UnitState
-
-export type UnitType = 'archer' | 'warrior' | 'settler'
 
 export const units: { [key in UnitType]: UnitBase } = {
     archer: {

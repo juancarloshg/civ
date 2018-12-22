@@ -1,6 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
-import { ActionTypes, actions } from './city.actions'
+import uniqueId from 'lodash.uniqueid'
+
+import { actions as playerActions } from '../player/player.actions'
 import { GridPosition, getCircularPosition } from '../grid'
+import { ActionTypes, actions } from './city.actions'
 
 export function* calculateCityTiles(position: GridPosition) {
     const cityTiles = []
@@ -16,9 +19,9 @@ export function* calculateCityTiles(position: GridPosition) {
     return cityTiles
 }
 
-function* createCity({ payload: position }: ReturnType<typeof actions.createCity>) {
-    const city = { position, ownedTiles: yield call(calculateCityTiles, position) }
-
+function* createCity({ payload: { owner, position } }: ReturnType<typeof actions.createCity>) {
+    const city = { id: uniqueId('city'), position, ownedTiles: yield call(calculateCityTiles, position) }
+    yield put(playerActions.addCity(owner, city.id))
     yield put(actions.addCity(city))
 }
 

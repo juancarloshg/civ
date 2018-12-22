@@ -1,52 +1,34 @@
 import { Actions, ActionTypes } from './player.actions'
-import { Unit } from '../units/units'
 import { Player } from '../game.types'
-import { Tile } from '../grid'
+import { removeByIndex, updateByIndex } from '../../../utils/utils'
 
-export interface PlayerState {
-    player: Player
-    selectedTileId: Tile['id'] | null
-    selectedUnitId: Unit['id'] | null
-    turn: number
-}
+export type PlayersState = Player[]
 
-const initialState: PlayerState = {
-    selectedTileId: null,
-    selectedUnitId: null,
-    turn: 0,
-    player: {
-        unitIds: []
-    }
-}
+const initialState: PlayersState = []
 
-export const reducer = (state: PlayerState = initialState, action: Actions): PlayerState => {
+export const reducer = (players: PlayersState = initialState, action: Actions): PlayersState => {
     switch (action.type) {
-        case ActionTypes.SELECT_TILE:
-            return {
-                ...state,
-                selectedTileId: action.payload,
-                selectedUnitId: null
-            }
-        case ActionTypes.SELECT_UNIT:
-            return {
-                ...state,
-                selectedUnitId: action.payload,
-                selectedTileId: null
-            }
         case ActionTypes.ADD_PLAYER:
-            return {
-                ...state,
-                player: {
-                    ...state.player,
+            return [
+                ...players,
+                {
                     ...action.payload
                 }
-            }
-        case ActionTypes.NEXT_TURN:
-            return {
-                ...state,
-                turn: state.turn + 1
-            }
+            ]
+        case ActionTypes.ADD_CITY: {
+            const player = players.find(p => p.id === action.payload.player.id)!
+            const playerIndex = players.indexOf(player)
+            const newPlayer: Player = { ...player, cityIds: [...player.cityIds, action.payload.cityId] }
+            return updateByIndex(players, newPlayer, playerIndex)
+        }
+        case ActionTypes.REMOVE_UNIT: {
+            const playerIndex = players.indexOf(action.payload.player)
+            const player = players[playerIndex]
+            const removedUnitIndex = player.unitIds.indexOf(action.payload.unit.id)
+            const newPlayer = { ...player, unitIds: removeByIndex(player.unitIds, removedUnitIndex) }
+            return updateByIndex(players, newPlayer, playerIndex)
+        }
         default:
-            return state
+            return players
     }
 }
