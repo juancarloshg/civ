@@ -29,9 +29,11 @@ const getCircularSlice = <T>(array: T[], start: number, end: number): T[] => {
 }
 
 export const getTileYield = (tile: Tile): Yield => {
-    let currentYield = EMPTY_YIELD
-    tile.terrainModifiers.forEach(terrainModifier => (currentYield = addPartialYields(currentYield, terrainModifiers[terrainModifier].yield)))
-    return addPartialYields(terrains[tile.terrain].yield, currentYield)
+    const modifiersYield = tile.terrainModifiers.reduce(
+        (totalYield, terrainModifier) => addPartialYields(totalYield, terrainModifiers[terrainModifier].yield),
+        EMPTY_YIELD
+    )
+    return addPartialYields(terrains[tile.terrain].yield, modifiersYield)
 }
 
 export const getTileByGridAndPosition = (grid: Grid, position: GridPosition): Tile | null => {
