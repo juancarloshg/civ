@@ -1,5 +1,5 @@
-import { Unit } from './units'
 import { Actions, ActionTypes } from './unit.actions'
+import { Unit } from './unit.types'
 
 export type UnitsState = Unit[]
 

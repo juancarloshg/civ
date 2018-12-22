@@ -11,6 +11,7 @@ import { initPlayer } from './player/player.sagas'
 function* initGame() {
     yield call(initGrid)
     yield call(initPlayer)
+    yield call(initPlayer)
 }
 
 function* handleKeydown(action: ReturnType<typeof keyActions.keydown>) {

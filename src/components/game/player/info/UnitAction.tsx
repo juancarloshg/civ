@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 
-import { UnitActionType, unitActionDescriptions, Unit } from '../../units/units'
+import { unitActionDescriptions } from '../../units/units'
+import { UnitActionType, Unit } from '../../units/unit.types'
 import { actions as unitActions } from '../../units/unit.actions'
 
 interface OwnProps {

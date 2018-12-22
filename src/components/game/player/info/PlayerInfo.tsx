@@ -8,15 +8,15 @@ import { ApplicationState } from '../../../../rootReducer'
 import { FlexContainer } from '../../../styled/FlexContainer'
 import { FlexItem } from '../../../styled/FlexItem'
 import { getSize } from '../../../configuration/configuration.selector'
-import { Unit } from '../../units/units'
+import { Unit } from '../../units/unit.types'
 import { getGrid, ExtendedTile, Grid } from '../../grid'
+import { actions as gameActions } from '../../game.actions'
 
-import { actions } from '../player.actions'
-import { getSelectedUnit, getSelectedExtendedTile, getTurn } from '../player.selectors'
 import { TileInfo } from './TileInfo'
 import { UnitInfo } from './UnitInfo'
 import { NextTurn } from './NextTurn'
 import { Minimap } from './Minimap'
+import { getSelectedExtendedTile, getSelectedUnit, getTurn } from '../../game.selectors'
 
 const StyledFlexContainer = styled(FlexContainer)`
     border: 5px solid black;
@@ -119,7 +119,7 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectUnit: (unit: Unit) => actions.selectUnit(unit.id)
+    selectUnit: (unit: Unit) => gameActions.selectUnit(unit.id)
 }
 
 export const PlayerInfo = connect<StateProps, DispatchProps>(

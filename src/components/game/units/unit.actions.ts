@@ -1,5 +1,5 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { Unit, UnitActionType } from './units'
+import { Unit, UnitActionType } from './unit.types'
 
 export enum ActionTypes {
     ADD_UNITS = '[units] add units',

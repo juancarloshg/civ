@@ -1,13 +1,13 @@
 import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 
-import { getSelectedUnit } from '../player/player.selectors'
-import { actions as cityActions } from '../city/city.actions'
-import { actions as playerActions, ActionTypes as PlayerActionTypes } from '../player/player.actions'
 import { GridPosition, Grid, Tile, getGrid, getTileByPosition, getCircularPosition } from '../grid'
+import { actions as cityActions } from '../city/city.actions'
+import { actions as gameActions, ActionTypes as GameActionTypes } from '../game.actions'
 
 import { getUnits } from './unit.selectors'
 import { actions, ActionTypes } from './unit.actions'
-import { Unit } from './units'
+import { Unit } from './unit.types'
+import { getSelectedUnit } from '../game.selectors'
 
 type MovementDirection = 'north' | 'south' | 'east' | 'west' | 'southwest' | 'northwest' | 'southeast' | 'northeast'
 export function* attemptUnitMove(direction: MovementDirection) {
@@ -84,12 +84,12 @@ function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof acti
         case 'create city':
             yield put(cityActions.createCity(unit.position))
             const tile: Tile | null = yield select(getTileByPosition, unit.position)
-            yield put(playerActions.selectTile(tile!.id))
+            yield put(gameActions.selectTile(tile!.id))
             yield put(actions.removeUnit(unit))
     }
 }
 
 export function* sagas() {
-    yield takeLatest(PlayerActionTypes.NEXT_TURN, handleNextTurn)
+    yield takeLatest(GameActionTypes.NEXT_TURN, handleNextTurn)
     yield takeEvery(ActionTypes.UNIT_ACTION, handleUnitAction)
 }

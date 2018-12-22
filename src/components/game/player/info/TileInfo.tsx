@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Unit } from '../../units/units'
+import { Unit } from '../../units/unit.types'
 import { ExtendedTile } from '../../grid'
 
 interface TileInfoProps {

@@ -3,14 +3,12 @@ import { flatten, pick } from 'ramda'
 
 import { ApplicationState } from '../../../rootReducer'
 import { getViewSize } from '../../configuration/configuration.selector'
-import { getUnits } from '../units/unit.selectors'
-import { Unit } from '../units/units'
+import { getExtendedUnits } from '../units/unit.selectors'
 import { getCities } from '../city/city.selector'
-import { City } from '../city/city.types'
 
 import { GridState } from './grid.reducer'
 import { getCircularView } from './grid.helpers'
-import { GridPosition, ExtendedGrid, Grid, Tile } from './grid.types'
+import { GridPosition, ExtendedGrid, Tile } from './grid.types'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -26,9 +24,9 @@ export const getGrid = createSelector(
 
 export const getExtendedGrid: Selector<ApplicationState, ExtendedGrid> = createSelector(
     getGrid,
-    getUnits,
+    getExtendedUnits,
     getCities,
-    (grid: Grid, units: Unit[], cities: City[]) => {
+    (grid, units, cities) => {
         const newGrid: ExtendedGrid = grid.map(row => row.map(tile => ({ ...tile, units: [], city: null, owner: null })))
 
         units.forEach(unit => newGrid[unit.position.row][unit.position.col].units.push(unit))
