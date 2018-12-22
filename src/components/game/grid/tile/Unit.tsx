@@ -22,6 +22,7 @@ interface DispatchProps {
 
 interface OwnProps {
     unit: ExtendedUnit
+    position: number
 }
 
 type Props = StateProps & OwnProps & DispatchProps
@@ -31,10 +32,12 @@ const getWidth = (props: StyledUnitProps) => (props.isSelected ? unitSize.select
 const getDisplay = (props: StyledUnitProps) => (props.isSelected ? 'flex' : 'inline-block')
 const getBackground = (props: StyledUnitProps) => props.unit.owner.color
 
-type StyledUnitProps = Pick<Props, 'isSelected' | 'unit'>
+type StyledUnitProps = Pick<Props, 'isSelected' | 'unit' | 'position'>
 const StyledUnit = styled.span<StyledUnitProps>`
     height: ${getHeight}px;
     width: ${getWidth}px;
+    left: ${props => (props.isSelected ? 0 : getWidth(props) * props.position)}px;
+    top: ${props => props.isSelected && getHeight(props) / 2}px;
     display: ${getDisplay};
     border-radius: 50%;
     border: 1px solid black;
@@ -51,7 +54,7 @@ const getStyledIcon = (icon: React.FunctionComponent<IconProps>) => styled(icon)
     height: ${iconWrapperRatio * 100}%;
 `
 
-const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected, playerMoving }) => {
+const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected, playerMoving, position }) => {
     const Icon = getStyledIcon(unitIcons[unit.type])
     return (
         <StyledUnit
@@ -61,6 +64,7 @@ const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected, playerMoving
                     selectUnit(unit)
                 }
             }}
+            position={position}
             isSelected={isSelected}
             unit={unit}
         >

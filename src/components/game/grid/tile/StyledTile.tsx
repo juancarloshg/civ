@@ -55,5 +55,6 @@ export const StyledTile = styled(BaseStyledTile)`
     border-width: ${getBorderSize}px;
     border-style: ${getBorderStyle};
     border-color: black;
-    ${applyPlayerColor}
+    position: relative;
+    ${applyPlayerColor};
 `
