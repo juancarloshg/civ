@@ -77,7 +77,7 @@ function* getCircularPosition(index: number) {
     if (index < 0) {
         return size + index
     }
-    if (index > size) {
+    if (index >= size) {
         return index - size
     }
     return index
