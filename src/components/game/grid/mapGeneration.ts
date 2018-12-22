@@ -17,7 +17,8 @@ export function generateMap(size: number): Grid {
                 terrain: getTerrainType(row, col, map, size),
                 terrainModifiers: [],
                 row,
-                col
+                col,
+                owner: null
             }
         }
     }

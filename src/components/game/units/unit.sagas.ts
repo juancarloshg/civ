@@ -1,11 +1,9 @@
 import { select, call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 
-import { getSize } from '../../configuration/configuration.selector'
 import { getSelectedUnit } from '../player/player.selectors'
 import { actions as cityActions } from '../city/city.actions'
 import { actions as playerActions, ActionTypes as PlayerActionTypes } from '../player/player.actions'
-import { City } from '../city/city.types'
-import { GridPosition, Grid, Tile, getGrid, getTileByPosition } from '../grid'
+import { GridPosition, Grid, Tile, getGrid, getTileByPosition, getCircularIndex } from '../grid'
 
 import { getUnits } from './unit.selectors'
 import { actions, ActionTypes } from './unit.actions'
@@ -48,7 +46,7 @@ function hasMovement(unit: Unit) {
 
 function* getNextPosition(position: GridPosition, direction: MovementDirection) {
     const absPosition = getAbsolutePosition(position, direction)
-    return { row: yield call(getCircularPosition, absPosition.row), col: yield call(getCircularPosition, absPosition.col) }
+    return { row: yield call(getCircularIndex, absPosition.row), col: yield call(getCircularIndex, absPosition.col) }
 }
 
 function getAbsolutePosition(position: GridPosition, direction: MovementDirection): GridPosition {
@@ -72,17 +70,6 @@ function getAbsolutePosition(position: GridPosition, direction: MovementDirectio
     }
 }
 
-function* getCircularPosition(index: number) {
-    const size: number = yield select(getSize)
-    if (index < 0) {
-        return size + index
-    }
-    if (index >= size) {
-        return index - size
-    }
-    return index
-}
-
 function* handleNextTurn() {
     const units: Unit[] = yield select(getUnits)
     const newUnits = units.map(unit => ({
@@ -96,8 +83,7 @@ function* handleNextTurn() {
 function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof actions.unitAction>) {
     switch (action) {
         case 'create city':
-            const city: City = { position: unit.position }
-            yield put(cityActions.addCity(city))
+            yield put(cityActions.createCity(unit.position))
             const tile: Tile | null = yield select(getTileByPosition, unit.position)
             yield put(playerActions.selectTile(tile!.id))
             yield put(actions.removeUnit(unit))

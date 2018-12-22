@@ -14,6 +14,7 @@ export interface Tile {
     terrainModifiers: TerrainModifierType[]
     row: number
     col: number
+    owner: string | null
 }
 
 export interface ExtendedTile extends Tile {
