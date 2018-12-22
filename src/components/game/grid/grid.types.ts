@@ -14,12 +14,12 @@ export interface Tile {
     terrainModifiers: TerrainModifierType[]
     row: number
     col: number
-    owner: string | null
 }
 
 export interface ExtendedTile extends Tile {
     units: Unit[]
     city: City | null
+    owner: string | null
 }
 
 export type Grid = Tile[][]
