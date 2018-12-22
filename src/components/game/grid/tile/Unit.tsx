@@ -39,6 +39,8 @@ const StyledUnit = styled.span<StyledUnitProps>`
     box-sizing: border-box;
     background: green;
     justify-content: center;
+    z-index: 1;
+    position: absolute;
 `
 
 const getStyledIcon = (icon: React.FunctionComponent<IconProps>) => styled(icon)`

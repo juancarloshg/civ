@@ -29,10 +29,13 @@ export const getExtendedGrid: Selector<ApplicationState, ExtendedGrid> = createS
     getUnits,
     getCities,
     (grid: Grid, units: Unit[], cities: City[]) => {
-        const newGrid: ExtendedGrid = grid.map(row => row.map(tile => ({ ...tile, units: [], city: null })))
+        const newGrid: ExtendedGrid = grid.map(row => row.map(tile => ({ ...tile, units: [], city: null, owner: null })))
 
         units.forEach(unit => newGrid[unit.position.row][unit.position.col].units.push(unit))
-        cities.forEach(city => (newGrid[city.position.row][city.position.col].city = city))
+        cities.forEach(city => {
+            newGrid[city.position.row][city.position.col].city = city
+            city.ownedTiles.forEach(position => (newGrid[position.row][position.col].owner = 'me'))
+        })
 
         return newGrid
     }

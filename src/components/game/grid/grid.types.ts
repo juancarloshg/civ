@@ -19,6 +19,7 @@ export interface Tile {
 export interface ExtendedTile extends Tile {
     units: Unit[]
     city: City | null
+    owner: string | null
 }
 
 export type Grid = Tile[][]
