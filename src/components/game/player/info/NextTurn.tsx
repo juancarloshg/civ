@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from '../../../../rootReducer'
-import { actions } from '../player.actions'
-import { getAnyMovesLeft } from '../player.selectors'
+import { actions as playerActions } from '../player.actions'
+import { getAnyMovesLeft } from '../../game.selectors'
 
 interface StateProps {
     movesLeft: boolean
@@ -37,7 +37,7 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    nextTurn: () => actions.nextTurn()
+    nextTurn: () => playerActions.skipTurn()
 }
 
 export const NextTurn = connect<StateProps, DispatchProps>(

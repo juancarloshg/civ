@@ -5,31 +5,33 @@ import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from '../../../../rootReducer'
 import { IconProps } from '../../../icons/icons.types'
-import { getIsSelectedUnit } from '../../player/player.selectors'
-import { actions as playerActions } from '../../player/player.actions'
-import { Unit as IUnit } from '../../units/units'
+import { ExtendedUnit } from '../../units/unit.types'
 import { unitIcons } from '../../units/unit.helpers'
 import { unitSize, iconWrapperRatio } from '../constants'
+import { getIsSelectedUnit, getPlayerMovingId } from '../../game.selectors'
+import { actions as gameActions } from '../../game.actions'
 
 interface StateProps {
     isSelected: boolean
+    playerMoving: string | null
 }
 
 interface DispatchProps {
-    selectUnit(unit: IUnit): void
+    selectUnit(unit: ExtendedUnit): void
 }
 
 interface OwnProps {
-    unit: IUnit
+    unit: ExtendedUnit
 }
 
 type Props = StateProps & OwnProps & DispatchProps
 
-const getHeight = (props: StyledUnitProps) => (props.isSelected ? unitSize.selectedHeight : unitSize.height)
+const getHeight = (props: { isSelected: boolean }) => (props.isSelected ? unitSize.selectedHeight : unitSize.height)
 const getWidth = (props: StyledUnitProps) => (props.isSelected ? unitSize.selectedWidth : unitSize.height)
 const getDisplay = (props: StyledUnitProps) => (props.isSelected ? 'flex' : 'inline-block')
+const getBackground = (props: StyledUnitProps) => props.unit.owner.color
 
-type StyledUnitProps = Pick<Props, 'isSelected'>
+type StyledUnitProps = Pick<Props, 'isSelected' | 'unit'>
 const StyledUnit = styled.span<StyledUnitProps>`
     height: ${getHeight}px;
     width: ${getWidth}px;
@@ -37,7 +39,7 @@ const StyledUnit = styled.span<StyledUnitProps>`
     border-radius: 50%;
     border: 1px solid black;
     box-sizing: border-box;
-    background: green;
+    background: ${getBackground};
     justify-content: center;
     z-index: 1;
     position: absolute;
@@ -49,15 +51,18 @@ const getStyledIcon = (icon: React.FunctionComponent<IconProps>) => styled(icon)
     height: ${iconWrapperRatio * 100}%;
 `
 
-const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected }) => {
+const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected, playerMoving }) => {
     const Icon = getStyledIcon(unitIcons[unit.type])
     return (
         <StyledUnit
             onClick={e => {
                 e.stopPropagation()
-                selectUnit(unit)
+                if (unit.owner.id === playerMoving) {
+                    selectUnit(unit)
+                }
             }}
             isSelected={isSelected}
+            unit={unit}
         >
             {isSelected && <Icon height={getHeight({ isSelected })} />}
         </StyledUnit>
@@ -65,11 +70,12 @@ const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected }) => {
 }
 
 const mapState = createStructuredSelector<ApplicationState, Props, StateProps>({
-    isSelected: getIsSelectedUnit
+    isSelected: getIsSelectedUnit,
+    playerMoving: getPlayerMovingId
 })
 
 const mapDispatch: DispatchProps = {
-    selectUnit: (unit: IUnit) => playerActions.selectUnit(unit.id)
+    selectUnit: (unit: ExtendedUnit) => gameActions.selectUnit(unit.id)
 }
 
 export const Unit = connect<StateProps, DispatchProps, OwnProps>(

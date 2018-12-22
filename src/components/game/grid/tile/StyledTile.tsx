@@ -25,6 +25,8 @@ export const getColor = (props: { tile: ExtendedTile }): string => {
 
 const getBorderSize = (props: StyledTileProps) => (props.tile.city ? (props.isSelectedTile ? 8 : 7) : props.isSelectedTile ? 3 : 1)
 const getBorderStyle = (props: StyledTileProps) => (props.tile.city ? 'double' : 'solid')
+
+const hexAlpha = 99
 const applyPlayerColor = (props: StyledTileProps) =>
     props.tile.owner
         ? `&:after{
@@ -37,7 +39,7 @@ const applyPlayerColor = (props: StyledTileProps) =>
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(200,0,0,0.6);
+    background-color: ${props.tile.owner.color}${hexAlpha};
 }`
         : ''
 

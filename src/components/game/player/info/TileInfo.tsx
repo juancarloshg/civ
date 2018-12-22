@@ -1,15 +1,16 @@
 import * as React from 'react'
 
-import { Unit } from '../../units/units'
+import { Unit } from '../../units/unit.types'
 import { ExtendedTile } from '../../grid'
 import { StyledP } from '../../../styled/StyledP'
 
 interface TileInfoProps {
     tile: ExtendedTile
+    playerMoving: string | null
     selectUnit(unit: Unit): void
 }
 
-export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit }) => (
+export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit, playerMoving }) => (
     <>
         <StyledP>
             Selected tile [{tile.row}, {tile.col}]
@@ -31,7 +32,12 @@ export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit }) => (
                 <StyledP>Units:</StyledP>
                 {tile.units.map((u, i) => (
                     <StyledP key={i}>
-                        {u.type} - {u.currentHp}/{u.hp} - <button onClick={() => selectUnit(u)}>USE</button>
+                        {u.type} - {u.currentHp}/{u.hp}{' '}
+                        {u.owner.id === playerMoving && (
+                            <>
+                                - <button onClick={() => selectUnit(u)}>USE</button>
+                            </>
+                        )}
                     </StyledP>
                 ))}
             </>

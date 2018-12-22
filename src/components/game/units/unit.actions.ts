@@ -1,5 +1,5 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { Unit, UnitActionType } from './units'
+import { Unit, UnitActionType, ExtendedUnit } from './unit.types'
 
 export enum ActionTypes {
     ADD_UNITS = '[units] add units',
@@ -14,7 +14,7 @@ export const actions = {
     moveUnit: (unit: Unit) => createAction(ActionTypes.MOVE_UNIT, unit),
     setUnits: (units: Unit[]) => createAction(ActionTypes.SET_UNITS, units),
     removeUnit: (unit: Unit) => createAction(ActionTypes.REMOVE_UNIT, unit),
-    unitAction: (unit: Unit, action: UnitActionType) => createAction(ActionTypes.UNIT_ACTION, { unit, action })
+    unitAction: (unit: ExtendedUnit, action: UnitActionType) => createAction(ActionTypes.UNIT_ACTION, { unit, action })
 }
 
 export type Actions = ActionsUnion<typeof actions>

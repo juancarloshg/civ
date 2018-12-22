@@ -1,21 +1,20 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { Unit } from '../units/units'
 import { Player } from '../game.types'
-import { Tile } from '../grid'
+import { Unit } from '../units/unit.types'
 
 export enum ActionTypes {
     INIT_PLAYER = '[player] init player',
     ADD_PLAYER = '[player] add player',
-    SELECT_TILE = '[player] select tile',
-    SELECT_UNIT = '[player] select unit',
-    NEXT_TURN = '[player] next turn'
+    SKIP_TURN = '[player] skip turn',
+    REMOVE_UNIT = '[player] remove unit',
+    ADD_CITY = '[player] add city'
 }
 
 export const actions = {
-    addPlayer: (player: Partial<Player>) => createAction(ActionTypes.ADD_PLAYER, player),
-    selectTile: (tileId: Tile['id']) => createAction(ActionTypes.SELECT_TILE, tileId),
-    selectUnit: (unitId: Unit['id']) => createAction(ActionTypes.SELECT_UNIT, unitId),
-    nextTurn: () => createAction(ActionTypes.NEXT_TURN)
+    addPlayer: (player: Player) => createAction(ActionTypes.ADD_PLAYER, player),
+    skipTurn: () => createAction(ActionTypes.SKIP_TURN),
+    addCity: (player: Player, cityId: string) => createAction(ActionTypes.ADD_CITY, { player, cityId }),
+    removeUnit: (player: Player, unit: Unit) => createAction(ActionTypes.REMOVE_UNIT, { player, unit })
 }
 
 export type Actions = ActionsUnion<typeof actions>
