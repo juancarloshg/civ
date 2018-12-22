@@ -4,12 +4,14 @@ import { flatten, pick } from 'ramda'
 import { ApplicationState } from '../../../rootReducer'
 import { getViewSize } from '../../configuration/configuration.selector'
 import { getExtendedUnits } from '../units/unit.selectors'
-import { getCities } from '../city/city.selector'
 
 import { GridState } from './grid.reducer'
 import { getCircularView } from './grid.helpers'
-import { GridPosition, ExtendedGrid, Tile } from './grid.types'
+import { GridPosition, ExtendedGrid, Tile, Grid } from './grid.types'
 import { getPlayers } from '../player/player.selectors'
+import { getCities } from '../city/city.selector'
+import { ExtendedCity, City } from '../city/city.types'
+import { getCityTilesYield } from '../city/city.helper'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -23,10 +25,18 @@ export const getGrid = createSelector(
     (gameState: GridState) => gameState.grid
 )
 
+export const getExtendedCities: Selector<ApplicationState, ExtendedCity[]> = createSelector(
+    getCities,
+    getGrid,
+    (cities: City[], grid: Grid) => {
+        return cities.map(city => ({ ...city, yield: getCityTilesYield(city, grid) }))
+    }
+)
+
 export const getExtendedGrid: Selector<ApplicationState, ExtendedGrid> = createSelector(
     getGrid,
     getExtendedUnits,
-    getCities,
+    getExtendedCities,
     getPlayers,
     (grid, units, cities, players) => {
         const newGrid: ExtendedGrid = grid.map(row => row.map(tile => ({ ...tile, units: [], city: null, owner: null })))

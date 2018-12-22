@@ -1,5 +1,5 @@
 import { createAction, ActionsUnion } from '../../../utils/actionHelpers'
-import { GridPosition } from '../grid'
+import { GridPosition } from '../grid/grid.types'
 import { City } from './city.types'
 import { Player } from '../game.types'
 
