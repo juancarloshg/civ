@@ -16,7 +16,7 @@ import { TileInfo } from './TileInfo'
 import { UnitInfo } from './UnitInfo'
 import { NextTurn } from './NextTurn'
 import { Minimap } from './Minimap'
-import { getSelectedExtendedTile, getSelectedUnit, getTurn } from '../../game.selectors'
+import { getSelectedExtendedTile, getSelectedUnit, getTurn, getPlayerMovingId } from '../../game.selectors'
 
 const StyledFlexContainer = styled(FlexContainer)`
     border: 5px solid black;
@@ -41,6 +41,7 @@ interface StateProps {
     turn: number
     viewGrid: Grid
     size: number
+    playerMoving: string | null
 }
 
 interface DispatchProps {
@@ -85,7 +86,7 @@ class PlayerInfoBase extends React.Component<Props, State> {
     }
 
     render() {
-        const { tile, unit, selectUnit, turn } = this.props
+        const { tile, unit, selectUnit, turn, playerMoving } = this.props
         const { miniwrapperSize } = this.state
         return (
             <StyledFlexContainer grow={1} basis="0">
@@ -93,7 +94,7 @@ class PlayerInfoBase extends React.Component<Props, State> {
                     <h3>Player 1</h3>
                 </FlexContainer>
                 <FlexContainer direction="column" grow={1}>
-                    {tile && <TileInfo tile={tile} selectUnit={selectUnit} />}
+                    {tile && <TileInfo tile={tile} selectUnit={selectUnit} playerMoving={playerMoving} />}
                     {unit && <UnitInfo unit={unit} />}
                 </FlexContainer>
                 <FlexContainer direction="column" grow={1}>
@@ -115,7 +116,8 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
     unit: getSelectedUnit,
     turn: getTurn,
     viewGrid: getGrid,
-    size: getSize
+    size: getSize,
+    playerMoving: getPlayerMovingId
 })
 
 const mapDispatch: DispatchProps = {

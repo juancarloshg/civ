@@ -5,10 +5,11 @@ import { ExtendedTile } from '../../grid'
 
 interface TileInfoProps {
     tile: ExtendedTile
+    playerMoving: string | null
     selectUnit(unit: Unit): void
 }
 
-export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit }) => (
+export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit, playerMoving }) => (
     <>
         <p>
             Selected tile [{tile.row}, {tile.col}]
@@ -21,7 +22,12 @@ export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit }) => (
                 <p>Units:</p>
                 {tile.units.map((u, i) => (
                     <p key={i}>
-                        {u.type} - {u.currentHp}/{u.hp} - <button onClick={() => selectUnit(u)}>USE</button>
+                        {u.type} - {u.currentHp}/{u.hp}{' '}
+                        {u.owner.id === playerMoving && (
+                            <>
+                                - <button onClick={() => selectUnit(u)}>USE</button>
+                            </>
+                        )}
                     </p>
                 ))}
             </>

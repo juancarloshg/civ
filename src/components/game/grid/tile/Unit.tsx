@@ -8,11 +8,12 @@ import { IconProps } from '../../../icons/icons.types'
 import { ExtendedUnit } from '../../units/unit.types'
 import { unitIcons } from '../../units/unit.helpers'
 import { unitSize, iconWrapperRatio } from '../constants'
-import { getIsSelectedUnit } from '../../game.selectors'
+import { getIsSelectedUnit, getPlayerMovingId } from '../../game.selectors'
 import { actions as gameActions } from '../../game.actions'
 
 interface StateProps {
     isSelected: boolean
+    playerMoving: string | null
 }
 
 interface DispatchProps {
@@ -50,13 +51,15 @@ const getStyledIcon = (icon: React.FunctionComponent<IconProps>) => styled(icon)
     height: ${iconWrapperRatio * 100}%;
 `
 
-const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected }) => {
+const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected, playerMoving }) => {
     const Icon = getStyledIcon(unitIcons[unit.type])
     return (
         <StyledUnit
             onClick={e => {
                 e.stopPropagation()
-                selectUnit(unit)
+                if (unit.owner.id === playerMoving) {
+                    selectUnit(unit)
+                }
             }}
             isSelected={isSelected}
             unit={unit}
@@ -67,7 +70,8 @@ const UnitBase: React.SFC<Props> = ({ selectUnit, unit, isSelected }) => {
 }
 
 const mapState = createStructuredSelector<ApplicationState, Props, StateProps>({
-    isSelected: getIsSelectedUnit
+    isSelected: getIsSelectedUnit,
+    playerMoving: getPlayerMovingId
 })
 
 const mapDispatch: DispatchProps = {

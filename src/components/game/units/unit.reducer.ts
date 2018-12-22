@@ -1,5 +1,6 @@
 import { Actions, ActionTypes } from './unit.actions'
 import { Unit } from './unit.types'
+import { removeByIndex } from '../../../utils/utils'
 
 export type UnitsState = Unit[]
 
@@ -14,7 +15,7 @@ export const reducer = (units: UnitsState = initialState, action: Actions) => {
         case ActionTypes.REMOVE_UNIT:
             const unit: Unit = action.payload
             const unitIndex = units.findIndex(u => u.id === unit.id)
-            return [...units.slice(0, unitIndex), ...units.slice(unitIndex + 1)]
+            return removeByIndex(units, unitIndex)
         default:
             return units
     }

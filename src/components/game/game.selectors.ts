@@ -3,9 +3,10 @@ import { flatten, prop, equals } from 'ramda'
 
 import { ApplicationState } from '../../rootReducer'
 import { getGrid, getExtendedGrid, Tile } from './grid'
-import { getExtendedUnits } from './units/unit.selectors'
+import { getExtendedUnits, getUnits } from './units/unit.selectors'
 import { GameState } from './game.reducer'
 import { Unit } from './units/unit.types'
+import { getPlayers } from './player/player.selectors'
 
 const getRoot = (state: ApplicationState): GameState => state.game
 
@@ -56,4 +57,31 @@ export const getIsSelectedUnit = createSelector(
     getSelectedUnit,
     getCurrentUnit,
     equals
+)
+
+export const getPlayerMovingId = createSelector(
+    getRoot,
+    prop('playerMovingId')
+)
+
+export const getPlayerMoving = createSelector(
+    getPlayers,
+    getPlayerMovingId,
+    (players, playerId) => players.find(player => player.id === playerId)
+)
+
+const getPlayerMovingUnits = createSelector(
+    getPlayerMoving,
+    getUnits,
+    (player, units) => (player ? units.filter(unit => player.unitIds.includes(unit.id)) : [])
+)
+
+export const getActivePlayerIds = createSelector(
+    getRoot,
+    prop('activePlayerIds')
+)
+
+export const getAnyMovesLeft = createSelector(
+    getPlayerMovingUnits,
+    units => units.some(unit => unit.movementsLeft !== 0)
 )

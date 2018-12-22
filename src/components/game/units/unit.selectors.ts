@@ -22,9 +22,3 @@ export const getExtendedUnits = createSelector(
         }, [])
     }
 )
-
-// TODO: check player units only
-export const getAnyMovesLeft = createSelector(
-    getUnits,
-    units => units.some(unit => unit.movementsLeft !== 0)
-)

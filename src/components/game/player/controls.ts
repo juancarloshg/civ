@@ -1,6 +1,6 @@
 import { moveMap } from '../grid'
 import { attemptUnitMove } from '../units/unit.sagas'
-import { actions as playerActions } from '../player/player.actions'
+import { skipTurn } from '../game.sagas'
 
 export const keyBindings: { [key: string]: () => void } = {
     // Grid controls
@@ -20,5 +20,5 @@ export const keyBindings: { [key: string]: () => void } = {
     9: () => attemptUnitMove('northeast'),
 
     // Other controls
-    Enter: () => playerActions.skipTurn()
+    Enter: () => skipTurn()
 }

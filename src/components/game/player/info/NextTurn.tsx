@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from '../../../../rootReducer'
 import { actions as playerActions } from '../player.actions'
-import { getAnyMovesLeft } from '../../units/unit.selectors'
+import { getAnyMovesLeft } from '../../game.selectors'
 
 interface StateProps {
     movesLeft: boolean

@@ -8,6 +8,7 @@ import { getUnits } from './unit.selectors'
 import { actions, ActionTypes } from './unit.actions'
 import { Unit } from './unit.types'
 import { getSelectedUnit } from '../game.selectors'
+import { removePlayerUnit } from '../player/player.sagas'
 
 type MovementDirection = 'north' | 'south' | 'east' | 'west' | 'southwest' | 'northwest' | 'southeast' | 'northeast'
 export function* attemptUnitMove(direction: MovementDirection) {
@@ -85,6 +86,7 @@ function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof acti
             yield put(cityActions.createCity(unit.position))
             const tile: Tile | null = yield select(getTileByPosition, unit.position)
             yield put(gameActions.selectTile(tile!.id))
+            yield call(removePlayerUnit, unit)
             yield put(actions.removeUnit(unit))
     }
 }

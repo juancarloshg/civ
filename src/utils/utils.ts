@@ -7,3 +7,7 @@ export const randomFrom = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr
 
 // tslint:disable-next-line:no-bitwise
 export const getRandomColor = () => '#' + ((Math.random() * 0xffffff) << 0).toString(16)
+
+export const removeByIndex = <T>(arr: T[], index: number): T[] => [...arr.slice(0, index), ...arr.slice(index + 1)]
+
+export const updateByIndex = <T>(arr: T[], item: T, index: number): T[] => [...arr.slice(0, index), item, ...arr.slice(index + 1)]
