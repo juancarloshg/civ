@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from '../../../../rootReducer'
-import { getExtendedGrid, getMainViewGridBorders, actions as gridActions, GridPosition, ExtendedGrid } from '../../grid'
+import { getExtendedGrid, getMainViewGridBorders, actions as gridActions, GridPosition, ExtendedGrid, ExtendedTile } from '../../grid'
 import { getSize } from '../../../configuration/configuration.selector'
 import { getColor } from '../../grid/tile'
 
@@ -47,8 +47,12 @@ export class MinimapBase extends React.Component<Props> {
         this.drawViewGridBorders(context)
     }
 
+    getColor(tile: ExtendedTile) {
+        return tile.owner ? tile.owner.color : getColor({ tile })
+    }
+
     drawGrid(context: CanvasRenderingContext2D) {
-        this.props.grid.forEach((tiles, row) => tiles.forEach((tile, col) => this.paint(context, row, col, getColor({ tile }))))
+        this.props.grid.forEach((tiles, row) => tiles.forEach((tile, col) => this.paint(context, row, col, this.getColor(tile))))
     }
 
     drawViewGridBorders(context: CanvasRenderingContext2D) {
