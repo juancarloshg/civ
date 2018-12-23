@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IconProps } from './icons.types'
+import { IconProps } from '../icons.types'
 
 export const Warrior = (props: IconProps) => (
     <svg viewBox="0 0 55.463 55.463" width="1em" height="1em" {...props}>

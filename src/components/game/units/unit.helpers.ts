@@ -1,8 +1,8 @@
 import uniqueId from 'lodash.uniqueid'
 
-import { Archer } from '../../icons/Archer'
-import { Warrior } from '../../icons/Warrior'
-import { Settler } from '../../icons/Settler'
+import { Archer } from '../../icons/units/Archer'
+import { Warrior } from '../../icons/units/Warrior'
+import { Settler } from '../../icons/units/Settler'
 import { IconProps } from '../../icons/icons.types'
 
 import { GridPosition } from '../grid'

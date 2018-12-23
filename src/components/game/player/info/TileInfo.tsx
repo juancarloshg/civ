@@ -1,8 +1,9 @@
 import * as React from 'react'
 
 import { Unit } from '../../units/unit.types'
-import { ExtendedTile } from '../../grid'
+import { ExtendedTile, getTileYield } from '../../grid'
 import { StyledP } from '../../../styled/StyledP'
+import { YieldInfo } from './YieldInfo'
 
 interface TileInfoProps {
     tile: ExtendedTile
@@ -15,18 +16,8 @@ export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit, currentPl
         <StyledP>
             Selected tile [{tile.row}, {tile.col}]
         </StyledP>
-        <StyledP>Tile details:</StyledP>
         <StyledP>Terrain - {tile.terrain}</StyledP>
-        {tile.city && (
-            <>
-                <StyledP>This tile has a city!</StyledP>
-                <StyledP>Production: {tile.city.yield.production}</StyledP>
-                <StyledP>Food: {tile.city.yield.food}</StyledP>
-                <StyledP>Gold: {tile.city.yield.gold}</StyledP>
-                <StyledP>Health: {tile.city.yield.health}</StyledP>
-                <StyledP>Science: {tile.city.yield.science}</StyledP>
-            </>
-        )}
+        <YieldInfo _yield={getTileYield(tile)} />
         {tile.units.length > 0 && (
             <>
                 <StyledP>Units:</StyledP>

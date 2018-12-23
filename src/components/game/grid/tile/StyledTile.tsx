@@ -25,10 +25,12 @@ export const getColor = (props: { tile: ExtendedTile }): string => {
 
 const getBorderSize = (props: StyledTileProps) => (props.tile.city ? (props.isSelectedTile ? 8 : 7) : props.isSelectedTile ? 3 : 1)
 const getBorderStyle = (props: StyledTileProps) => (props.tile.city ? 'double' : 'solid')
+const getBackgroundImage = (props: StyledTileProps) => (props.tile.city ? props.tile.city.icon : '""')
 
 const hexAlpha = 99
-const applyPlayerColor = (props: StyledTileProps) =>
-    props.tile.owner
+const applyPlayerColor = (props: StyledTileProps) => {
+    const backgroundImage = getBackgroundImage(props)
+    return props.tile.owner
         ? `&:after{
     content: '';
     display: block;
@@ -40,8 +42,11 @@ const applyPlayerColor = (props: StyledTileProps) =>
     bottom: 0;
     left: 0;
     background-color: ${props.tile.owner.color}${hexAlpha};
+    background-image: ${backgroundImage};
+    background-repeat: no-repeat;
 }`
         : ''
+}
 
 export const BaseStyledTile = styled.span<{ tile: ExtendedTile }>`
     flex-grow: 1;

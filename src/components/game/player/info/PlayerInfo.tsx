@@ -17,6 +17,7 @@ import { UnitInfo } from './UnitInfo'
 import { NextTurn } from './NextTurn'
 import { Minimap } from './Minimap'
 import { getSelectedExtendedTile, getSelectedUnit, getTurn, getCurrentPlayerId } from '../../game.selectors'
+import { CityInfo } from './CityInfo'
 
 const StyledFlexContainer = styled(FlexContainer)`
     border: 5px solid black;
@@ -90,14 +91,15 @@ class PlayerInfoBase extends React.Component<Props, State> {
         const { miniwrapperSize } = this.state
         return (
             <StyledFlexContainer grow={1} basis="0">
-                <FlexContainer direction="column" grow={1}>
-                    <h3>Player 1</h3>
-                </FlexContainer>
-                <FlexContainer direction="column" grow={1}>
+                <FlexContainer direction="column" grow={1} padding={5}>
+                    <h3>Player {currentPlayer}</h3>
                     {tile && <TileInfo tile={tile} selectUnit={selectUnit} currentPlayer={currentPlayer} />}
-                    {unit && <UnitInfo unit={unit} />}
                 </FlexContainer>
-                <FlexContainer direction="column" grow={1}>
+                <FlexContainer direction="row" grow={2} padding={5}>
+                    {unit && <UnitInfo unit={unit} />}
+                    {tile && tile.city && <CityInfo city={tile.city} />}
+                </FlexContainer>
+                <FlexContainer direction="column" grow={1} padding={5}>
                     <FlexItem>
                         <NextTurn />
                         <h3>Turn {turn}</h3>
