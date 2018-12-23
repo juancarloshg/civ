@@ -11,6 +11,7 @@ import { getSize } from '../../../configuration/configuration.selector'
 import { Unit, ExtendedUnit } from '../../units/unit.types'
 import { getGrid, ExtendedTile, Grid } from '../../grid'
 import { actions as gameActions } from '../../game.actions'
+import { actions as cityActions } from '../../city/city.actions'
 
 import { TileInfo } from './TileInfo'
 import { UnitInfo } from './UnitInfo'
@@ -18,6 +19,7 @@ import { NextTurn } from './NextTurn'
 import { Minimap } from './Minimap'
 import { getSelectedExtendedTile, getSelectedUnit, getTurn, getCurrentPlayerId } from '../../game.selectors'
 import { CityInfo } from './CityInfo'
+import { City } from '../../city/city.types'
 
 const StyledFlexContainer = styled(FlexContainer)`
     border: 5px solid black;
@@ -47,6 +49,7 @@ interface StateProps {
 
 interface DispatchProps {
     selectUnit(unit: Unit): void
+    build(city: City, key: string): void
 }
 
 type Props = StateProps & DispatchProps
@@ -87,7 +90,7 @@ class PlayerInfoBase extends React.Component<Props, State> {
     }
 
     render() {
-        const { tile, unit, selectUnit, turn, currentPlayer } = this.props
+        const { tile, unit, selectUnit, turn, currentPlayer, build } = this.props
         const { miniwrapperSize } = this.state
         return (
             <StyledFlexContainer grow={1} basis="0">
@@ -97,7 +100,7 @@ class PlayerInfoBase extends React.Component<Props, State> {
                 </FlexContainer>
                 <FlexContainer direction="row" grow={2} padding={5}>
                     {unit && <UnitInfo unit={unit} />}
-                    {tile && tile.city && <CityInfo city={tile.city} />}
+                    {tile && tile.city && <CityInfo city={tile.city} build={build} />}
                 </FlexContainer>
                 <FlexContainer direction="column" grow={1} padding={5}>
                     <FlexItem>
@@ -123,7 +126,8 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectUnit: (unit: Unit) => gameActions.selectUnit(unit)
+    selectUnit: (unit: Unit) => gameActions.selectUnit(unit),
+    build: (city: City, buildKey: string) => cityActions.build(city, buildKey)
 }
 
 export const PlayerInfo = connect<StateProps, DispatchProps>(

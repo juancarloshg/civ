@@ -1,4 +1,4 @@
-import { takeEvery, call, put } from 'redux-saga/effects'
+import { takeEvery, call, put, takeLatest } from 'redux-saga/effects'
 import uniqueId from 'lodash.uniqueid'
 
 import { actions as playerActions } from '../player/player.actions'
@@ -25,6 +25,11 @@ function* createCity({ payload: { owner, position } }: ReturnType<typeof actions
     yield put(actions.addCity(city))
 }
 
+function build({ payload: { city, buildKey } }: ReturnType<typeof actions.build>) {
+    console.log('Building: ' + buildKey + ' in ' + city.id)
+}
+
 export function* sagas() {
     yield takeEvery(ActionTypes.CREATE_CITY, createCity)
+    yield takeLatest(ActionTypes.BUILD, build)
 }

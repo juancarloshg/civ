@@ -1,5 +1,6 @@
 import { GridPosition } from '../grid/grid.types'
 import { Yield } from '../yield/Yield'
+import { Progress } from '../../../utils/utils'
 
 export interface City {
     id: string
@@ -10,6 +11,8 @@ export interface City {
 export interface ExtendedCity extends City {
     yield: Yield
     icon: string
+    currentBuild?: Progress
+    prodSurplus: number
 }
 
 export const CITY_BASE_STATS = {
