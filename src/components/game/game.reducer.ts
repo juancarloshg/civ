@@ -7,7 +7,7 @@ export interface GameState {
     selectedTileId: Tile['id'] | null
     selectedUnitId: Unit['id'] | null
     turn: number
-    playerMovingId: Player['id'] | null
+    currentPlayerId: Player['id'] | null
     activePlayerIds: Player['id'][]
 }
 
@@ -16,7 +16,7 @@ const initialState: GameState = {
     selectedTileId: null,
     selectedUnitId: null,
     turn: 0,
-    playerMovingId: null
+    currentPlayerId: null
 }
 
 export const reducer = (state: GameState = initialState, action: Actions): GameState => {
@@ -26,10 +26,10 @@ export const reducer = (state: GameState = initialState, action: Actions): GameS
                 ...state,
                 activePlayerIds: [...state.activePlayerIds, action.payload]
             }
-        case ActionTypes.SET_PLAYER_MOVING:
+        case ActionTypes.SET_CURRENT_PLAYER:
             return {
                 ...state,
-                playerMovingId: action.payload
+                currentPlayerId: action.payload
             }
         case ActionTypes.SELECT_TILE:
             return {
@@ -53,7 +53,7 @@ export const reducer = (state: GameState = initialState, action: Actions): GameS
             return {
                 ...state,
                 turn: state.turn + 1,
-                playerMovingId: state.activePlayerIds[0]
+                currentPlayerId: state.activePlayerIds[0]
             }
         default:
             return state
