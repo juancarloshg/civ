@@ -47,7 +47,7 @@ export function* skipTurn() {
 
 function* selectNextActiveUnit() {
     const nextActiveUnit: Unit | null = yield select(getNextActiveUnit)
-    yield put(actions.selectUnit(nextActiveUnit ? nextActiveUnit.id : null))
+    yield put(actions.selectUnit(nextActiveUnit))
 }
 
 export function* sagas() {

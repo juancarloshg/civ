@@ -15,7 +15,7 @@ export enum ActionTypes {
 export const actions = {
     initGame: () => createAction(ActionTypes.INIT_GAME),
     selectTile: (tileId: Tile['id']) => createAction(ActionTypes.SELECT_TILE, tileId),
-    selectUnit: (unitId: Unit['id'] | null) => createAction(ActionTypes.SELECT_UNIT, unitId),
+    selectUnit: (unitId: Unit | null) => createAction(ActionTypes.SELECT_UNIT, unitId),
     nextTurn: () => createAction(ActionTypes.NEXT_TURN),
     addPlayer: (playerId: string) => createAction(ActionTypes.ADD_PLAYER, playerId),
     setCurrentPlayer: (playerId: string) => createAction(ActionTypes.SET_CURRENT_PLAYER, playerId),

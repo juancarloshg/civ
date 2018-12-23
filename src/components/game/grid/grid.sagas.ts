@@ -6,6 +6,9 @@ import { actions } from './grid.actions'
 import { generateMap } from './mapGeneration'
 import { getExtendedGrid, getViewGridOrigin } from './grid.selectors'
 import { GridPosition, ExtendedGrid, Grid } from './grid.types'
+import { takeLatest } from 'redux-saga'
+import { ActionTypes as GameActionTypes, actions as gameActions } from '../game.actions'
+import { Unit } from '../units/unit.types'
 
 export function* moveMap(direction: 'north' | 'south' | 'east' | 'west') {
     const { row: currentRow, col: currentCol }: GridPosition = yield select(getViewGridOrigin)
@@ -59,4 +62,15 @@ export function* getCircularIndex(index: number) {
 
 export function* getCircularPosition(position: GridPosition) {
     return { row: yield call(getCircularIndex, position.row), col: yield call(getCircularIndex, position.col) }
+}
+
+function* setViewGridOrigin(action: ReturnType<typeof gameActions.selectUnit>) {
+    const unit: Unit | null = action.payload
+    if (unit) {
+        yield put(actions.setViewGridOrigin(unit.position))
+    }
+}
+
+export function* sagas() {
+    yield takeLatest(GameActionTypes.SELECT_UNIT, setViewGridOrigin)
 }
