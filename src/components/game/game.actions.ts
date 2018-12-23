@@ -9,16 +9,16 @@ export enum ActionTypes {
     RESET_SELECTIONS = '[game] reset selections',
     NEXT_TURN = '[game] next turn',
     ADD_PLAYER = '[game] add player',
-    SET_PLAYER_MOVING = '[game] set player moving'
+    SET_CURRENT_PLAYER = '[game] set current player'
 }
 
 export const actions = {
     initGame: () => createAction(ActionTypes.INIT_GAME),
     selectTile: (tileId: Tile['id']) => createAction(ActionTypes.SELECT_TILE, tileId),
-    selectUnit: (unitId: Unit['id']) => createAction(ActionTypes.SELECT_UNIT, unitId),
+    selectUnit: (unitId: Unit['id'] | null) => createAction(ActionTypes.SELECT_UNIT, unitId),
     nextTurn: () => createAction(ActionTypes.NEXT_TURN),
     addPlayer: (playerId: string) => createAction(ActionTypes.ADD_PLAYER, playerId),
-    setPlayerMoving: (playerId: string) => createAction(ActionTypes.SET_PLAYER_MOVING, playerId),
+    setCurrentPlayer: (playerId: string) => createAction(ActionTypes.SET_CURRENT_PLAYER, playerId),
     resetSelections: () => createAction(ActionTypes.RESET_SELECTIONS)
 }
 

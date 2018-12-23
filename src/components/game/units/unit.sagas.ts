@@ -4,7 +4,6 @@ import { GridPosition, Grid, Tile, getGrid, getTileByPosition, getCircularPositi
 import { actions as cityActions } from '../city/city.actions'
 import { actions as gameActions, ActionTypes as GameActionTypes } from '../game.actions'
 
-import { getUnits } from './unit.selectors'
 import { actions, ActionTypes } from './unit.actions'
 import { Unit } from './unit.types'
 import { getSelectedUnit } from '../game.selectors'
@@ -24,11 +23,7 @@ export function* attemptUnitMove(direction: MovementDirection) {
 }
 
 function* moveUnit(unit: Unit, nextPosition: GridPosition) {
-    const units: Unit[] = yield select(getUnits)
-    const movedUnitIndex = units.map(u => u.id).indexOf(unit.id)
-    const movedUnit = { ...unit, position: nextPosition, movementsLeft: unit.movementsLeft - 1 }
-    const newUnits = [...units.slice(0, movedUnitIndex), movedUnit, ...units.slice(movedUnitIndex + 1)]
-    yield put(actions.setUnits(newUnits))
+    yield put(actions.moveUnit(unit, nextPosition))
 }
 
 function isMovementPossible(unit: Unit, nextPosition: GridPosition) {
@@ -71,13 +66,7 @@ function getAbsolutePosition(position: GridPosition, direction: MovementDirectio
 }
 
 function* handleNextTurn() {
-    const units: Unit[] = yield select(getUnits)
-    const newUnits = units.map(unit => ({
-        ...unit,
-        movementsLeft: unit.movement
-    }))
-
-    yield put(actions.setUnits(newUnits))
+    yield put(actions.resetUnitMovements())
 }
 
 function* handleUnitAction({ payload: { action, unit } }: ReturnType<typeof actions.unitAction>) {

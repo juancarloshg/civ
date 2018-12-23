@@ -25,7 +25,7 @@ export type Props = OwnProps & DispatchProps & StateProps
 
 const TileBase: React.FunctionComponent<Props> = ({ selectTile, tile, ...passProps }) => (
     <StyledTile data-testid="grid-square" tile={tile} onClick={() => selectTile(tile)} {...passProps}>
-        {tile.units && tile.units.map(unit => <Unit unit={unit} key={unit.id} />)}
+        {tile.units && tile.units.map((unit, index) => <Unit position={index} unit={unit} key={unit.id} />)}
     </StyledTile>
 )
 

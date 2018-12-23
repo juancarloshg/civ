@@ -59,21 +59,31 @@ export const getIsSelectedUnit = createSelector(
     equals
 )
 
-export const getPlayerMovingId = createSelector(
+export const getCurrentPlayerId = createSelector(
     getRoot,
-    prop('playerMovingId')
+    prop('currentPlayerId')
 )
 
-export const getPlayerMoving = createSelector(
+export const getCurrentPlayer = createSelector(
     getPlayers,
-    getPlayerMovingId,
+    getCurrentPlayerId,
     (players, playerId) => players.find(player => player.id === playerId)
 )
 
-const getPlayerMovingUnits = createSelector(
-    getPlayerMoving,
+export const getCurrentPlayerUnits = createSelector(
+    getCurrentPlayer,
     getUnits,
     (player, units) => (player ? units.filter(unit => player.unitIds.includes(unit.id)) : [])
+)
+
+export const getActiveUnits = createSelector(
+    getCurrentPlayerUnits,
+    units => units.filter(unit => unit.movementsLeft > 0) || null
+)
+
+export const getNextActiveUnit = createSelector(
+    getActiveUnits,
+    units => units.find(unit => unit.movementsLeft > 0) || null
 )
 
 export const getActivePlayerIds = createSelector(
@@ -82,6 +92,6 @@ export const getActivePlayerIds = createSelector(
 )
 
 export const getAnyMovesLeft = createSelector(
-    getPlayerMovingUnits,
+    getCurrentPlayerUnits,
     units => units.some(unit => unit.movementsLeft !== 0)
 )

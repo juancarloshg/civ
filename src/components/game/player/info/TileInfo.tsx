@@ -6,11 +6,11 @@ import { StyledP } from '../../../styled/StyledP'
 
 interface TileInfoProps {
     tile: ExtendedTile
-    playerMoving: string | null
+    currentPlayer: string | null
     selectUnit(unit: Unit): void
 }
 
-export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit, playerMoving }) => (
+export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit, currentPlayer }) => (
     <>
         <StyledP>
             Selected tile [{tile.row}, {tile.col}]
@@ -33,7 +33,7 @@ export const TileInfo: React.SFC<TileInfoProps> = ({ tile, selectUnit, playerMov
                 {tile.units.map((u, i) => (
                     <StyledP key={i}>
                         {u.type} - {u.currentHp}/{u.hp}{' '}
-                        {u.owner.id === playerMoving && (
+                        {u.owner.id === currentPlayer && (
                             <>
                                 - <button onClick={() => selectUnit(u)}>USE</button>
                             </>
