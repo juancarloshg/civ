@@ -11,7 +11,7 @@ import { GridPosition, ExtendedGrid, Tile, Grid } from './grid.types'
 import { getPlayers } from '../player/player.selectors'
 import { getCities } from '../city/city.selector'
 import { ExtendedCity, City } from '../city/city.types'
-import { getCityTilesYield } from '../city/city.helper'
+import { getCityYield } from '../city/city.helper'
 
 const getRoot = (state: ApplicationState): GridState => state.grid
 
@@ -29,7 +29,7 @@ export const getExtendedCities: Selector<ApplicationState, ExtendedCity[]> = cre
     getCities,
     getGrid,
     (cities: City[], grid: Grid) => {
-        return cities.map(city => ({ ...city, yield: getCityTilesYield(city, grid) }))
+        return cities.map(city => ({ ...city, yield: getCityYield(city, grid) }))
     }
 )
 
