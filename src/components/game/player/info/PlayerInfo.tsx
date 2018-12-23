@@ -121,7 +121,7 @@ const mapState = createStructuredSelector<ApplicationState, StateProps>({
 })
 
 const mapDispatch: DispatchProps = {
-    selectUnit: (unit: Unit) => gameActions.selectUnit(unit.id)
+    selectUnit: (unit: Unit) => gameActions.selectUnit(unit)
 }
 
 export const PlayerInfo = connect<StateProps, DispatchProps>(

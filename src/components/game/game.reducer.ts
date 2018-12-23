@@ -40,7 +40,7 @@ export const reducer = (state: GameState = initialState, action: Actions): GameS
         case ActionTypes.SELECT_UNIT:
             return {
                 ...state,
-                selectedUnitId: action.payload,
+                selectedUnitId: action.payload ? action.payload.id : null,
                 selectedTileId: null
             }
         case ActionTypes.RESET_SELECTIONS:
