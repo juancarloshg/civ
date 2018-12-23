@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IconProps } from './icons.types'
+import { IconProps } from '../icons.types'
 
 export const Settler = (props: IconProps) => (
     <svg width="1em" height="1em" viewBox="0 0 489.765 489.766" {...props}>

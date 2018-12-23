@@ -9,6 +9,7 @@ export interface City {
 
 export interface ExtendedCity extends City {
     yield: Yield
+    icon: string
 }
 
 export const CITY_BASE_STATS = {

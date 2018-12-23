@@ -14,3 +14,10 @@ function getCityBaseStats(): Yield {
 export function getCityYield(city: City, grid: Grid): Yield {
     return addYields(getCityTilesYield(city, grid), getCityBaseStats())
 }
+
+export function getCityIcon(city: City) {
+    if (city !== null) {
+        return 'url(indian-village.svg)'
+    }
+    return ''
+}
