@@ -13,7 +13,8 @@ export const units: { [key in UnitType]: UnitBase } = {
         meleeAtk: 1,
         meleeDef: 1,
         movement: 1,
-        rangedAtk: 4
+        rangedAtk: 4,
+        cost: 10
     },
     warrior: {
         type: 'warrior',
@@ -23,7 +24,8 @@ export const units: { [key in UnitType]: UnitBase } = {
         meleeAtk: 5,
         meleeDef: 2,
         movement: 1,
-        rangedDef: 1
+        rangedDef: 1,
+        cost: 8
     },
     settler: {
         type: 'settler',
@@ -31,6 +33,7 @@ export const units: { [key in UnitType]: UnitBase } = {
         environment: 'land',
         hp: 1,
         movement: 1,
-        actions: ['create city']
+        actions: ['create city'],
+        cost: 15
     }
 }

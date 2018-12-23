@@ -14,6 +14,7 @@ export interface UnitBase {
     rangedDef?: number
     movement: number
     actions?: UnitActionType[]
+    cost: number
 }
 
 export interface UnitState {

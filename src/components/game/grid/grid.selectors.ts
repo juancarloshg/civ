@@ -29,7 +29,7 @@ export const getExtendedCities: Selector<ApplicationState, ExtendedCity[]> = cre
     getCities,
     getGrid,
     (cities: City[], grid: Grid) => {
-        return cities.map(city => ({ ...city, yield: getCityYield(city, grid), icon: getCityIcon(city) }))
+        return cities.map(city => ({ ...city, yield: getCityYield(city, grid), icon: getCityIcon(city), prodSurplus: 0 }))
     }
 )
 
