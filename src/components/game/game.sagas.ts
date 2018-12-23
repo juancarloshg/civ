@@ -1,6 +1,7 @@
 import { takeLatest, call, throttle, put, takeEvery, select } from 'redux-saga/effects'
 
 import { ActionTypes as KeyActionTypes, actions as keyActions } from '../keys/keys.actions'
+import { actions as configurationActions } from '../configuration/configuration.actions'
 import { ActionTypes as PlayerActionTypes, actions as playerActions } from './player/player.actions'
 import { initPlayer } from './player/player.sagas'
 import { keyBindings } from './player/controls'
@@ -10,6 +11,8 @@ import { Unit } from './units/unit.types'
 
 import { getActivePlayerIds, getCurrentPlayerId, getNextActiveUnit } from './game.selectors'
 import { ActionTypes, actions } from './game.actions'
+import { getViewSize } from '../configuration/configuration.selector'
+import { Size } from '../configuration/configuration.types'
 
 function* initGame() {
     yield call(initGrid)
@@ -24,6 +27,22 @@ function* handleKeydown(action: ReturnType<typeof keyActions.keydown>) {
     const handler = keyBindings[key]
     if (handler) {
         yield handler()
+    }
+}
+
+function* handleWheel(action: ReturnType<typeof keyActions.wheel>) {
+    const direction = action.payload.direction
+
+    const viewSize: Size = yield select(getViewSize)
+    const delta = 4
+
+    switch (direction) {
+        case 'in': {
+            return yield put(configurationActions.configureGame({ viewSize: { height: viewSize.height - delta, width: viewSize.width - delta } }))
+        }
+        case 'out': {
+            return yield put(configurationActions.configureGame({ viewSize: { height: viewSize.height + delta, width: viewSize.width + delta } }))
+        }
     }
 }
 
@@ -55,6 +74,7 @@ export function* sagas() {
     yield takeLatest(PlayerActionTypes.SKIP_TURN, skipTurn)
     yield takeEvery(PlayerActionTypes.ADD_PLAYER, addPlayer)
     yield throttle(0, KeyActionTypes.KEYDOWN, handleKeydown)
+    yield takeLatest(KeyActionTypes.WHEEL, handleWheel)
     yield takeLatest(
         [UnitActionTypes.MOVE_UNIT, ActionTypes.NEXT_TURN, ActionTypes.SET_CURRENT_PLAYER, UnitActionTypes.RESET_UNIT_MOVEMENTS],
         selectNextActiveUnit

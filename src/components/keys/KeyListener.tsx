@@ -6,11 +6,12 @@ import { FlexContainer } from '../styled/FlexContainer'
 
 interface DispatchProps {
     keydown(key: string): void
+    wheel(direction: 'in' | 'out'): void
 }
 
 type KeyListenerProps = DispatchProps
 
-const KeyListenerBase: React.SFC<KeyListenerProps> = ({ keydown, children }) => (
+const KeyListenerBase: React.SFC<KeyListenerProps> = ({ wheel, keydown, children }) => (
     <FlexContainer
         direction="column"
         grow={1}
@@ -20,13 +21,20 @@ const KeyListenerBase: React.SFC<KeyListenerProps> = ({ keydown, children }) => 
             ev.preventDefault()
             keydown(ev.key)
         }}
+        onWheel={ev => {
+            ev.stopPropagation()
+            ev.preventDefault()
+            const direction = ev.deltaY < 0 ? 'in' : 'out'
+            wheel(direction)
+        }}
     >
         {children}
     </FlexContainer>
 )
 
 const mapDispatch: DispatchProps = {
-    keydown: actions.keydown
+    keydown: actions.keydown,
+    wheel: actions.wheel
 }
 
 export const KeyListener = connect<null, DispatchProps>(
