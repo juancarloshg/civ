@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { createStructuredSelector } from 'reselect'
 
 import { ApplicationState } from '../../../../rootReducer'
+import { blinker } from '../../../styled/Blinking'
 import { IconProps } from '../../../icons/icons.types'
 import { ExtendedUnit } from '../../units/unit.types'
 import { unitIcons } from '../../units/unit.helpers'
@@ -46,6 +47,11 @@ const StyledUnit = styled.span<StyledUnitProps>`
     justify-content: center;
     z-index: 1;
     position: absolute;
+    animation: ${({ isSelected }) =>
+        isSelected &&
+        css`
+            ${blinker} 1.5s linear infinite
+        `};
 `
 
 const getStyledIcon = (icon: React.FunctionComponent<IconProps>) => styled(icon)`
