@@ -11,26 +11,30 @@ interface DispatchProps {
 
 type KeyListenerProps = DispatchProps
 
-const KeyListenerBase: React.SFC<KeyListenerProps> = ({ wheel, keydown, children }) => (
-    <FlexContainer
-        direction="column"
-        grow={1}
-        tabIndex={0}
-        onKeyDown={ev => {
+class KeyListenerBase extends React.Component<KeyListenerProps> {
+    componentDidMount() {
+        document.addEventListener('keydown', ev => {
             ev.stopPropagation()
             ev.preventDefault()
-            keydown(ev.key)
-        }}
-        onWheel={ev => {
+            this.props.keydown(ev.key)
+        })
+
+        document.addEventListener('wheel', ev => {
             ev.stopPropagation()
             ev.preventDefault()
             const direction = ev.deltaY < 0 ? 'in' : 'out'
-            wheel(direction)
-        }}
-    >
-        {children}
-    </FlexContainer>
-)
+            this.props.wheel(direction)
+        })
+    }
+
+    render() {
+        return (
+            <FlexContainer direction="column" grow={1} tabIndex={0}>
+                {this.props.children}
+            </FlexContainer>
+        )
+    }
+}
 
 const mapDispatch: DispatchProps = {
     keydown: actions.keydown,
