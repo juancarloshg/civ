@@ -21,11 +21,15 @@ import { getSelectedExtendedTile, getSelectedUnit, getTurn, getCurrentPlayerId }
 import { CityInfo } from './CityInfo'
 import { City } from '../../city/city.types'
 
-const StyledFlexContainer = styled(FlexContainer)`
+const PlayerInfoWrapper = styled(FlexContainer)`
     border: 5px solid black;
-    background: #596869;
+    background: #596869ef;
     color: white;
     padding: 10px;
+    position: absolute;
+    width: 100%;
+    height: 25%;
+    bottom: 0;
 `
 
 const StyledMinimap = styled(Minimap)<{ size: number }>`
@@ -93,7 +97,7 @@ class PlayerInfoBase extends React.Component<Props, State> {
         const { tile, unit, selectUnit, turn, currentPlayer, build } = this.props
         const { miniwrapperSize } = this.state
         return (
-            <StyledFlexContainer grow={1} basis="0">
+            <PlayerInfoWrapper grow={1} basis="0">
                 <FlexContainer direction="column" grow={1} padding={5}>
                     <h3>Player {currentPlayer}</h3>
                     {tile && <TileInfo tile={tile} selectUnit={selectUnit} currentPlayer={currentPlayer} />}
@@ -107,11 +111,11 @@ class PlayerInfoBase extends React.Component<Props, State> {
                         <NextTurn />
                         <h3>Turn {turn}</h3>
                     </FlexItem>
-                    <FlexContainer grow={1} ref={this.minimapWrapper} basis="auto">
-                        <StyledMinimap size={min(miniwrapperSize.height, miniwrapperSize.width)} />
-                    </FlexContainer>
                 </FlexContainer>
-            </StyledFlexContainer>
+                <FlexContainer grow={1} basis="0" ref={this.minimapWrapper}>
+                    <StyledMinimap size={min(miniwrapperSize.height, miniwrapperSize.width)} />
+                </FlexContainer>
+            </PlayerInfoWrapper>
         )
     }
 }
