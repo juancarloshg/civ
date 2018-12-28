@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 import { ApplicationState } from '../../rootReducer'
 
-import { FlexContainer } from '../styled/FlexContainer'
 import { KeyListener } from '../keys/KeyListener'
 import { getViewSize } from '../configuration/configuration.selector'
 import { Size } from '../configuration/configuration.types'
@@ -34,14 +33,14 @@ export class GameBase extends React.Component<GameProps> {
         const { isGridReady, size, viewGrid } = this.props
 
         return (
-            <FlexContainer cssHeight="100vh" direction="column" data-testid="game-container">
+            <div data-testid="game-container">
                 {isGridReady && (
                     <KeyListener>
                         <ViewGrid size={size} viewGrid={viewGrid} />
                         <PlayerInfo />
                     </KeyListener>
                 )}
-            </FlexContainer>
+            </div>
         )
     }
 }
