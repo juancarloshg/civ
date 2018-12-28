@@ -1,13 +1,16 @@
 import { keyframes } from 'styled-components'
 
 export const blinker = keyframes`
-    60% {
+    51% {
         opacity: 1
     }
-    50% {
+    50.9% {
         opacity: 0;
     }
-    40% {
+    41% {
+        opacity: 0;
+    }
+    40.9% {
         opacity: 1;
     }
 `

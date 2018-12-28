@@ -50,7 +50,7 @@ const StyledUnit = styled.span<StyledUnitProps>`
     animation: ${({ isSelected }) =>
         isSelected &&
         css`
-            ${blinker} 1.5s linear infinite
+            ${blinker} 1s linear infinite
         `};
 `
 
