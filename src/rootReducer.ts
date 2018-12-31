@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-import { reducer as configurationReducer, ConfigurationState } from './components/configuration/configuration.reducer'
-import { reducer as gameReducer, GameState } from './components/game/game.reducer'
-import { reducer as playersReducer, PlayersState } from './components/game/player/player.reducer'
-import { reducer as gridReducer, GridState } from './components/game/grid'
-import { reducer as unitsReducer, UnitsState } from './components/game/units/unit.reducer'
-import { reducer as citiesReducer, CitiesState } from './components/game/city/city.reducer'
+import { reducer as configurationReducer, ConfigurationState } from './core/shared/configuration/configuration.reducer'
+import { reducer as gameReducer, GameState } from './core/game.reducer'
+import { reducer as playersReducer, PlayersState } from './core/player/player.reducer'
+import { reducer as gridReducer, GridState } from './core/grid/grid.reducer'
+import { reducer as unitsReducer, UnitsState } from './core/units/unit.reducer'
+import { reducer as citiesReducer, CitiesState } from './core/city/city.reducer'
 
 export interface ApplicationState {
     configuration: ConfigurationState

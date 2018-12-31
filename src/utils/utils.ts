@@ -11,16 +11,3 @@ export const getRandomColor = () => '#' + ((Math.random() * 0xffffff) << 0).toSt
 export const removeByIndex = <T>(arr: T[], index: number): T[] => [...arr.slice(0, index), ...arr.slice(index + 1)]
 
 export const updateByIndex = <T>(arr: T[], item: T, index: number): T[] => [...arr.slice(0, index), item, ...arr.slice(index + 1)]
-
-export interface Progress {
-    key: string
-    current: number
-    total: number
-    perTurn?: number
-}
-
-export const EMPTY_PROGRESS = {
-    key: '-',
-    current: 0,
-    total: 0
-}
