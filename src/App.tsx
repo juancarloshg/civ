@@ -7,8 +7,6 @@ import logger from 'redux-logger'
 import { Router } from './Router'
 import { rootReducer } from './rootReducer'
 import { rootSaga } from './rootSaga'
-import { SiteWrapper } from './components/SiteWrapper'
-import { Main } from './components/Main'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -19,10 +17,6 @@ sagaMiddleware.run(rootSaga)
 
 export const App: React.FunctionComponent = () => (
     <Provider store={store}>
-        <SiteWrapper>
-            <Main>
-                <Router />
-            </Main>
-        </SiteWrapper>
+        <Router />
     </Provider>
 )
